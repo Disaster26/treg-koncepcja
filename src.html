@@ -127,7 +127,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .pol.apv .hs{color:var(--mut)}
 .pol .btn{align-self:flex-start}
 /* granica: znak z logo na szwie */
-.szew{position:absolute;z-index:6;left:50%;bottom:calc(var(--bh,0px));width:64px;height:64px;transform:translate(-50%,50%);pointer-events:none}
+.szew{position:absolute;z-index:6;left:50%;top:0;width:64px;height:64px;transform:translate(-50%,-50%);pointer-events:none}
 .szew::before{content:"";position:absolute;left:0;top:0;width:40px;height:40px;border:4px solid var(--aq);background:#fff}
 .szew::after{content:"";position:absolute;right:0;bottom:0;width:38px;height:38px;background:var(--apv)}
 .baza{grid-column:1/-1;position:relative;z-index:5;background:#fff;border-top:1px solid var(--line)}
@@ -160,6 +160,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* sekcje */
 .sek{padding:clamp(56px,8vw,120px) 0}
 .szary{background:var(--g)}
+.sek,.sauny,.stopka{content-visibility:auto;contain-intrinsic-size:auto 900px}
 .sg{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(26px,3vw,48px)}
 .sg h2{display:flex;align-items:center;gap:.4em}
 .sg h2 .kw{width:.5em;height:.5em}
@@ -383,8 +384,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <span class="btn apv">Zobacz bieżnie</span>
     </span>
   </a>
-  <span class="szew" aria-hidden="true"></span>
   <div class="baza">
+    <span class="szew" aria-hidden="true"></span>
     <div class="wrap">
       <h1>TREG z Bielska Podlaskiego: wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport - przewaga dzięki technologii</h1>
       <a href="#sauny"><span class="kw"></span><span>Wkrótce: sauny parowe</span></a>

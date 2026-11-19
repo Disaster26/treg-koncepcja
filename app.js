@@ -4,10 +4,7 @@
   bg.addEventListener('click',function(){var o=top.classList.toggle('open');bg.setAttribute('aria-expanded',o);bg.setAttribute('aria-label',o?'Zamknij menu':'Otwórz menu')});
   d.querySelectorAll('.menu a').forEach(function(a){a.addEventListener('click',zamknij)});
 
-  /* szew z logo na granicy polowek: wysokosc paska z H1 */
-  var hero=d.querySelector('.hero'),baza=d.querySelector('.baza');
-  function bh(){hero.style.setProperty('--bh',baza.offsetHeight+'px')}
-  bh();addEventListener('resize',bh);
+  var hero=d.querySelector('.hero');
 
   var prz=[].slice.call(d.querySelectorAll('.prz a')),links=[].slice.call(d.querySelectorAll('.menu a[href^="#"]'));
   if('IntersectionObserver' in window){
@@ -39,7 +36,7 @@
     if(nav){var bs=nav.querySelectorAll('button');
       bs.forEach(function(b){b.addEventListener('click',function(){tor.scrollBy({left:step()*(+b.dataset.k),behavior:'smooth'})})});
       function upd(){bs[0].disabled=tor.scrollLeft<4;bs[1].disabled=tor.scrollLeft+tor.clientWidth>=tor.scrollWidth-4}
-      tor.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+      bs[0].disabled=true;tor.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);
     }
   });
   d.querySelectorAll('.fl .reszta').forEach(function(r){przeciagaj(r,function(){var k=r.children[0];return k?k.getBoundingClientRect().width+14:300})});
@@ -51,7 +48,7 @@
     if(p){p.addEventListener('pointerenter',wczytaj,{once:true});n.addEventListener('pointerenter',wczytaj,{once:true})}
     przeciagaj(gt,w);
     function upd(){var i=Math.round(gt.scrollLeft/w());kr.forEach(function(k,j){k.classList.toggle('on',j===i)});if(p){p.disabled=i<=0;n.disabled=i>=gt.children.length-1}}
-    gt.addEventListener('scroll',upd,{passive:true});upd();
+    if(p)p.disabled=true;gt.addEventListener('scroll',upd,{passive:true});
     if(p){p.addEventListener('click',function(){wczytaj();gt.scrollBy({left:-w(),behavior:'smooth'})});n.addEventListener('click',function(){wczytaj();gt.scrollBy({left:w(),behavior:'smooth'})})}
   });
 
