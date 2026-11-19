@@ -8,8 +8,7 @@
 <meta name="description" content="TREG z Bielska Podlaskiego: wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport. Raty 0%, PayPo, BLIK, serwis i części. Tel. 503 538 038.">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-<link rel="preload" as="image" href="img/aqm-760.webp" imagesrcset="img/aqm-480.webp 480w, img/aqm-760.webp 760w" imagesizes="100vw" media="(max-width:760px)" fetchpriority="high">
-<link rel="preload" as="image" href="img/aq-1000.webp" imagesrcset="img/aq-700.webp 700w, img/aq-1000.webp 1000w, img/aq-1400.webp 1400w" imagesizes="50vw" media="(min-width:761px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/ta-hero-1600.webp" imagesrcset="img/ta-hero-800.webp 800w, img/ta-hero-1600.webp 1600w" imagesizes="(max-width:760px) 100vw, 60vw" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="fonts/archivo-rdzen.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/archivo-pl.woff2" crossorigin>
 <style>
@@ -93,90 +92,75 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .prz .dl{display:none}
 }
 
-/* pierwszy ekran: jedna firma, dwa kierunki */
-.hero{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;min-height:calc(100svh - var(--hh));background:var(--g)}
-.pol{position:relative;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;text-decoration:none;min-height:0}
-.pol .in{position:relative;z-index:3;padding:clamp(28px,4.5vh,64px) clamp(24px,3.4vw,72px)}
-.pol .marka{display:flex;align-items:center;gap:12px;font-weight:700;font-size:clamp(16px,1vw,19px)}
+/* pierwszy ekran: jedna firma, dwa kierunki - dwie pelnoekranowe polowy z ruchomym tlem */
+.hero{position:relative;display:flex;height:calc(100svh - var(--hh));min-height:520px;background:#0b0e11;color:#fff;overflow:hidden}
+.pol{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;text-decoration:none;color:#fff;transition:flex-grow .7s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover) and (min-width:761px){.hero .pol:hover{flex-grow:1.45}}
+.tla{position:absolute;inset:0;z-index:0}
+.tla img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:sek 21s linear infinite}
+.tla img:nth-child(1){opacity:1;animation-name:sek1}
+.tla img:nth-child(2){animation-delay:7s}.tla img:nth-child(3){animation-delay:14s}
+.pol.apv .tla img:nth-child(1){animation-delay:-3.5s}.pol.apv .tla img:nth-child(2){animation-delay:3.5s}.pol.apv .tla img:nth-child(3){animation-delay:10.5s}
+@keyframes sek1{0%{opacity:1;transform:scale(1.04)}33%{opacity:1}40%{opacity:0;transform:scale(1.13)}94%{opacity:0;transform:scale(1)}100%{opacity:1;transform:scale(1.04)}}
+@keyframes sek{0%{opacity:0;transform:scale(1)}6%{opacity:1}33%{opacity:1}40%{opacity:0;transform:scale(1.13)}100%{opacity:0;transform:scale(1.13)}}
+.pol::after{content:"";position:absolute;inset:0;z-index:1}
+.pol.aq::after{background:linear-gradient(0deg,rgba(4,26,46,.94) 0%,rgba(4,26,46,.66) 40%,rgba(4,26,46,.3) 68%,rgba(9,12,15,.66) 100%)}
+.pol.apv::after{background:linear-gradient(0deg,rgba(24,8,8,.94) 0%,rgba(18,10,10,.66) 40%,rgba(12,12,14,.36) 68%,rgba(9,12,15,.66) 100%)}
+.pol.apv{border-left:1px solid rgba(255,255,255,.2)}
+.pol.apv .tla img:nth-child(1){object-position:28% 50%}
+.pol .in{position:relative;z-index:3;padding:clamp(24px,5vh,72px) clamp(22px,3.4vw,72px)}
+.pol .marka{display:flex;align-items:center;gap:12px;font-weight:700;font-size:clamp(16px,1vw,19px);color:#e9eef3}
 .pol .marka .kw{width:16px;height:16px}
-.pol .tyt{display:block;font-weight:800;font-stretch:90%;line-height:1.02;letter-spacing:-.02em;font-size:clamp(34px,min(3.7vw,7.4vh),76px);margin-top:clamp(10px,1.6vh,16px);max-width:12ch}
-.hs{display:grid;margin-top:clamp(12px,1.8vh,20px);font-size:clamp(18px,1.25vw,24px);font-weight:600;min-height:1.5em}
-.hs span{grid-area:1/1;opacity:0;animation:hs 20s linear infinite}
-.hs span:nth-child(1){opacity:1;animation-name:hs1}
-.hs span:nth-child(2){animation-delay:5s}.hs span:nth-child(3){animation-delay:10s}.hs span:nth-child(4){animation-delay:15s}
-@keyframes hs1{0%,22%{opacity:1}25%,97%{opacity:0}100%{opacity:1}}
-@keyframes hs{0%{opacity:0}3%,22%{opacity:1}25%,100%{opacity:0}}
-.pol .btn{margin-top:clamp(24px,3.4vh,36px)}
-/* polowa lewa: wanny Aquaholm, zdjecie */
-.pol.aq{color:#fff;background:var(--aqn)}
-.pol.aq picture,.pol.aq picture img{position:absolute;inset:0;width:100%;height:100%}
-.pol.aq picture img{object-fit:cover;object-position:56% 72%;animation:kb 26s ease-in-out infinite alternate;transform-origin:60% 70%}
-.pol.aq::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,rgba(6,36,63,.92) 0%,rgba(6,36,63,.62) 38%,rgba(6,36,63,.08) 72%)}
-.pol.aq .marka .kw{border-color:#fff}
-.pol.aq .hs{color:#d9ebfa}
-@keyframes kb{from{transform:scale(1)}to{transform:scale(1.07)}}
-/* polowa prawa: bieznie APVsport, czerwony kwadrat z logo i bieznia */
-.pol.apv{background:linear-gradient(180deg,#fff 0%,var(--g) 100%);color:var(--ink)}
-.scena{position:absolute;inset:0;z-index:1}
-.pol.apv .kwad{position:absolute;background:var(--apv);width:38%;aspect-ratio:1;right:calc(clamp(24px,3.4vw,72px) + 12%);top:8%}
-.pol.apv .bz{position:absolute;width:52%;height:auto;right:clamp(10px,1.6vw,34px);bottom:10%;animation:bz 9s ease-in-out infinite alternate}
-.pol.apv .in{max-width:52%}
-@media (max-width:1500px){.pol.apv .bz{width:46%}}
-@keyframes bz{from{transform:translateX(0)}to{transform:translateX(-10px)}}
-.pol.apv .marka .kw{background:var(--apv)}
-.pol.apv .hs{color:var(--mut)}
-.pol .btn{align-self:flex-start}
-/* granica: znak z logo na szwie */
-.szew{position:absolute;z-index:6;left:50%;top:0;width:64px;height:64px;transform:translate(-50%,-50%);pointer-events:none}
-.szew::before{content:"";position:absolute;left:0;top:0;width:40px;height:40px;border:4px solid var(--aq);background:#fff}
-.szew::after{content:"";position:absolute;right:0;bottom:0;width:38px;height:38px;background:var(--apv)}
-.baza{grid-column:1/-1;position:relative;z-index:5;background:#fff;border-top:1px solid var(--line)}
-.baza .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 32px;padding:clamp(14px,2vh,22px) 0}
-.baza h1{font-size:clamp(16px,1.05vw,21px);font-weight:700;line-height:1.35;letter-spacing:0;max-width:62ch}
-.baza a{flex:none;display:inline-flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;white-space:nowrap;font-size:clamp(15px,.95vw,18px)}
-.baza a .kw{border:2.5px dashed var(--logo);width:14px;height:14px}
-.baza a:hover span{text-decoration:underline}
+.pol.aq .marka .kw{border-color:#4fb1ee}
+.pol .tyt{display:block;font-weight:800;font-stretch:90%;line-height:1.02;letter-spacing:-.02em;font-size:clamp(36px,min(4vw,7.6vh),84px);margin-top:clamp(10px,1.6vh,16px);max-width:12ch;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.pol .krot{display:block;margin-top:clamp(10px,1.6vh,16px);font-size:clamp(17px,1.1vw,21px);line-height:1.45;color:#d5dde5;max-width:34ch}
+.pol .btn{margin-top:clamp(24px,3.4vh,36px);align-self:flex-start}
 .pol:hover .btn::after{transform:translate(3px,-3px)}
+/* srodek: znak TREG, H1 i hasla */
+.srod{position:absolute;z-index:5;left:50%;top:clamp(26px,6vh,64px);transform:translateX(-50%);width:min(92%,980px);text-align:center;pointer-events:none}
+.srod::before{content:"";position:absolute;z-index:-1;left:-8%;right:-8%;top:-40%;bottom:-50%;background:radial-gradient(closest-side,rgba(8,11,14,.55),rgba(8,11,14,0))}
+.srod .znak{display:block;position:relative;width:46px;height:46px;margin:0 auto 14px}
+.srod .znak::before{content:"";position:absolute;left:0;top:0;width:28px;height:28px;border:3.5px solid #4fb1ee}
+.srod .znak::after{content:"";position:absolute;right:0;bottom:0;width:27px;height:27px;background:var(--apv)}
+.srod h1{font-size:clamp(15px,1vw,19px);font-weight:600;line-height:1.4;letter-spacing:0;color:#e3e9ef;max-width:60ch;margin:0 auto}
+.hasla{display:grid;margin-top:clamp(10px,1.4vh,16px);font-weight:800;font-stretch:92%;font-size:clamp(24px,2.3vw,44px);line-height:1.12;letter-spacing:-.01em;text-shadow:0 2px 20px rgba(0,0,0,.45)}
+.hasla span{grid-area:1/1;opacity:0;animation:has 30s ease-in-out infinite}
+.hasla span:nth-child(1){opacity:1;animation-name:has1}
+.hasla span:nth-child(2){animation-delay:5s}.hasla span:nth-child(3){animation-delay:10s}.hasla span:nth-child(4){animation-delay:15s}.hasla span:nth-child(5){animation-delay:20s}.hasla span:nth-child(6){animation-delay:25s}
+@keyframes has1{0%,14%{opacity:1;transform:none}17%,97%{opacity:0;transform:translateY(-10px)}100%{opacity:1;transform:none}}
+@keyframes has{0%{opacity:0;transform:translateY(12px)}3%,14%{opacity:1;transform:none}17%,100%{opacity:0;transform:translateY(-10px)}}
 @media (max-width:760px){
-  .hero{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr) auto}
-  .pol .in{padding:18px 16px 20px}
-  .pol .tyt{font-size:clamp(28px,min(8.4vw,5.2svh),40px);margin-top:6px}
-  .hs{font-size:clamp(16px,2.6svh,19px);margin-top:6px}
-  .pol .btn{margin-top:24px;min-height:50px;font-size:1rem;padding:0 18px;gap:12px;white-space:nowrap}
-  .pol.aq picture img{object-position:50% 60%}
-  .pol.aq::after{background:linear-gradient(90deg,rgba(6,36,63,.9) 0%,rgba(6,36,63,.6) 55%,rgba(6,36,63,.15) 100%)}
-  .pol.apv .in{width:57%;max-width:none;padding-right:0}
-  .scena{position:absolute;inset:0 0 0 auto;width:50%}
-  .pol.apv .kwad{width:80%;right:-14%;top:auto;bottom:-10%}
-  .pol.apv .bz{width:124%;right:-30%;bottom:12%}
-  .szew{display:none}
-  .baza .wrap{padding:12px 0}
-  .baza h1{font-size:15px;line-height:1.35}
-  .baza a{display:none}
+  .hero{flex-direction:column;min-height:0}
+  .pol.apv{border-left:0;order:3}
+  .srod{position:relative;order:2;left:auto;top:auto;transform:none;width:100%;padding:10px 16px 11px;background:#0b0e11;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
+  .srod .znak,.srod::before{display:none}
+  .srod h1{font-size:13.5px;line-height:1.35;color:#c9d2db}
+  .hasla{font-size:clamp(18px,5vw,21px);margin-top:4px}
+  .pol .in{padding:14px 16px 16px}
+  .pol .marka{font-size:15px}
+  .pol .tyt{font-size:clamp(27px,min(8vw,4.9svh),38px);margin-top:4px}
+  .pol .krot{display:none}
+  .pol .btn{margin-top:24px;min-height:48px;font-size:1rem;padding:0 18px;gap:12px}
 }
 @media (max-width:760px) and (max-height:700px){.pol .marka{display:none}.pol .tyt{margin-top:0}}
-@media (prefers-reduced-motion:reduce){.pol.aq picture img,.pol.apv .bz{animation:none}.hs span{animation:none}.hs span:not(:first-child){display:none}}
-
+@media (prefers-reduced-motion:reduce){.tla img,.hasla span{animation:none!important}.tla img:not(:first-child),.hasla span:not(:first-child){display:none}.pol{transition:none}}
 /* sekcje */
 .sek{padding:clamp(56px,8vw,120px) 0}
 .szary{background:var(--g)}
-.sek,.sauny,.stopka{content-visibility:auto;contain-intrinsic-size:auto 900px}
 .sg{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 40px;margin-bottom:clamp(26px,3vw,48px)}
 .sg h2 .kw{width:.5em;height:.5em;margin-right:.35em;vertical-align:.04em}
 .sg h2 .kw.aq{border-width:4px}
 .sg .lead{max-width:60ch;color:var(--mut);margin-top:14px}
 .zrodlo{font-size:.86rem;color:var(--mut)}
-.tor{display:grid;grid-auto-flow:column;grid-auto-columns:min(82vw,360px);gap:clamp(14px,1.3vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:4px}
+.tor{display:grid;grid-auto-flow:column;grid-auto-columns:min(84vw,clamp(300px,27vw,520px));gap:clamp(14px,1.3vw,24px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;padding-bottom:4px}
 .tor::-webkit-scrollbar{display:none}
 .tor>*{scroll-snap-align:start}
 .tor.drag{cursor:grabbing;scroll-behavior:auto}
-@media (min-width:1300px){.tor{grid-auto-flow:row;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-columns:auto;overflow:visible}}
 .nav{display:flex;gap:8px}
-.nav button{width:50px;height:50px;border:2px solid var(--line);background:#fff;border-radius:2px;cursor:pointer;position:relative}
-.nav button::before{content:"";position:absolute;left:18px;top:17px;width:11px;height:11px;border:solid var(--ink);border-width:0 3px 3px 0;transform:rotate(-45deg)}
-.nav button:first-child::before{left:20px;transform:rotate(135deg)}
+.nav button{width:54px;height:54px;border:0;background:var(--ink);border-radius:2px;cursor:pointer;position:relative}
+.nav button::before{content:"";position:absolute;left:19px;top:20px;width:11px;height:11px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(-45deg)}
+.nav button:first-child::before{left:23px;transform:rotate(135deg)}
 .nav button:disabled{opacity:.35;cursor:default}
-@media (min-width:1300px){.nav{display:none}}
 /* karta produktu */
 .prod{display:flex;flex-direction:column;background:#fff;min-width:0}
 .szary .prod{background:#fff}
@@ -208,10 +192,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cena{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-top:auto;padding-top:6px}
 .cena b{font-size:clamp(26px,1.7vw,32px);font-weight:800;font-stretch:90%;letter-spacing:-.01em}
 .cena s{color:var(--mut);font-size:.98rem}
-.dok{display:flex;align-items:center;justify-content:center;min-height:50px;margin-top:6px;border:2px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font:700 1rem/1 Archivo,"Archivo fb",Arial,sans-serif;cursor:pointer;text-decoration:none;transition:.15s}
-#wanny .dok{border-color:var(--aqd);color:var(--aqd)}#wanny .dok:hover{background:var(--aqd);color:#fff}
-#bieznie .dok{border-color:var(--apv);color:var(--apvd)}#bieznie .dok:hover{background:var(--apv);color:#fff}
-.dok.pyt{border-color:var(--line)!important;color:var(--ink)!important}.dok.pyt:hover{background:var(--ink)!important;color:#fff!important}
+.dok{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:8px;border:0;border-radius:2px;background:var(--ink);color:#fff;font:700 1rem/1 Archivo,"Archivo fb",Arial,sans-serif;cursor:pointer;text-decoration:none;transition:.15s}
+#wanny .dok{background:var(--aqd)}#wanny .dok:hover{background:#015a96}
+#bieznie .dok{background:var(--apv)}#bieznie .dok:hover{background:var(--apvd)}
+.dok.pyt{background:var(--ink)!important}
 .pod{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;margin-top:clamp(26px,3vw,44px);padding-top:clamp(20px,2vw,28px);border-top:1px solid var(--line)}
 .pod p{max-width:70ch}
 .pod b{font-weight:700}
@@ -262,15 +246,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media (max-width:620px){.info4{grid-template-columns:minmax(0,1fr)}}
 
 /* o firmie */
-.firma .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,100px);align-items:center}
+.firma .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(28px,5vw,100px);align-items:center}
 .firma .fot{position:relative;padding:0 18px 18px 0}
 .firma .fot::before{content:"";position:absolute;right:0;bottom:0;width:62%;height:70%;background:var(--apv)}
 .firma .fot::after{content:"";position:absolute;left:-14px;top:-14px;width:46%;height:52%;border:4px solid var(--aq);z-index:2;pointer-events:none}
 .firma .fot img{position:relative;z-index:1;width:100%;aspect-ratio:784/449;object-fit:cover}
 .firma p{margin-top:16px;max-width:60ch}
 .firma .dwie{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
-.firma .dwie a{display:block;padding:18px 18px 16px;border:2px solid var(--line);text-decoration:none;transition:border-color .15s}
-.firma .dwie a.aq:hover{border-color:var(--aq)}.firma .dwie a.apv:hover{border-color:var(--apv)}
+.firma .dwie a{display:block;padding:16px 0 4px;border-top:4px solid var(--aq);text-decoration:none}
+.firma .dwie a.apv{border-top-color:var(--apv)}.firma .dwie a:hover b{text-decoration:underline}
 .firma .dwie b{display:flex;align-items:center;gap:10px;font-size:1.15rem}
 .firma .dwie b .kw{width:14px;height:14px}
 .firma .dwie span{display:block;color:var(--mut);font-size:.92rem;margin-top:4px}
@@ -282,7 +266,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .opinie .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,100px);align-items:center}
 .opinie p{color:var(--mut);margin-top:14px;max-width:58ch}
 .opinie .btn{margin-top:26px}
-.miejsce{position:relative;border:2px dashed #aab4be;padding:48px 36px 44px 48px;background:#fff}
+.miejsce{position:relative;padding:48px 36px 44px 48px;background:#fff}
 .miejsce b{display:block;font-size:clamp(20px,1.4vw,26px);font-weight:800;line-height:1.2}
 .miejsce span{display:block;color:var(--mut);margin-top:10px;font-size:.95rem}
 .miejsce::after{content:"";position:absolute;right:-12px;bottom:-12px;width:44px;height:44px;background:var(--apv)}
@@ -294,7 +278,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .kd{margin-top:22px;display:grid;gap:18px}
 .kd a,.kd div{display:flex;gap:14px;align-items:flex-start;text-decoration:none}
 .kd svg{width:24px;height:24px;flex:none;margin-top:3px;color:var(--ink)}
-.kd b{display:block;font-size:clamp(22px,1.5vw,30px);font-weight:800;line-height:1.15}
+.kd b{color:var(--ink);display:block;font-size:clamp(22px,1.5vw,30px);font-weight:800;line-height:1.15}
 .kd span{color:var(--mut);font-size:.95rem}
 .mapa{margin-top:28px;aspect-ratio:16/9;background:var(--g);border:1px solid var(--line);position:relative}
 .mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -344,8 +328,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   <div class="wrap">
     <a class="logo" href="#start" aria-label="TREG, strona główna">{{LOGO}}</a>
     <nav class="prz" aria-label="Wybór kategorii">
-      <a class="aq" href="#wanny" data-k="aq"><span class="kw aq"></span>Wanny<span class="dl"> z hydromasażem</span></a>
-      <a class="apv" href="#bieznie" data-k="apv"><span class="kw apv"></span>Bieżnie<span class="dl"> elektryczne</span></a>
+      <a class="aq" href="#wanny" data-k="aq"><span class="kw aq"></span><span>Wanny<span class="dl"> z hydromasażem</span></span></a>
+      <a class="apv" href="#bieznie" data-k="apv"><span class="kw apv"></span><span>Bieżnie<span class="dl"> elektryczne</span></span></a>
     </nav>
     <nav class="menu" id="menu" aria-label="Menu">
       <a href="#filmy">Filmy</a>
@@ -362,34 +346,36 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <main id="tresc">
 <section class="hero" id="start" aria-label="Wybierz kategorię">
   <a class="pol aq" href="#wanny">
-    <picture>
-      <source media="(max-width:760px)" srcset="img/aqm-480.webp 480w, img/aqm-760.webp 760w" sizes="100vw" width="760" height="507">
-      <img src="img/aq-1000.webp" srcset="img/aq-700.webp 700w, img/aq-1000.webp 1000w, img/aq-1400.webp 1400w" sizes="50vw" width="1000" height="872" fetchpriority="high" alt="Narożna wanna z hydromasażem Aquaholm z podświetloną wodą">
-    </picture>
+    <span class="tla">
+      <img src="img/ta-hero-1600.webp" srcset="img/ta-hero-800.webp 800w, img/ta-hero-1600.webp 1600w" sizes="(max-width:760px) 100vw, 60vw" width="1600" height="900" decoding="async" fetchpriority="high" alt="Narożna wanna z hydromasażem Aquaholm z podświetloną wodą">
+      <img src="img/ta-88-1200.webp" srcset="img/ta-88-640.webp 640w, img/ta-88-1200.webp 1200w" sizes="(max-width:760px) 100vw, 60vw" width="1200" height="1200" decoding="async" loading="lazy" alt="">
+      <img src="img/ta-91-1200.webp" srcset="img/ta-91-640.webp 640w, img/ta-91-1200.webp 1200w" sizes="(max-width:760px) 100vw, 60vw" width="1200" height="1200" decoding="async" loading="lazy" alt="">
+    </span>
     <span class="in">
       <span class="marka"><span class="kw aq"></span>Aquaholm</span>
       <span class="tyt">Wanny z hydromasażem</span>
-      <span class="hs" aria-hidden="true"><span>Przewaga dzięki technologii</span><span>Podgrzewacz wody i Bluetooth</span><span>Czekasz 30 dni, płacisz mniej</span><span>Raty 0%, PayPo i BLIK</span></span>
+      <span class="krot">Prostokątne i narożne wanny Premium Line z podgrzewaczem wody i Bluetooth.</span>
       <span class="btn aq">Zobacz wanny</span>
     </span>
   </a>
+  <div class="srod">
+    <span class="znak" aria-hidden="true"></span>
+    <h1>TREG z Bielska Podlaskiego: wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport</h1>
+    <p class="hasla" aria-hidden="true"><span>Przewaga dzięki technologii</span><span>Raty 0% na cały asortyment</span><span>Zapłać za 30 dni z PayPo albo BLIK-iem</span><span>Własny serwis i magazyn części</span><span>Darmowa wysyłka</span><span>Polska firma z Bielska Podlaskiego</span></p>
+  </div>
   <a class="pol apv" href="#bieznie">
-    <span class="scena"><span class="kwad" aria-hidden="true"></span>
-    <img class="bz" src="img/apv-640.webp" srcset="img/apv-420.webp 420w, img/apv-640.webp 640w, img/apv-833.webp 833w" sizes="(max-width:760px) 62vw, 26vw" width="833" height="688" alt="Bieżnia elektryczna APVsport APV8000 z ekranem Android"></span>
+    <span class="tla">
+      <img src="img/tb-r46a-1280.webp" srcset="img/tb-r46a-640.webp 640w, img/tb-r46a-1280.webp 1280w" sizes="(max-width:760px) 100vw, 60vw" width="1280" height="720" decoding="async" alt="Bieżnia elektryczna APVsport APV8000 w sali">
+      <img src="img/tb-ZPg6-1280.webp" srcset="img/tb-ZPg6-640.webp 640w, img/tb-ZPg6-1280.webp 1280w" sizes="(max-width:760px) 100vw, 60vw" width="1280" height="720" decoding="async" loading="lazy" alt="">
+      <img src="img/tb-Z4sf-1280.webp" srcset="img/tb-Z4sf-640.webp 640w, img/tb-Z4sf-1280.webp 1280w" sizes="(max-width:760px) 100vw, 60vw" width="1280" height="720" decoding="async" loading="lazy" alt="">
+    </span>
     <span class="in">
       <span class="marka"><span class="kw apv"></span>APVsport</span>
       <span class="tyt">Bieżnie elektryczne</span>
-      <span class="hs" aria-hidden="true"><span>Przewaga dzięki technologii</span><span>Silnik 6 KM, pas 145 x 58 cm</span><span>Ekran Android 15,6 cala</span><span>Własny serwis i części</span></span>
+      <span class="krot">Od APV900 po APV8000 z silnikiem 6 KM i ekranem Android 15,6 cala.</span>
       <span class="btn apv">Zobacz bieżnie</span>
     </span>
   </a>
-  <div class="baza">
-    <span class="szew" aria-hidden="true"></span>
-    <div class="wrap">
-      <h1>TREG z Bielska Podlaskiego: wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport - przewaga dzięki technologii</h1>
-      <a href="#sauny"><span class="kw"></span><span>Wkrótce: sauny parowe</span></a>
-    </div>
-  </div>
 </section>
 
 <section class="sek" id="wanny" data-k="aq" aria-labelledby="h-wanny">
