@@ -39,7 +39,7 @@ def karta(k, n, wd, wm, nazwa, opis, cena, stara, dost, alt, kier):
         f = (lambda w: f'img/{k}-{i}-{w}.webp') if n > 1 else (lambda w: f'img/{k}-{w}.webp')
         a = 'src' if i == 1 else 'data-src'
         zd.append(f'<button class="zd" type="button" data-lb="{f(wd)}" aria-label="Powiększ zdjęcie {i} z {n}">'
-                  f'<img {a}="{f(wm)}" width="600" height="450" loading="lazy" decoding="async" alt="{H.escape(alt)}{"" if i == 1 else f", zdjęcie {i}"}"></button>')
+                  f'<img {a}="{f(wm)}"{f' srcset="{f(wm)} {wm}w, {f(wd)} {wd}w" sizes="(max-width:600px) 84vw, (max-width:1280px) 34vw, 26vw"' if n == 1 else ''} width="600" height="450" loading="lazy" decoding="async" alt="{H.escape(alt)}{"" if i == 1 else f", zdjęcie {i}"}"></button>')
     kropki = ''.join(f'<i{" class=on" if i == 0 else ""}></i>' for i in range(n)) if n > 1 else ''
     strz = '<span class="gs"><button type="button" class="gp" aria-label="Poprzednie zdjęcie"></button><button type="button" class="gn" aria-label="Następne zdjęcie"></button></span>' if n > 1 else ''
     st = f'<s>{stara} zł</s>' if stara else ''
