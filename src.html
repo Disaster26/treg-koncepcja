@@ -304,7 +304,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .stopka a{text-decoration:none}.stopka a:hover{text-decoration:underline}
 .stopka .logo svg{width:120px}
 .stopka .dol{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:40px;padding-top:20px;border-top:1px solid #3a3f44;font-size:.88rem}
-@media (max-width:900px){.stopka .g{grid-template-columns:1fr 1fr}}
+@media (max-width:900px){.stopka .g{grid-template-columns:1fr 1fr}.stopka .g>div:first-child{grid-column:1/-1}.stopka .g>div:first-child p{max-width:46ch}}
+@media (max-width:560px){.stopka .g{grid-template-columns:1fr;gap:26px}}
 {{BADGE_STYLE}}
 
 /* lightbox */
@@ -445,7 +446,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   <div class="wrap">
     <div class="sg"><div><h2 id="h-dostawa">Dostawa, płatności i serwis</h2><p class="lead">Tak samo dla wanien i bieżni, zgodnie z regulaminem sklepu.</p></div></div>
     <div class="info4">
-      <div><h3><span class="kw aq"></span>Dostawa</h3><ul><li>Darmowa wysyłka produktów oznaczonych na karcie</li><li>Kurierem na adres w Polsce, przewidywany czas dostawy 1 dzień roboczy od wysyłki</li><li>Wysyłka także do krajów Unii Europejskiej, 2-5 dni roboczych</li></ul></div>
+      <div><h3><span class="kw aq"></span>Dostawa</h3><ul><li>Kurierem, także przesyłki nadwymiarowe i bardzo ciężkie</li><li>W Polsce zwykle 1 dzień roboczy od nadania (deklaracja firmy kurierskiej)</li><li>Do krajów Unii Europejskiej 2-5 dni roboczych</li><li>Koszt dostawy doliczany według cennika</li></ul></div>
       <div><h3><span class="kw apv"></span>Płatności</h3><ul><li>Raty 0%</li><li>PayPo: zapłać za 30 dni</li><li>BLIK i przelew</li><li>Płatność przy odbiorze</li></ul></div>
       <div><h3><span class="kw aq"></span>Serwis i części</h3><ul><li>Serwis gwarancyjny i pogwarancyjny</li><li>Własny magazyn części zamiennych</li><li>Doradzimy przy wyborze modelu</li></ul></div>
       <div><h3><span class="kw apv"></span>Zwroty</h3><ul><li>14 dni na odstąpienie od umowy przy zakupie przez internet</li><li>Termin realizacji towaru na zamówienie ustalamy z klientem przed wysyłką</li></ul></div>
