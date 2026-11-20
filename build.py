@@ -1,5 +1,5 @@
 # Buduje index.html z src.html: logo TREG (SVG), znak Wylinki (oficjalny fragment), karty produktow, filmy.
-# Wanny: ceny i dostepnosc z aquaholm.pl (Store API), bieznie: apvsport.pl (Store API) - sprawdzone 18.11.2026.
+# Nazwy, ceny i dostepnosc wanien i biezni z aquaholm.pl (Store API) - wg klienta obowiazujace, sprawdzone 20.11.2026.
 import html as H
 s = open('src.html', encoding='utf-8').read()
 
@@ -20,16 +20,17 @@ BRAK = ('brak', 'Brak w magazynie')
 WANNY = [
     ('w9014', 4, 1200, 600, 'Wanna A9014 Premium Line', '170 x 80 x 58 cm, dysze obrotowe, podgrzewacz wody, wodospad, Bluetooth, pilot', '6 990', '10 900', JEST, 'Wanna z hydromasażem A9014 z przeszkloną ścianką i niebieskim podświetleniem'),
     ('w9011', 3, 1200, 600, 'Wanna narożna A9011 Premium Line', '150 x 150 x 58 cm, Bluetooth, podgrzewacz wody, USB, pilot', '7 490', '11 900', JEST, 'Narożna wanna z hydromasażem A9011 z zielonym podświetleniem'),
-    ('w8008', 4, 1200, 600, 'Wanna A9008 Premium Line', '180 x 120 x 58 cm, dysze obrotowe, podgrzewacz wody, wodospad, Bluetooth, pilot', '7 490', '11 900', ZAM, 'Biała prostokątna wanna z hydromasażem A9008 z podświetleniem LED'),
+    ('w8008', 4, 1200, 600, 'Wanna A9008 Premium Line', '180 x 120 x 59 cm, dysze obrotowe, podgrzewacz wody, wodospad, Bluetooth, pilot', '7 490', '11 900', ZAM, 'Biała prostokątna wanna z hydromasażem A9008 z podświetleniem LED'),
     ('w8008c', 4, 1200, 600, 'Czarna wanna A9008C Premium Line', '180 x 120 x 59 cm, dysze obrotowe, podgrzewacz wody, wodospad, Bluetooth, pilot', '7 490', '11 900', ZAM, 'Czarna prostokątna wanna z hydromasażem A9008C z podświetleniem LED'),
     ('w9001', 4, 1200, 600, 'Wanna A9001 Premium Line', '170 x 78 x 60 cm, dysze obrotowe, podgrzewacz wody, wodospad, Bluetooth, pilot', '6 990', '11 250', ZAM, 'Prostokątna wanna z hydromasażem A9001 z kolorowym podświetleniem'),
 ]
 BIEZNIE = [
     ('futura', 1, 640, 360, 'Bieżnia APV8000 Futura Prestige 6 KM', 'ekran dotykowy Android 15,6", silnik 6 KM (10 KM szczytowo), pas 145 x 58 cm, do 180 kg', '4 990', '7 290', ZAM, 'Bieżnia elektryczna APVsport APV8000 Futura Prestige z ekranem 15,6 cala'),
-    ('elitek', 1, 640, 360, 'Bieżnia APV8000 Elite Series 5 KM', 'ekran dotykowy Android 10,1", silnik 5 KM (8 KM szczytowo), pas 145 x 58 cm, do 160 kg', '4 790', '6 790', ZAM, 'Bieżnia elektryczna APVsport APV8000 Elite Series'),
-    ('apv6000', 1, 640, 360, 'Bieżnia APV6000 z zestawem dodatków', 'ekran dotykowy Android 10,1", silnik 6 KM, pas 135 x 48 cm, do 180 kg', '7 990', None, JEST, 'Bieżnia elektryczna APVsport APV6000'),
-    ('apv5000', 1, 640, 360, 'Bieżnia APV5000 z zestawem dodatków', 'ekran dotykowy Android 7", silnik 4,5 KM, pas 130 x 40 cm, do 160 kg', '6 690', None, JEST, 'Bieżnia elektryczna APVsport APV5000'),
-    ('apv900', 1, 640, 360, 'Bieżnia APV900 z zestawem dodatków', 'ekran LCD, silnik 4 KM, pas 130 x 38 cm, do 150 kg', '6 290', None, JEST, 'Bieżnia elektryczna APVsport APV900'),
+    ('premium', 1, 640, 360, 'Bieżnia APV8000 Premium Line 6 KM', 'ekran dotykowy Android 10,1", silnik 6 KM (10 KM szczytowo), pas 145 x 58 cm, do 180 kg', '4 990', '7 290', ZAM, 'Bieżnia elektryczna APVsport APV8000 Premium Line'),
+    ('top', 1, 640, 360, 'Bieżnia APV8000 Top Quality 5 KM', 'ekran dotykowy Android 10,1", silnik 5 KM (8 KM szczytowo), pas 145 x 58 cm', '4 790', '6 790', ZAM, 'Bieżnia elektryczna APVsport APV8000 Top Quality'),
+    ('apv6000', 1, 640, 360, 'Bieżnia APV6000 z zestawem dodatków', 'ekran Android 10,1", pas 135 x 48 cm, w zestawie masażer, hantle, przyrząd do brzuszków, mata', '6 490', None, BRAK, 'Bieżnia elektryczna APVsport APV6000'),
+    ('apv5000', 1, 640, 360, 'Bieżnia APV5000 z zestawem dodatków', 'ekran Android 7", pas 130 x 40 cm, w zestawie masażer, hantle, przyrząd do brzuszków, mata', '6 290', None, BRAK, 'Bieżnia elektryczna APVsport APV5000'),
+    ('apv900', 1, 640, 360, 'Bieżnia APV900 z zestawem dodatków', 'ekran LCD, pas 130 x 38 cm, w zestawie masażer, hantle, przyrząd do brzuszków, mata', '4 385', None, BRAK, 'Bieżnia elektryczna APVsport APV900'),
 ]
 
 def karta(k, n, wd, wm, nazwa, opis, cena, stara, dost, alt, kier):

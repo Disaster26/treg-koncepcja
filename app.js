@@ -9,7 +9,7 @@
   var prz=[].slice.call(d.querySelectorAll('.prz a')),links=[].slice.call(d.querySelectorAll('.menu a[href^="#"]'));
   if('IntersectionObserver' in window){
     /* przelacznik wanny / bieznie: widoczny na telefonie po zejsciu z pierwszego ekranu, podswietla aktualny kierunek */
-    new IntersectionObserver(function(es){d.body.classList.toggle('zsz',!es[0].isIntersecting)},{threshold:0,rootMargin:'-40% 0px 0px 0px'}).observe(hero);
+    if(hero)new IntersectionObserver(function(es){d.body.classList.toggle('zsz',!es[0].isIntersecting)},{threshold:0,rootMargin:'-40% 0px 0px 0px'}).observe(hero);else d.body.classList.add('zsz');
     var ioK=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var k=e.target.getAttribute('data-k');prz.forEach(function(a){a.classList.toggle('on',a.getAttribute('data-k')===k)})}})},{rootMargin:'-45% 0px -50% 0px'});
     d.querySelectorAll('section[id]').forEach(function(s){ioK.observe(s)});
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-45% 0px -50% 0px'});
