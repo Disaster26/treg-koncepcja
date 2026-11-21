@@ -26,6 +26,7 @@ WANNY = [
 ]
 BIEZNIE = [
     ('futura', 1, 640, 360, 'Bieżnia APV8000 Futura Prestige 6 KM', 'ekran dotykowy Android 15,6", silnik 6 KM (10 KM szczytowo), pas 145 x 58 cm, do 180 kg', '4 990', '7 290', ZAM, 'Bieżnia elektryczna APVsport APV8000 Futura Prestige z ekranem 15,6 cala'),
+    ('elitek', 1, 640, 360, 'Bieżnia APV8000 Elite Series 5 KM', 'ekran dotykowy Android 10,1", silnik 5 KM (8 KM szczytowo), pas 145 x 58 cm, do 160 kg', '4 790', '6 790', ZAM, 'Bieżnia elektryczna APVsport APV8000 Elite Series'),
     ('premium', 1, 640, 360, 'Bieżnia APV8000 Premium Line 6 KM', 'ekran dotykowy Android 10,1", silnik 6 KM (10 KM szczytowo), pas 145 x 58 cm, do 180 kg', '4 990', '7 290', ZAM, 'Bieżnia elektryczna APVsport APV8000 Premium Line'),
     ('top', 1, 640, 360, 'Bieżnia APV8000 Top Quality 5 KM', 'ekran dotykowy Android 10,1", silnik 5 KM (8 KM szczytowo), pas 145 x 58 cm', '4 790', '6 790', ZAM, 'Bieżnia elektryczna APVsport APV8000 Top Quality'),
     ('apv6000', 1, 640, 360, 'Bieżnia APV6000 z zestawem dodatków', 'ekran Android 10,1", pas 135 x 48 cm, w zestawie masażer, hantle, przyrząd do brzuszków, mata', '6 490', None, BRAK, 'Bieżnia elektryczna APVsport APV6000'),
