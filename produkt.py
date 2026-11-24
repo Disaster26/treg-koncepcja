@@ -135,6 +135,10 @@ FILMY = [('r46a4RoqEwY', 'Prezentacja serii Futura Prestige'), ('Z4sfFoUTpzg', '
          ('ZPg6jSN-DGE', 'Wirtualne trasy na ekranie bieżni'), ('3zskB507N9g', 'Jak połączyć bieżnię z aplikacją Kinomap'),
          ('J7oqwrpF1ac', 'Jak połączyć bieżnię z aplikacją Zwift')]
 filmy = ''.join(f'<figure class="film"><button class="fa" type="button" data-yt="{i}" aria-label="Odtwórz film: {E(t)}"><img src="../img/yt-{i}.webp" width="480" height="270" loading="lazy" decoding="async" alt=""><span class="od" aria-hidden="true"></span></button><figcaption>{E(t)}</figcaption></figure>' for i, t in FILMY)
+# 24.11 oryginal od klienta (TransferNow, 1920x1080, bez ujec z hali): klienci/Treg/montaz_bieznia.py
+filmy = ('<figure class="film nat" style="grid-column:1/-1;max-width:1280px;margin:0"><video controls playsinline preload="none" poster="../film/bieznia-apv8000-futura-prestige.webp" width="1920" height="1080" '
+         'style="display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:6px;background:#0b0e11" aria-label="Film: bieżnia APV8000 Futura Prestige z ekranem 15,6 cala">'
+         '<source src="../film/bieznia-apv8000-futura-prestige.mp4" type="video/mp4"></video><figcaption>Bieżnia APV8000 Futura Prestige: ekran dotykowy 15,6 cala, pokrętło sterujące, pas biegowy 145 x 58 cm (film z dźwiękiem)</figcaption></figure>') + filmy
 
 podobne = '\n'.join(x for x in BIEZNIE if 'APV8000 Futura Prestige 6 KM' not in x)
 
@@ -226,7 +230,7 @@ strona = f'''<!doctype html>
 
 <section class="sek" id="filmy" aria-labelledby="h-fil">
   <div class="wrap">
-    <div class="sg"><div><h2 id="h-fil">Filmy</h2><p class="lead">Odtwarzacz YouTube włącza się dopiero po kliknięciu.</p></div></div>
+    <div class="sg"><div><h2 id="h-fil">Filmy</h2><p class="lead">Film odtwarza się po kliknięciu. Odtwarzacz YouTube włącza się dopiero po kliknięciu.</p></div></div>
     <div class="fl2">{filmy}</div>
   </div>
 </section>
