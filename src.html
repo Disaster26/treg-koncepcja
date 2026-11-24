@@ -344,6 +344,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .lb .p{left:6px}.lb .n{right:6px}
 .lb .p::before,.lb .n::before{content:"";position:absolute;left:20px;top:21px;width:14px;height:14px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(-45deg)}
 .lb .p::before{left:24px;transform:rotate(135deg)}
+/* 24.11 rozmowa: sprzedawane takze w duzych sieciach */
+.sieci{padding:clamp(40px,4.5vw,72px) 0;border-top:1px solid var(--line)}
+.sieci .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 48px}
+.sieci h2{font-size:clamp(20px,1.5vw,28px);max-width:26ch}
+.sieci ul{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:16px clamp(28px,4vw,72px);margin:0;padding:0}
+.sieci li{font-size:clamp(24px,2.2vw,40px);font-weight:800;letter-spacing:-.02em;color:#3d4247;opacity:.8}
 </style>
 </head>
 <body>
@@ -375,7 +381,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p class="hasla" aria-hidden="true"><span>Przewaga dzięki technologii</span><span>Raty 0% na cały asortyment</span><span>Zapłać za 30 dni z PayPo albo BLIK-iem</span><span>Własny serwis i magazyn części</span><span>Szybka dostawa w całej Polsce</span><span>Polska firma z Bielska Podlaskiego</span></p>
   </div>
   <a class="pol aq" href="#wanny">
-    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/wanny-hero.webp" width="960" height="540" aria-label="Wanny z hydromasażem Aquaholm w działaniu"><source src="film/wanny-hero.mp4" type="video/mp4"></video></span>
+    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/wanny-hero.webp" width="1280" height="720" aria-label="Wanny z hydromasażem Aquaholm w działaniu"><source src="film/wanny-hero.mp4" type="video/mp4"></video></span>
     <span class="in">
       <span class="marka"><span class="kw aq"></span>Aquaholm</span>
       <span class="tyt">Wanny z hydromasażem</span>
@@ -501,6 +507,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <a class="btn ciem" href="#kontakt">Napisz opinię</a>
     </div>
     <div class="miejsce"><b>Opinie Zaufane Ceneo dla treg.pl</b><span>Po uruchomieniu sklepu w tym miejscu pokażemy opinie kupujących z programu Opinie Zaufane Ceneo. Konto treg.pl jest już przypisane, ankieta trafia do klienta po każdym zamówieniu.</span></div>
+  </div>
+</section>
+
+<section class="sieci" aria-labelledby="h-si">
+  <div class="wrap">
+    <h2 id="h-si">Nasze wanny i bieżnie sprzedają także duże sieci</h2>
+    <ul><li>Media Expert</li><li>Empik</li></ul>
   </div>
 </section>
 

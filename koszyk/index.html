@@ -356,6 +356,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .lb .p{left:6px}.lb .n{right:6px}
 .lb .p::before,.lb .n::before{content:"";position:absolute;left:20px;top:21px;width:14px;height:14px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(-45deg)}
 .lb .p::before{left:24px;transform:rotate(135deg)}
+/* 24.11 rozmowa: sprzedawane takze w duzych sieciach */
+.sieci{padding:clamp(40px,4.5vw,72px) 0;border-top:1px solid var(--line)}
+.sieci .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 48px}
+.sieci h2{font-size:clamp(20px,1.5vw,28px);max-width:26ch}
+.sieci ul{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:16px clamp(28px,4vw,72px);margin:0;padding:0}
+.sieci li{font-size:clamp(24px,2.2vw,40px);font-weight:800;letter-spacing:-.02em;color:#3d4247;opacity:.8}
 
 .mia{padding:clamp(36px,5vw,80px) 0 clamp(40px,5vw,72px);background:var(--g)}
 .okr{font-size:.95rem;color:var(--mut);margin-bottom:18px}.okr a{color:var(--mut)}
