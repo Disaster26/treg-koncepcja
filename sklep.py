@@ -185,8 +185,10 @@ FILMY_F = [('r46a4RoqEwY', 'Prezentacja serii Futura Prestige'), ('Z4sfFoUTpzg',
 # filmy od klienta (WhatsApp 24.11), pelne, z dzwiekiem, natywna rozdzielczosc: klienci/Treg/montaz2.py
 FILMY_N = {'A9001C': (960, 544), 'A9009': (960, 544), 'A9001': (960, 544), 'A9006': (1024, 576), 'A9007C': (1024, 576), 'A9004C': (1024, 576), 'A9014': (1024, 576)}
 def film_nat(p):
-    if p['typ'] != 'wanna' or p['kod'] not in FILMY_N: return ''
-    w, h = FILMY_N[p['kod']]; n = 'wanna-' + p['kod'].lower()
+    if p['typ'] != 'wanna': return ''
+    if p['kod'] == 'A9002' and 'podwojna' in p['slug']: w, h, n = 1280, 720, 'wanna-a9002-podwojna'  # TransferNow 24.11, oryginal 4K
+    elif p['kod'] in FILMY_N: w, h = FILMY_N[p['kod']]; n = 'wanna-' + p['kod'].lower()
+    else: return ''
     return (f'<figure class="film nat" style="grid-column:1/-1;max-width:{w}px;margin:0"><video controls playsinline preload="none" poster="../film/{n}.webp" width="{w}" height="{h}" '
             f'style="display:block;width:100%;height:auto;aspect-ratio:{w}/{h};border-radius:6px;background:#0b0e11" aria-label="Film: wanna {E(p["kod"])} w działaniu">'
             f'<source src="../film/{n}.mp4" type="video/mp4"></video><figcaption>Wanna {E(p["kod"])} w działaniu: hydromasaż, podświetlenie LED i panel sterowania (film z dźwiękiem)</figcaption></figure>')
