@@ -12,6 +12,10 @@ s = s.replace('{{LOGO}}', logo('#4A4A4A')).replace('{{LOGO_JASNE}}', logo('#FFFF
 s = s.replace('{{BADGE_STYLE}}', open('badge_style.part', encoding='utf-8').read().replace('<style>', '').replace('</style>', ''))
 s = s.replace('{{BADGE_LINK}}', open('badge_link.part', encoding='utf-8').read().strip())
 
+import json
+PROD = {p['id']: p for p in json.load(open('produkty.json', encoding='utf-8'))}
+KARTY = {'w9014': 19555, 'w9011': 17916, 'w8008': 17905, 'w8008c': 19099, 'w9001': 17827,
+         'futura': 20185, 'premium': 20175, 'top': 20183, 'apv6000': 20272, 'apv5000': 20270, 'apv900': 20233}
 ZAM = ('zam', 'Na zamówienie, realizacja 30 dni')
 JEST = ('jest', 'Dostępna')
 BRAK = ('brak', 'Brak w magazynie')
@@ -43,10 +47,21 @@ def karta(k, n, wd, wm, nazwa, opis, cena, stara, dost, alt, kier):
                   f'<img {a}="{f(wm)}"{f' srcset="{f(wm)} {wm}w, {f(wd)} {wd}w" sizes="(max-width:600px) 84vw, (max-width:1000px) 56vw, (max-width:1280px) 34vw, 26vw"' if i == 1 else ''} width="600" height="450" loading="lazy" decoding="async" alt="{H.escape(alt)}{"" if i == 1 else f", zdjęcie {i}"}"></button>')
     kropki = ''.join(f'<i{" class=on" if i == 0 else ""}></i>' for i in range(n)) if n > 1 else ''
     strz = '<span class="gs"><button type="button" class="gp" aria-label="Poprzednie zdjęcie"></button><button type="button" class="gn" aria-label="Następne zdjęcie"></button></span>' if n > 1 else ''
+    # karta produktu w sklepie (produkty.json, dane_sklepu.py); Elite Series nie ma na aquaholm.pl
+    pr = PROD.get(KARTY.get(k))
+    if pr:
+        dost = {'zam': ZAM, 'jest': JEST, 'brak': BRAK}[pr['dost']]
+        cena = f'{pr["cena"]:,}'.replace(',', ' ')
+        stara = f'{pr["stara"]:,}'.replace(',', ' ') if pr['stara'] else None
     st = f'<s>{stara} zł</s>' if stara else ''
-    # wzorcowa karta produktu (uklad jak urbogym.pl) - na razie dla APV8000 Futura Prestige 6 KM
-    nz = f'<a class="pl" href="bieznia-apv8000-futura-prestige-6km/">{H.escape(nazwa)}</a>' if k == 'futura' else H.escape(nazwa)
-    kup = '<button type="button" class="dok" data-kosz>Dodaj do koszyka</button>' if dost[0] != 'brak' else '<a class="dok pyt" href="#kontakt">Zapytaj o termin</a>'
+    nz = f'<a class="pl" href="{pr["slug"]}/">{H.escape(nazwa)}</a>' if pr else H.escape(nazwa)
+    if pr and dost[0] != 'brak':
+        kup = (f'<button type="button" class="dok" data-kosz data-id="{pr["id"]}" data-nazwa="{H.escape(pr["nazwa"])}" data-cena="{pr["cena"]}" '
+               f'data-url="{pr["slug"]}/" data-img="img/p/{pr["zdjecia"][0]["m"][0]}">Dodaj do koszyka</button>')
+    elif dost[0] != 'brak':
+        kup = '<a class="dok pyt" href="kontakt/">Zapytaj o bieżnię</a>'
+    else:
+        kup = f'<a class="dok pyt" href="{pr["slug"] + "/" if pr else "kontakt/"}">Zapytaj o termin</a>'
     return (f'<article class="prod">\n  <div class="gal" data-grupa><div class="gt">{"".join(zd)}</div>{strz}<div class="kr" aria-hidden="true">{kropki}</div></div>\n'
             f'  <div class="pin"><h3><span class="kw {kier}"></span>{nz}</h3><p class="po">{H.escape(opis)}</p>\n'
             f'  <p class="dost {dost[0]}"><span class="b" aria-hidden="true"></span>{dost[1]}</p>\n'

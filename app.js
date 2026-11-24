@@ -52,8 +52,6 @@
     if(p){p.addEventListener('click',function(){wczytaj();gt.scrollBy({left:-w(),behavior:'smooth'})});n.addEventListener('click',function(){wczytaj();gt.scrollBy({left:w(),behavior:'smooth'})})}
   });
 
-  /* koszyk - tylko element wygladu podgladu */
-  d.querySelectorAll('[data-kosz]').forEach(function(b){b.addEventListener('click',function(){if(b.classList.contains('ok'))return;b.classList.add('ok');b.textContent='W koszyku'})});
 
   /* filmy: fasada, odtwarzacz YouTube dopiero po kliknieciu */
   d.querySelectorAll('[data-yt]').forEach(function(b){b.addEventListener('click',function(){

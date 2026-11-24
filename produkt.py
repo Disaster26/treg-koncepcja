@@ -141,7 +141,7 @@ podobne = '\n'.join(x for x in BIEZNIE if 'APV8000 Futura Prestige 6 KM' not in 
 ld = json.dumps({'@context': 'https://schema.org', '@graph': [
     {'@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'TREG', 'item': BAZA},
-        {'@type': 'ListItem', 'position': 2, 'name': 'Bieżnie elektryczne', 'item': BAZA + '#bieznie'},
+        {'@type': 'ListItem', 'position': 2, 'name': 'Bieżnie elektryczne', 'item': BAZA + 'bieznie-elektryczne/'},
         {'@type': 'ListItem', 'position': 3, 'name': NAZWA, 'item': URL}]},
     {'@type': 'Product', 'name': NAZWA, 'sku': 'APV8000-FP-6KM', 'gtin13': '9331582499908',
      'brand': {'@type': 'Brand', 'name': 'APVsport'},
@@ -175,7 +175,7 @@ strona = f'''<!doctype html>
 <main id="tresc">
 <section class="kp" aria-labelledby="h1">
   <div class="wrap">
-    <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / <a href="../#bieznie">Bieżnie elektryczne</a> / APV8000 Futura Prestige 6 KM</nav>
+    <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / <a href="../bieznie-elektryczne/">Bieżnie elektryczne</a> / APV8000 Futura Prestige 6 KM</nav>
     <div class="kp-g">
       {galeria}
       <div class="zak" id="zakup">
@@ -195,7 +195,7 @@ strona = f'''<!doctype html>
         <label class="opc"><input type="checkbox" id="pas"><span><b>Dodaj pas piersiowy do pomiaru tętna: 125 zł</b> <s>139 zł</s><small>Tętno wyświetla się na ekranie bieżni.</small></span></label>
         <div class="kup">
           <div class="ilosc"><button type="button" data-il="-1" aria-label="Mniej">-</button><input id="il" type="number" min="1" value="1" aria-label="Ilość"><button type="button" data-il="1" aria-label="Więcej">+</button></div>
-          <button type="button" class="dok" data-kosz>Dodaj do koszyka</button>
+          <button type="button" class="dok" data-kosz data-id="20185" data-nazwa="{E(NAZWA)}" data-cena="4990" data-url="./" data-img="../img/pf-g1-480.webp">Dodaj do koszyka</button>
         </div>
         <div class="zauf">
           <span><span class="kw apv"></span>Raty 0%</span><span><span class="kw aq"></span>PayPo: zapłać za 30 dni</span>
@@ -282,6 +282,7 @@ if('IntersectionObserver' in window){{var io=new IntersectionObserver(function(e
 }})();
 </script>
 <script src="../app.js" defer></script>
+<script src="../koszyk.js" defer></script>
 <script src="../wa.js" data-firma="TREG" data-kolor="#1e2124" defer></script>
 </body>
 </html>

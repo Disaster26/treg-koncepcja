@@ -3,7 +3,7 @@
 # Uruchamiac PO build.py.  Wynik: /wanny-z-hydromasazem-<miasto>/index.html + sitemap.xml
 import re, html as H, unicodedata
 
-BAZA = 'https://disaster26.github.io/treg-koncepcja/'
+BAZA = 'https://wylinka-podglad.pl/treg-koncepcja/'
 idx = open('index.html', encoding='utf-8').read()
 
 def wytnij(a, b, s=idx):
@@ -43,9 +43,13 @@ def popraw_linki(s):
     for k in ('filmy', 'firma', 'sauny', 'opinie'):
         s = s.replace(f'href="#{k}"', f'href="../#{k}"')
     s = s.replace('href="bieznia-', 'href="../bieznia-')
+    s = re.sub(r'(href|data-url|data-img)="(?!#|https?:|tel:|mailto:|\.\./|/)([a-z])', r'\1="../\2', s)
     return s.replace('src="img/', 'src="../img/').replace('data-src="img/', 'data-src="../img/').replace('data-lb="img/', 'data-lb="../img/').replace('srcset="img/', 'srcset="../img/').replace(', img/', ', ../img/')
 
 NAGL, STOPKA = popraw_linki(NAGL), popraw_linki(STOPKA)
+for a, b in (('href="#wanny"', 'href="../wanny-z-hydromasazem/"'), ('href="#bieznie"', 'href="../bieznie-elektryczne/"'),
+             ('href="#sauny"', 'href="../#sauny"'), ('href="#dostawa"', 'href="../dostawa-i-platnosci/"'), ('href="#kontakt"', 'href="../kontakt/"')):
+    NAGL, STOPKA = NAGL.replace(a, b), STOPKA.replace(a, b)
 WANNY = [popraw_linki(x) for x in WANNY]; BIEZNIE = [popraw_linki(x) for x in BIEZNIE]
 
 
@@ -188,6 +192,7 @@ for i, (m, w, dop, woj, wst, krot) in enumerate(M):
 {STOPKA}
 {LB}
 <script src="../app.js" defer></script>
+<script src="../koszyk.js" defer></script>
 <script src="../wa.js" data-firma="TREG" data-kolor="#1e2124" defer></script>
 </body>
 </html>
