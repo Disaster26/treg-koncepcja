@@ -182,6 +182,14 @@ FILMY_W = {'A9009': [('UxqKd6TiJ00', 'Wanna A9009, biała: hydromasaż i podświ
            'A9008C': [('IQyb91JjEAs', 'Wanna A9008C, czarna: prezentacja')], 'A9014': [('c0Il79_bJFk', 'Wanna A9014: prezentacja')]}
 FILMY_F = [('r46a4RoqEwY', 'Prezentacja serii Futura Prestige'), ('Z4sfFoUTpzg', 'Funkcje ekranu dotykowego 15,6 cala, wersja polska'),
            ('ZPg6jSN-DGE', 'Wirtualne trasy na ekranie bieżni'), ('3zskB507N9g', 'Jak połączyć bieżnię z aplikacją Kinomap'), ('J7oqwrpF1ac', 'Jak połączyć bieżnię z aplikacją Zwift')]
+# filmy od klienta (WhatsApp 24.11), pelne, z dzwiekiem, natywna rozdzielczosc: klienci/Treg/montaz2.py
+FILMY_N = {'A9001C': (960, 544), 'A9009': (960, 544), 'A9001': (960, 544), 'A9006': (1024, 576), 'A9007C': (1024, 576), 'A9004C': (1024, 576), 'A9014': (1024, 576)}
+def film_nat(p):
+    if p['typ'] != 'wanna' or p['kod'] not in FILMY_N: return ''
+    w, h = FILMY_N[p['kod']]; n = 'wanna-' + p['kod'].lower()
+    return (f'<figure class="film nat" style="grid-column:1/-1;max-width:{w}px;margin:0"><video controls playsinline preload="none" poster="../film/{n}.webp" width="{w}" height="{h}" '
+            f'style="display:block;width:100%;height:auto;aspect-ratio:{w}/{h};border-radius:6px;background:#0b0e11" aria-label="Film: wanna {E(p["kod"])} w działaniu">'
+            f'<source src="../film/{n}.mp4" type="video/mp4"></video><figcaption>Wanna {E(p["kod"])} w działaniu: hydromasaż, podświetlenie LED i panel sterowania (film z dźwiękiem)</figcaption></figure>')
 def filmy_dla(p):
     if p['typ'] == 'wanna': return FILMY_W.get(p['kod'], [])
     if p['typ'] == 'bieznia' and p.get('seria') == 'Futura Prestige':
@@ -330,13 +338,14 @@ def strona_produktu(p):
     if p['typ'] == 'wanna' and p['dost'] == 'zam':
         zest = '<p class="zest"><b>Czekasz, zyskujesz:</b> wanna z terminem realizacji 30 dni kosztuje mniej niż ta sama wanna od ręki.</p>'
     fl = filmy_dla(p)
-    filmy = ''.join(f'<figure class="film"><button class="fa" type="button" data-yt="{i}" aria-label="Odtwórz film: {E(t)}"><img src="../img/yt-{i}.webp" width="480" height="270" loading="lazy" decoding="async" alt=""><span class="od" aria-hidden="true"></span></button><figcaption>{E(t)}</figcaption></figure>' for i, t in fl)
+    fn = film_nat(p)
+    filmy = fn + ''.join(f'<figure class="film"><button class="fa" type="button" data-yt="{i}" aria-label="Odtwórz film: {E(t)}"><img src="../img/yt-{i}.webp" width="480" height="270" loading="lazy" decoding="async" alt=""><span class="od" aria-hidden="true"></span></button><figcaption>{E(t)}</figcaption></figure>' for i, t in fl)
     tabela = ('<table class="par"><caption>Parametry techniczne</caption><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in par) + '</tbody></table>') if par else ''
     pod = sorted([x for x in P if x['typ'] == p['typ'] and x['id'] != p['id']] if p['typ'] != 'akcesorium' else [x for x in P if x['id'] != p['id'] and (x['typ'] == 'akcesorium' or x['id'] in (20185, 20175, 20177))],
                  key=lambda x: (x['dost'] == 'brak', abs(x['cena'] - p['cena'])))[:8]
-    zakl = [('opis', 'Opis')] + ([('parametry', 'Parametry')] if tabela else []) + ([('filmy', 'Filmy')] if fl else []) + [('dostawa', 'Dostawa i płatności'), ('opinie', 'Opinie'), ('podobne', 'Podobne')]
+    zakl = [('opis', 'Opis')] + ([('parametry', 'Parametry')] if tabela else []) + ([('filmy', 'Filmy')] if (fl or fn) else []) + [('dostawa', 'Dostawa i płatności'), ('opinie', 'Opinie'), ('podobne', 'Podobne')]
     sek_par = f'<section class="sek szary" id="parametry" aria-labelledby="h-par"><div class="wrap"><div class="sg"><div><h2 id="h-par">Parametry</h2></div></div>{tabela}</div></section>' if tabela else ''
-    sek_fil = f'<section class="sek" id="filmy" aria-labelledby="h-fil"><div class="wrap"><div class="sg"><div><h2 id="h-fil">Filmy</h2><p class="lead">Odtwarzacz YouTube włącza się dopiero po kliknięciu.</p></div></div><div class="fl2">{filmy}</div></div></section>' if fl else ''
+    sek_fil = f'<section class="sek" id="filmy" aria-labelledby="h-fil"><div class="wrap"><div class="sg"><div><h2 id="h-fil">Filmy</h2><p class="lead">{"Film odtwarza się po kliknięciu. " if fn else ""}{"Odtwarzacz YouTube włącza się dopiero po kliknięciu." if fl else ""}</p></div></div><div class="fl2">{filmy}</div></div></section>' if (fl or fn) else ''
     dostawa = wytnij('<div class="info4">', '</section>', produkt.strona)
     url = BAZA + p['slug'] + '/'
     ld = {'@context': 'https://schema.org', '@graph': [
