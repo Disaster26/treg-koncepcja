@@ -185,6 +185,12 @@ FILMY_F = [('r46a4RoqEwY', 'Prezentacja serii Futura Prestige'), ('Z4sfFoUTpzg',
 # filmy od klienta (WhatsApp 24.11), pelne, z dzwiekiem, natywna rozdzielczosc: klienci/Treg/montaz2.py
 FILMY_N = {'A9001C': (960, 544), 'A9009': (960, 544), 'A9001': (960, 544), 'A9006': (1024, 576), 'A9007C': (1024, 576), 'A9004C': (1024, 576), 'A9014': (1024, 576)}
 def film_nat(p):
+    if p['typ'] == 'bieznia' and p.get('seria') == 'Futura Prestige' and p.get('ekran') == '15.6':
+        # oryginal od klienta (TransferNow 24.11, 1920x1080), bez ujec z hali: klienci/Treg/montaz_bieznia.py
+        w, h, n = 1920, 1080, 'bieznia-apv8000-futura-prestige'
+        return (f'<figure class="film nat" style="grid-column:1/-1;max-width:1280px;margin:0"><video controls playsinline preload="none" poster="../film/{n}.webp" width="{w}" height="{h}" '
+                f'style="display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:6px;background:#0b0e11" aria-label="Film: bieżnia APV8000 Futura Prestige z ekranem 15,6 cala">'
+                f'<source src="../film/{n}.mp4" type="video/mp4"></video><figcaption>Bieżnia APV8000 Futura Prestige: ekran dotykowy 15,6 cala, pokrętło sterujące, pas biegowy 145 x 58 cm (film z dźwiękiem)</figcaption></figure>')
     if p['typ'] != 'wanna': return ''
     if p['kod'] == 'A9002' and 'podwojna' in p['slug']: w, h, n = 1280, 720, 'wanna-a9002-podwojna'  # TransferNow 24.11, oryginal 4K
     elif p['kod'] in FILMY_N: w, h = FILMY_N[p['kod']]; n = 'wanna-' + p['kod'].lower()

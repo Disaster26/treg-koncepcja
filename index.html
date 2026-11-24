@@ -356,12 +356,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .lb .p{left:6px}.lb .n{right:6px}
 .lb .p::before,.lb .n::before{content:"";position:absolute;left:20px;top:21px;width:14px;height:14px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(-45deg)}
 .lb .p::before{left:24px;transform:rotate(135deg)}
-/* 24.11 rozmowa: sprzedawane takze w duzych sieciach */
-.sieci{padding:clamp(40px,4.5vw,72px) 0;border-top:1px solid var(--line)}
-.sieci .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 48px}
-.sieci h2{font-size:clamp(20px,1.5vw,28px);max-width:26ch}
-.sieci ul{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:16px clamp(28px,4vw,72px);margin:0;padding:0}
-.sieci li{font-size:clamp(24px,2.2vw,40px);font-weight:800;letter-spacing:-.02em;color:#3d4247;opacity:.8}
+/* 24.11 rozmowa + propozycja klienta z AI (WA 19:07): pas sieci pod pierwszym ekranem, szare nazwy */
+.sieci{padding:clamp(22px,2.4vw,40px) 0;background:#eef2f6;border-bottom:1px solid #d8dee4}
+.sieci .wrap{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.sieci h2{font-size:clamp(14px,1vw,17px);font-weight:600;color:#4d5862;letter-spacing:0;max-width:none}
+.sieci ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px clamp(22px,3.4vw,64px);margin:0;padding:0}
+.sieci li{font-size:clamp(19px,1.7vw,30px);font-weight:800;letter-spacing:-.02em;color:#8a939b}
 </style>
 </head>
 <body>
@@ -402,7 +402,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </span>
   </a>
   <a class="pol apv" href="#bieznie">
-    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/bieznie-hero.webp" width="960" height="540" aria-label="Bieżnia APVsport APV8000 w działaniu"><source src="film/bieznie-hero.mp4" type="video/mp4"></video></span>
+    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/bieznie-hero.webp" width="1920" height="1080" aria-label="Bieżnia APVsport APV8000 w działaniu"><source src="film/bieznie-hero.mp4" type="video/mp4"></video></span>
     <span class="in">
       <span class="marka"><span class="kw apv"></span>APVsport</span>
       <span class="tyt">Bieżnie elektryczne</span>
@@ -411,6 +411,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </span>
   </a>
 </section>
+
+<section class="sieci" aria-labelledby="h-si">
+  <div class="wrap">
+    <h2 id="h-si">Produkty naszych marek znajdziesz w ofercie czołowych sieci</h2>
+    <ul><li>Media Expert</li><li>Empik</li><li>Erli</li><li>Allegro</li><li>Amazon</li><li>RTV Euro AGD</li></ul>
+  </div>
+</section>
+
 
 <section class="sek" id="wanny" data-k="aq" aria-labelledby="h-wanny">
   <div class="wrap">
@@ -590,13 +598,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <a class="btn ciem" href="#kontakt">Napisz opinię</a>
     </div>
     <div class="miejsce"><b>Opinie Zaufane Ceneo dla treg.pl</b><span>Po uruchomieniu sklepu w tym miejscu pokażemy opinie kupujących z programu Opinie Zaufane Ceneo. Konto treg.pl jest już przypisane, ankieta trafia do klienta po każdym zamówieniu.</span></div>
-  </div>
-</section>
-
-<section class="sieci" aria-labelledby="h-si">
-  <div class="wrap">
-    <h2 id="h-si">Nasze wanny i bieżnie sprzedają także duże sieci</h2>
-    <ul><li>Media Expert</li><li>Empik</li></ul>
   </div>
 </section>
 

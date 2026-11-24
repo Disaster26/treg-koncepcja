@@ -356,12 +356,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .lb .p{left:6px}.lb .n{right:6px}
 .lb .p::before,.lb .n::before{content:"";position:absolute;left:20px;top:21px;width:14px;height:14px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(-45deg)}
 .lb .p::before{left:24px;transform:rotate(135deg)}
-/* 24.11 rozmowa: sprzedawane takze w duzych sieciach */
-.sieci{padding:clamp(40px,4.5vw,72px) 0;border-top:1px solid var(--line)}
-.sieci .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px 48px}
-.sieci h2{font-size:clamp(20px,1.5vw,28px);max-width:26ch}
-.sieci ul{list-style:none;display:flex;flex-wrap:wrap;align-items:center;gap:16px clamp(28px,4vw,72px);margin:0;padding:0}
-.sieci li{font-size:clamp(24px,2.2vw,40px);font-weight:800;letter-spacing:-.02em;color:#3d4247;opacity:.8}
+/* 24.11 rozmowa + propozycja klienta z AI (WA 19:07): pas sieci pod pierwszym ekranem, szare nazwy */
+.sieci{padding:clamp(22px,2.4vw,40px) 0;background:#eef2f6;border-bottom:1px solid #d8dee4}
+.sieci .wrap{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.sieci h2{font-size:clamp(14px,1vw,17px);font-weight:600;color:#4d5862;letter-spacing:0;max-width:none}
+.sieci ul{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px clamp(22px,3.4vw,64px);margin:0;padding:0}
+.sieci li{font-size:clamp(19px,1.7vw,30px);font-weight:800;letter-spacing:-.02em;color:#8a939b}
 
 .mia{padding:clamp(36px,5vw,80px) 0 clamp(40px,5vw,72px);background:var(--g)}
 .okr{font-size:.95rem;color:var(--mut);margin-bottom:18px}.okr a{color:var(--mut)}
