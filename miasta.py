@@ -42,6 +42,7 @@ def popraw_linki(s):
     s = s.replace('href="#start"', 'href="../"')
     for k in ('filmy', 'firma', 'sauny', 'opinie'):
         s = s.replace(f'href="#{k}"', f'href="../#{k}"')
+    s = s.replace('href="bieznia-', 'href="../bieznia-')
     return s.replace('src="img/', 'src="../img/').replace('data-src="img/', 'data-src="../img/').replace('data-lb="img/', 'data-lb="../img/').replace('srcset="img/', 'srcset="../img/').replace(', img/', ', ../img/')
 
 NAGL, STOPKA = popraw_linki(NAGL), popraw_linki(STOPKA)

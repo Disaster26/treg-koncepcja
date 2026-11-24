@@ -44,9 +44,11 @@ def karta(k, n, wd, wm, nazwa, opis, cena, stara, dost, alt, kier):
     kropki = ''.join(f'<i{" class=on" if i == 0 else ""}></i>' for i in range(n)) if n > 1 else ''
     strz = '<span class="gs"><button type="button" class="gp" aria-label="Poprzednie zdjęcie"></button><button type="button" class="gn" aria-label="Następne zdjęcie"></button></span>' if n > 1 else ''
     st = f'<s>{stara} zł</s>' if stara else ''
+    # wzorcowa karta produktu (uklad jak urbogym.pl) - na razie dla APV8000 Futura Prestige 6 KM
+    nz = f'<a class="pl" href="bieznia-apv8000-futura-prestige-6km/">{H.escape(nazwa)}</a>' if k == 'futura' else H.escape(nazwa)
     kup = '<button type="button" class="dok" data-kosz>Dodaj do koszyka</button>' if dost[0] != 'brak' else '<a class="dok pyt" href="#kontakt">Zapytaj o termin</a>'
     return (f'<article class="prod">\n  <div class="gal" data-grupa><div class="gt">{"".join(zd)}</div>{strz}<div class="kr" aria-hidden="true">{kropki}</div></div>\n'
-            f'  <div class="pin"><h3><span class="kw {kier}"></span>{H.escape(nazwa)}</h3><p class="po">{H.escape(opis)}</p>\n'
+            f'  <div class="pin"><h3><span class="kw {kier}"></span>{nz}</h3><p class="po">{H.escape(opis)}</p>\n'
             f'  <p class="dost {dost[0]}"><span class="b" aria-hidden="true"></span>{dost[1]}</p>\n'
             f'  <p class="cena"><b>{cena} zł</b>{st}</p>{kup}</div>\n</article>')
 

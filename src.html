@@ -124,6 +124,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* tylko przenikanie i lekki ruch od 0.94 do 1 (nigdy ponad skale 1:1) */
 @keyframes sek1{0%{opacity:1;transform:scale(.97)}33%{opacity:1;transform:scale(1)}40%{opacity:0;transform:scale(1)}94%{opacity:0;transform:scale(.94)}100%{opacity:1;transform:scale(.97)}}
 @keyframes sek{0%{opacity:0;transform:scale(.94)}6%{opacity:1}33%{opacity:1;transform:scale(1)}40%{opacity:0;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
+.ekran video{animation:none;opacity:1}
+.pol .ekran{max-width:768px}
+@media (max-width:760px){.pol.aq .ekran video{object-position:right center}}
 .ekran{background:#06243f}.pol.apv .ekran{background:#1d0a0a}
 .pol .in{position:relative;z-index:1;width:min(100%,960px,calc((100svh - var(--hh) - 500px) * 1.7778));min-width:min(100%,300px)}
 .pol .marka{display:flex;align-items:center;gap:12px;font-weight:700;font-size:clamp(16px,1vw,19px);color:#e9eef3}
@@ -191,6 +194,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media (hover:none){.gs{display:none}}
 .pin{display:flex;flex-direction:column;gap:8px;padding:18px 18px 20px;flex:1}
 .prod h3{display:flex;gap:10px;align-items:baseline}
+.prod h3 a.pl{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}.prod h3 a.pl:hover{color:var(--apv)}
 .prod h3 .kw{width:12px;height:12px;transform:translateY(-1px)}
 .po{color:var(--mut);font-size:.95rem;line-height:1.5}
 .dost{display:flex;align-items:center;gap:9px;font-size:.92rem;font-weight:700;margin-top:2px}
@@ -259,7 +263,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .firma .fot{position:relative;padding:0 18px 18px 0}
 .firma .fot::before{content:"";position:absolute;right:0;bottom:0;width:62%;height:70%;background:var(--apv)}
 .firma .fot::after{content:"";position:absolute;left:-14px;top:-14px;width:46%;height:52%;border:4px solid var(--aq);z-index:2;pointer-events:none}
-.firma .fot img{position:relative;z-index:1;width:100%;aspect-ratio:784/449;object-fit:cover}
+.firma .fot{margin:0}.firma .fot video{position:relative;z-index:1;display:block;width:100%;height:auto;max-width:1024px;aspect-ratio:16/9;object-fit:cover;background:#111}
+.firma figcaption{position:relative;z-index:3;margin-top:10px;font-size:.92rem;color:var(--mut)}
+.firma .fot figcaption{background:#fff;padding-right:12px}
+.firma .zap{margin-top:clamp(48px,6vw,110px);grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}
+.firma .zap h3{display:flex;align-items:center;gap:12px;font-size:clamp(22px,1.6vw,30px)}
+.firma .zap .kw{width:16px;height:16px}
+.firma .fot2{margin:0;position:relative}
+.firma .fot2 video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#111;box-shadow:12px 12px 0 var(--apv)}
+@media (max-width:900px){.firma .zap .fot2{order:-1}}
 .firma p{margin-top:16px;max-width:60ch}
 .firma .dwie{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
 .firma .dwie a{display:block;padding:16px 0 4px;border-top:4px solid var(--aq);text-decoration:none}
@@ -361,11 +373,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p class="hasla" aria-hidden="true"><span>Przewaga dzięki technologii</span><span>Raty 0% na cały asortyment</span><span>Zapłać za 30 dni z PayPo albo BLIK-iem</span><span>Własny serwis i magazyn części</span><span>Szybka dostawa w całej Polsce</span><span>Polska firma z Bielska Podlaskiego</span></p>
   </div>
   <a class="pol aq" href="#wanny">
-    <span class="ekran">
-      <img src="img/ta-hero-1600.webp" srcset="img/ta-hero-800.webp 800w, img/ta-hero-1600.webp 1600w" sizes="(max-width:760px) 82vw, 50vw" width="1600" height="900" decoding="async" fetchpriority="high" alt="Narożna wanna z hydromasażem Aquaholm z podświetloną wodą">
-      <img src="img/ta-88-1200.webp" srcset="img/ta-88-640.webp 640w, img/ta-88-1200.webp 1200w" sizes="(max-width:760px) 82vw, 50vw" width="1200" height="1200" decoding="async" loading="lazy" alt="">
-      <img src="img/ta-91-1200.webp" srcset="img/ta-91-640.webp 640w, img/ta-91-1200.webp 1200w" sizes="(max-width:760px) 82vw, 50vw" width="1200" height="1200" decoding="async" loading="lazy" alt="">
-    </span>
+    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/wanny-hero.webp" width="768" height="432" aria-label="Wanny z hydromasażem Aquaholm w działaniu"><source src="film/wanny-hero.mp4" type="video/mp4"></video></span>
     <span class="in">
       <span class="marka"><span class="kw aq"></span>Aquaholm</span>
       <span class="tyt">Wanny z hydromasażem</span>
@@ -374,11 +382,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     </span>
   </a>
   <a class="pol apv" href="#bieznie">
-    <span class="ekran">
-      <img src="img/tb-r46a-1280.webp" srcset="img/tb-r46a-640.webp 640w, img/tb-r46a-1280.webp 1280w" sizes="(max-width:760px) 82vw, 50vw" width="1280" height="720" decoding="async" alt="Bieżnia elektryczna APVsport APV8000 w sali">
-      <img src="img/tb-ZPg6-1280.webp" srcset="img/tb-ZPg6-640.webp 640w, img/tb-ZPg6-1280.webp 1280w" sizes="(max-width:760px) 82vw, 50vw" width="1280" height="720" decoding="async" loading="lazy" alt="">
-      <img src="img/tb-Z4sf-1280.webp" srcset="img/tb-Z4sf-640.webp 640w, img/tb-Z4sf-1280.webp 1280w" sizes="(max-width:760px) 82vw, 50vw" width="1280" height="720" decoding="async" loading="lazy" alt="">
-    </span>
+    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/bieznie-hero.webp" width="960" height="540" aria-label="Bieżnia APVsport APV8000 w działaniu"><source src="film/bieznie-hero.mp4" type="video/mp4"></video></span>
     <span class="in">
       <span class="marka"><span class="kw apv"></span>APVsport</span>
       <span class="tyt">Bieżnie elektryczne</span>
@@ -465,7 +469,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <section class="sek firma" id="firma" aria-labelledby="h-firma">
   <div class="wrap">
-    <div class="fot"><img src="img/salon-784.webp" srcset="img/salon-480.webp 480w, img/salon-784.webp 784w" sizes="(max-width:900px) 90vw, 45vw" width="784" height="449" loading="lazy" decoding="async" alt="Sala z bieżniami elektrycznymi APVsport"></div>
+    <figure class="fot"><video autoplay muted loop playsinline preload="none" poster="film/magazyn-wanny.webp" width="1024" height="576" data-leniwy aria-label="Magazyn wanien z hydromasażem Aquaholm"><source data-src="film/magazyn-wanny.mp4" type="video/mp4"></video><figcaption>Magazyn wanien Aquaholm: rzędy wanien z hydromasażem gotowych do wysyłki.</figcaption></figure>
     <div>
       <h2 id="h-firma">TREG: jedna firma, dwa kierunki</h2>
       <p>TREG Łukasz Pawluczuk z Bielska Podlaskiego prowadzi dwie marki: Aquaholm, czyli wanny z hydromasażem, i APVsport, czyli bieżnie elektryczne. Zajmujemy się produkcją wanien i bieżni, sprzedajemy w Polsce i za granicą, prowadzimy serwis gwarancyjny i pogwarancyjny oraz magazyn części.</p>
@@ -476,6 +480,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <p class="dane">TREG Łukasz Pawluczuk, ul. 30 Lipca 2, 17-100 Bielsk Podlaski, NIP 543-200-95-88, REGON 200140166. Nasze sklepy: treg.pl, aquaholm.pl, apvsport.pl, mixhurt.com.pl.</p>
     </div>
   </div>
+  <div class="wrap zap">
+    <div>
+      <h3><span class="kw apv"></span>Bieżnie APVsport: od montażu do kartonu</h3>
+      <p>Każda bieżnia przechodzi montaż, próbę na pasie i kontrolę, a potem trafia do kartonu z logo APVsport, zabezpieczona na czas transportu. Wysyłamy ją ubezpieczoną, a części zamienne mamy na miejscu w magazynie.</p>
+    </div>
+    <figure class="fot2"><video autoplay muted loop playsinline preload="none" poster="film/hala-bieznie.webp" width="1280" height="720" data-leniwy aria-label="Produkcja i pakowanie bieżni APVsport"><source data-src="film/hala-bieznie.mp4" type="video/mp4"></video><figcaption>Montaż, kontrola i pakowanie bieżni APVsport.</figcaption></figure>
+  </div>
 </section>
 
 <section class="sek szary opinie" id="opinie" aria-labelledby="h-opinie">
@@ -485,7 +496,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <p>W tym miejscu pokażemy opinie klientów zbierane pod marką TREG, od kupujących zarówno wanny, jak i bieżnie. Kupili Państwo u nas sprzęt? Będzie nam miło, jeśli podzielą się Państwo opinią.</p>
       <a class="btn ciem" href="#kontakt">Napisz opinię</a>
     </div>
-    <div class="miejsce"><b>Miejsce na opinie klientów TREG</b><span>Tu wyświetlimy opinie zebrane pod marką TREG, na przykład z wizytówki firmy w Google.</span></div>
+    <div class="miejsce"><b>Opinie Zaufane Ceneo dla treg.pl</b><span>Po uruchomieniu sklepu w tym miejscu pokażemy opinie kupujących z programu Opinie Zaufane Ceneo. Konto treg.pl jest już przypisane, ankieta trafia do klienta po każdym zamówieniu.</span></div>
   </div>
 </section>
 
@@ -530,6 +541,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Powiększone zdjęcie"><button class="x" type="button" aria-label="Zamknij"></button><button class="p" type="button" aria-label="Poprzednie zdjęcie"></button><img alt=""><p></p><button class="n" type="button" aria-label="Następne zdjęcie"></button></div>
 <script src="app.js" defer></script>
+<script src="film.js" defer></script>
 <script src="wa.js" data-firma="TREG" data-kolor="#1e2124" defer></script>
 </body>
 </html>
