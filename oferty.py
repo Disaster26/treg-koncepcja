@@ -313,20 +313,23 @@ def opis_html(o, sl_url, alt):
             html.append(f'<h3{" class=\"red\"" if x[2] else ""}>{nowosc(x[1])}</h3>'); i += 1; continue
         if x[0] == 'ikony': html.append(pasek_ikon()); i += 1; continue
         if x[0] == 'promo': html.append('<p class="promo">Promocja</p>'); i += 1; continue
-        if x[0] == 'yt':
-            yid, tyt = x[1], x[2]
-            tyt = zdanie(tyt) if caps(tyt) else tyt
-            p = obraz_yt(yid)
-            html.append(f'<figure class="film of"><button class="fa" type="button" data-yt="{yid}" aria-label="Odtwórz film: {E(tyt)}">'
-                        f'<img src="../img/o/{p[0]}" width="{p[1]}" height="{p[2]}" loading="lazy" decoding="async" alt=""><span class="od" aria-hidden="true"></span></button></figure>'); i += 1; continue
-        if x[0] == 'img':
-            fig = ''
-            for src, w in x[1]:
-                n, sw, sh = obraz(src)
-                pok = sw   # natywna szerokosc, w kolumnie opisu 800 px wszystkie rowne
-                fig += (f'<button type="button" class="oi" data-lb="../img/o/{n}" aria-label="Powiększ zdjęcie" style="max-width:{pok}px">'
-                        f'<img src="../img/o/{n}" width="{sw}" height="{sh}" loading="lazy" decoding="async" alt="{E(alt)}"></button>')
-            html.append(f'<div class="of-z{" rz" if len(x[1]) > 1 else ""}">{fig}</div>'); i += 1; continue
+        if x[0] in ('yt', 'img'):
+            # zdjecia, rysunki i filmy stojace obok siebie -> rowna siatka po 2 w rzedzie
+            kom = []
+            while i < len(el) and el[i][0] in ('yt', 'img'):
+                y = el[i]
+                if y[0] == 'yt':
+                    yid, tyt = y[1], (zdanie(y[2]) if caps(y[2]) else y[2])
+                    p = obraz_yt(yid)
+                    kom.append(f'<figure class="mk mf"><button class="fa" type="button" data-yt="{yid}" aria-label="Odtwórz film: {E(tyt)}">'
+                               f'<img src="../img/o/{p[0]}" width="{p[1]}" height="{p[2]}" loading="lazy" decoding="async" alt=""><span class="od" aria-hidden="true"></span></button></figure>')
+                else:
+                    for src, w in y[1]:
+                        n, sw, sh = obraz(src)
+                        kom.append(f'<figure class="mk"><button type="button" class="oi" data-lb="../img/o/{n}" aria-label="Powiększ zdjęcie">'
+                                   f'<img src="../img/o/{n}" width="{sw}" height="{sh}" style="max-width:min(100%,{sw}px);max-height:min(100%,{sh}px)" loading="lazy" decoding="async" alt="{E(alt)}"></button></figure>')
+                i += 1
+            html.append(f'<div class="siatka{" jeden" if len(kom) == 1 else ""}">' + ''.join(kom) + '</div>'); continue
         i += 1
     return '\n'.join(html)
 
@@ -382,9 +385,20 @@ CSS = '''
 .opis-s{padding:clamp(30px,4vw,64px) 0 clamp(50px,6vw,90px)}
 .opis-s h2{font-size:clamp(26px,2vw,36px)}
 .opis-s .info-h{margin-top:clamp(40px,4vw,64px);font-size:clamp(26px,2vw,36px)}.info-t{margin-top:14px;max-width:900px}
-.opis{max-width:800px;margin:10px auto 0}
-.opis-s>.wrap>h2,.opis-s .info-h,.opis-s .info-t{max-width:800px;margin-left:auto;margin-right:auto}
-.opis p,.opis li{line-height:1.6}
+.opis{margin-top:10px}
+.opis p,.opis li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.siatka{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.4vw,24px);margin-top:20px}
+.siatka.jeden{grid-template-columns:minmax(0,1fr);max-width:calc(50% - 12px);margin-left:auto;margin-right:auto}
+.siatka .mk{margin:0;aspect-ratio:16/10;background:#fff;border:1px solid var(--line);overflow:hidden;position:relative}
+.siatka .oi{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border:0;padding:0;background:#fff;cursor:zoom-in}
+.siatka .oi img{width:auto;height:auto;object-fit:contain;transition:transform .45s ease}
+.siatka .mf{background:#0b0e11}.siatka .fa{width:100%;height:100%;aspect-ratio:auto}
+.siatka .fa img{transition:transform .45s ease,opacity .2s}
+.siatka .fa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (hover:hover){.siatka .mk:hover .oi img{transform:scale(1.18)}.siatka .mk:hover .fa img{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.siatka img{transition:none}}
+@media (max-width:640px){.siatka{grid-template-columns:minmax(0,1fr)}.siatka.jeden{max-width:none}}
+.opis p,.opis li{line-height:1.65}
 .opis p{margin-top:12px}
 .opis h3{font-size:clamp(20px,1.35vw,25px);margin-top:clamp(32px,3vw,48px);padding-top:clamp(20px,2vw,28px);border-top:1px solid var(--line)}
 .opis h3:first-child{margin-top:18px;border-top:0;padding-top:0}
@@ -397,7 +411,7 @@ CSS = '''
 .opis .ol li:last-child{border-bottom:0}
 .opis ul.ol li::before{content:"";position:absolute;left:4px;top:1.05em;width:8px;height:8px;background:var(--ink)}
 .opis ol.ol li{counter-increment:o}.opis ol.ol li::before{content:counter(o) ".";position:absolute;left:0;top:7px;font-weight:800}
-.opis .par{margin-top:14px;width:100%}
+.opis .par{margin-top:14px;width:100%;max-width:none}
 .opis .par th{width:42%}
 .opis .nw{display:inline-block;margin-left:6px;padding:1px 7px;background:#d7140f;color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:.12em;border-radius:2px}
 .opis .of-z{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:18px}

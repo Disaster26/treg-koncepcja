@@ -597,9 +597,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .opis-s{padding:clamp(30px,4vw,64px) 0 clamp(50px,6vw,90px)}
 .opis-s h2{font-size:clamp(26px,2vw,36px)}
 .opis-s .info-h{margin-top:clamp(40px,4vw,64px);font-size:clamp(26px,2vw,36px)}.info-t{margin-top:14px;max-width:900px}
-.opis{max-width:800px;margin:10px auto 0}
-.opis-s>.wrap>h2,.opis-s .info-h,.opis-s .info-t{max-width:800px;margin-left:auto;margin-right:auto}
-.opis p,.opis li{line-height:1.6}
+.opis{margin-top:10px}
+.opis p,.opis li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.siatka{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.4vw,24px);margin-top:20px}
+.siatka.jeden{grid-template-columns:minmax(0,1fr);max-width:calc(50% - 12px);margin-left:auto;margin-right:auto}
+.siatka .mk{margin:0;aspect-ratio:16/10;background:#fff;border:1px solid var(--line);overflow:hidden;position:relative}
+.siatka .oi{display:flex;align-items:center;justify-content:center;width:100%;height:100%;border:0;padding:0;background:#fff;cursor:zoom-in}
+.siatka .oi img{width:auto;height:auto;object-fit:contain;transition:transform .45s ease}
+.siatka .mf{background:#0b0e11}.siatka .fa{width:100%;height:100%;aspect-ratio:auto}
+.siatka .fa img{transition:transform .45s ease,opacity .2s}
+.siatka .fa iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (hover:hover){.siatka .mk:hover .oi img{transform:scale(1.18)}.siatka .mk:hover .fa img{transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.siatka img{transition:none}}
+@media (max-width:640px){.siatka{grid-template-columns:minmax(0,1fr)}.siatka.jeden{max-width:none}}
+.opis p,.opis li{line-height:1.65}
 .opis p{margin-top:12px}
 .opis h3{font-size:clamp(20px,1.35vw,25px);margin-top:clamp(32px,3vw,48px);padding-top:clamp(20px,2vw,28px);border-top:1px solid var(--line)}
 .opis h3:first-child{margin-top:18px;border-top:0;padding-top:0}
@@ -612,7 +623,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .opis .ol li:last-child{border-bottom:0}
 .opis ul.ol li::before{content:"";position:absolute;left:4px;top:1.05em;width:8px;height:8px;background:var(--ink)}
 .opis ol.ol li{counter-increment:o}.opis ol.ol li::before{content:counter(o) ".";position:absolute;left:0;top:7px;font-weight:800}
-.opis .par{margin-top:14px;width:100%}
+.opis .par{margin-top:14px;width:100%;max-width:none}
 .opis .par th{width:42%}
 .opis .nw{display:inline-block;margin-left:6px;padding:1px 7px;background:#d7140f;color:#fff;font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;vertical-align:.12em;border-radius:2px}
 .opis .of-z{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:18px}
@@ -686,10 +697,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <h3>Dodatkowe wyposażenie</h3>
 <ol class="ol"><li>wysokiej jakości profesjonalny masażer relaksujący i spalający cellulit / tłuszcz</li><li>profesjonalna mata pod bieżnię</li><li>twister</li><li>hantle – 2 sztuki</li><li>przyrząd do brzuszków</li><li>olej silikonowy</li><li>odbiornik pasa na klatkę piersiową</li></ol>
 <h3>Prezentowana bieżnia jest łatwa do złożenia i przemieszczania</h3>
-<div class="of-z"><button type="button" class="oi" data-lb="../img/o/c6db7cd29640.webp" aria-label="Powiększ zdjęcie" style="max-width:700px"><img src="../img/o/c6db7cd29640.webp" width="700" height="402" loading="lazy" decoding="async" alt="Bieżnia elektryczna do biegania i chodzenia APVsport APV5000"></button></div>
+<div class="siatka jeden"><figure class="mk"><button type="button" class="oi" data-lb="../img/o/c6db7cd29640.webp" aria-label="Powiększ zdjęcie"><img src="../img/o/c6db7cd29640.webp" width="700" height="402" style="max-width:min(100%,700px);max-height:min(100%,402px)" loading="lazy" decoding="async" alt="Bieżnia elektryczna do biegania i chodzenia APVsport APV5000"></button></figure></div>
 <h3>Pakowanie produktu</h3>
 <p>Bezpieczna dostawa to nasz priorytet!</p><p>Na poniższych zdjęciach przedstawiamy sposób pakowania naszych bieżni.</p><p>Każdy produkt wysyłany z naszego magazynu jest solidnie zapakowany i ubezpieczony.</p>
-<div class="of-z"><button type="button" class="oi" data-lb="../img/o/227e150ea945.webp" aria-label="Powiększ zdjęcie" style="max-width:1024px"><img src="../img/o/227e150ea945.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Bieżnia elektryczna do biegania i chodzenia APVsport APV5000"></button></div>
+<div class="siatka jeden"><figure class="mk"><button type="button" class="oi" data-lb="../img/o/227e150ea945.webp" aria-label="Powiększ zdjęcie"><img src="../img/o/227e150ea945.webp" width="1024" height="768" style="max-width:min(100%,1024px);max-height:min(100%,768px)" loading="lazy" decoding="async" alt="Bieżnia elektryczna do biegania i chodzenia APVsport APV5000"></button></figure></div>
     </div>
     <h3 class="info-h">Informacje dodatkowe</h3><table class="par info-t"><tbody><tr><th scope="row">Waga</th><td>100 kg</td></tr></tbody></table>
   </div>
