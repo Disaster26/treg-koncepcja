@@ -186,7 +186,7 @@ strona = f'''<!doctype html>
         <span class="marka"><span class="kw apv"></span>APVsport</span>
         <h1 id="h1">{E(NAZWA)}</h1>
         <a class="ocz" href="#opinie">Opinie kupujących z Opinii Zaufanych Ceneo</a>
-        <p class="cena"><b>4 990 zł</b><s>7 290 zł</s><span class="oszcz">taniej o 2 300 zł</span></p>
+        <p class="cena"><b>4 990 zł</b><s>7 290 zł</s><span class="oszcz">taniej o 2 300 zł</span><span class="gratis">Transport gratis</span></p>
         <p class="dost zam"><span class="b" aria-hidden="true"></span>Na zamówienie, realizacja 30 dni</p>
         <ul class="kl">
           <li>Silnik 6 KM, 10 KM mocy szczytowej</li>
@@ -239,7 +239,7 @@ strona = f'''<!doctype html>
   <div class="wrap">
     <div class="sg"><div><h2 id="h-dostawa">Dostawa, płatności i zwroty</h2></div></div>
     <div class="info4">
-      <div><h3><span class="kw aq"></span>Dostawa</h3><ul><li>Kurierem, także przesyłki nadwymiarowe i bardzo ciężkie</li><li>Każda bieżnia solidnie zapakowana i ubezpieczona</li><li>Koszt dostawy doliczany według cennika z dnia zakupu</li></ul></div>
+      <div><h3><span class="kw aq"></span>Dostawa</h3><ul><li>Kurierem, także przesyłki nadwymiarowe i bardzo ciężkie</li><li>Każda bieżnia solidnie zapakowana i ubezpieczona</li><li><b>Transport gratis na wszystkie produkty</b></li></ul></div>
       <div><h3><span class="kw apv"></span>Płatności</h3><ul><li>Raty 0%</li><li>PayPo: zapłata po 30 dniach</li><li>BLIK i przelew</li><li>Gotówką przy odbiorze</li></ul></div>
       <div><h3><span class="kw aq"></span>Gwarancja i serwis</h3><ul><li>Dokument gwarancyjny i instrukcja w komplecie</li><li>Serwis gwarancyjny i pogwarancyjny w całym kraju</li><li>Własny magazyn części zamiennych</li></ul></div>
       <div><h3><span class="kw apv"></span>Zwroty</h3><ul><li>14 dni na odstąpienie od umowy</li><li>Zwrot pieniędzy w ciągu 7 dni roboczych</li><li>Przesyłkę sprawdza się przy kurierze</li></ul></div>

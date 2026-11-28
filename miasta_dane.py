@@ -15,7 +15,7 @@ M = [
   'Duża prostokątna wanna A9005 ma 180 x 120 x 64 cm, dysze obrotowe, wodospad i podgrzewacz wody. Jest dostępna od ręki, więc zamawiając ją do Łodzi, nie czeka się 30 dni jak przy modelach na zamówienie.',
   'Wanna A9005 180 x 120 cm dostępna od ręki.'),
  ('Poznań', 'w Poznaniu', 'Poznania', 'wielkopolskie',
-  'Przy zamówieniu do Poznania można zapłacić przy odbiorze gotówką u kuriera, przelewem, BLIK-iem, w ratach 0% albo przez PayPo z zapłatą po 30 dniach. Koszt dostawy jest doliczany do zamówienia według aktualnego cennika.',
+  'Przy zamówieniu do Poznania można zapłacić przy odbiorze gotówką u kuriera, przelewem, BLIK-iem, w ratach 0% albo przez PayPo z zapłatą po 30 dniach. Transport jest gratis na wszystkie produkty.',
   'Płatność przy odbiorze, BLIK, raty 0% i PayPo.'),
  ('Gdańsk', 'w Gdańsku', 'Gdańska', 'pomorskie',
   'Wanny i bieżnie jadą do Gdańska kurierem, który obsługuje przesyłki nadwymiarowe i bardzo ciężkie. Przy odbiorze dobrze jest sprawdzić opakowanie i zawartość w obecności kuriera.',
@@ -127,7 +127,7 @@ M = [
 # Pytania: (pytanie, odpowiedź); {w} = w + miejscownik, {d} = dopełniacz
 FAQ = [
  ('Ile trwa dostawa do {d}?', 'Wysyłamy kurierem. Firma kurierska deklaruje dostawę na terenie Polski w 1 dzień roboczy od nadania. Modele oznaczone jako dostępne na zamówienie wysyłamy po 30 dniach realizacji.'),
- ('Ile kosztuje dostawa do {d}?', 'Koszt dostawy jest doliczany do zamówienia według cennika obowiązującego w dniu zakupu. Kwotę widać w podsumowaniu zamówienia, zanim Państwo zapłacą.'),
+ ('Ile kosztuje dostawa do {d}?', 'Nic. Transport jest gratis na wszystkie produkty, także na wanny i bieżnie wysyłane jako przesyłki nadwymiarowe.'),
  ('Jak odebrać przesyłkę z wanną lub bieżnią?', 'Opakowanie i zawartość najlepiej sprawdzić w obecności kuriera. Jeśli coś jest uszkodzone, trzeba spisać przy nim protokół szkody, bo na jego podstawie rozpatrujemy reklamacje transportowe.'),
  ('Jak można zapłacić?', 'W sklepie są raty 0%, PayPo (zapłata po 30 dniach), BLIK, przelew i płatność gotówką przy odbiorze u kuriera.'),
  ('Czy mogę zwrócić zakupiony sprzęt?', 'Tak, przy zakupie przez internet jest 14 dni na odstąpienie od umowy. Towar musi być nieużywany, w oryginalnym opakowaniu i w komplecie. Pieniądze oddajemy w ciągu 7 dni roboczych, koszt odesłania pokrywa kupujący.'),

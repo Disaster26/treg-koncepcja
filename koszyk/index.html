@@ -207,6 +207,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .cena{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;margin-top:auto;padding-top:6px}
 .cena b{font-size:clamp(26px,1.7vw,32px);font-weight:800;font-stretch:90%;letter-spacing:-.01em}
 .cena s{color:var(--mut);font-size:.98rem}
+.cena .gratis{flex-basis:100%;font-size:.95rem;font-weight:700;color:#0A7A3D}
 .dok{display:flex;align-items:center;justify-content:center;min-height:52px;margin-top:8px;border:0;border-radius:2px;background:var(--ink);color:#fff;font:700 1rem/1 Archivo,"Archivo fb",Arial,sans-serif;cursor:pointer;text-decoration:none;transition:.15s}
 #wanny .dok{background:var(--aqd)}#wanny .dok:hover{background:#015a96}
 #bieznie .dok{background:var(--apv)}#bieznie .dok:hover{background:var(--apvd)}
@@ -564,7 +565,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <div>
         <ul id="lista" aria-label="Produkty w koszyku"></ul>
         <p class="razem"><span>Razem za produkty</span><b id="suma">0 zł</b></p>
-        <p class="uw">Koszt dostawy doliczamy zgodnie z cennikiem dostaw z dnia zamówienia. Zamawiając wannę lub bieżnię na zamówienie, przed wysyłką potwierdzimy termin realizacji.</p>
+        <p class="razem"><span>Dostawa kurierem</span><b>0 zł, transport gratis</b></p>
+        <p class="uw">Transport gratis na wszystkie produkty, także na wanny i bieżnie wysyłane jako przesyłki nadwymiarowe. Zamawiając wannę lub bieżnię na zamówienie, przed wysyłką potwierdzimy termin realizacji.</p>
       </div>
       <form class="zamf" id="zamowienie" novalidate>
         <h2>Dane do zamówienia</h2>
@@ -573,7 +575,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
         <label>Ulica i numer<input type="text" name="u" autocomplete="street-address" required></label>
         <div class="r2"><label>Kod pocztowy<input type="text" name="k" autocomplete="postal-code" required></label><label>Miejscowość<input type="text" name="m" autocomplete="address-level2" required></label></div>
         <fieldset><legend>Dostawa</legend>
-          <label class="op"><input type="radio" name="dost" checked><span>Kurier<small>Także przesyłki nadwymiarowe i bardzo ciężkie, ubezpieczone.</small></span></label>
+          <label class="op"><input type="radio" name="dost" checked><span>Kurier: 0 zł, transport gratis<small>Także przesyłki nadwymiarowe i bardzo ciężkie, ubezpieczone.</small></span></label>
         </fieldset>
         <fieldset><legend>Płatność</legend>
           <label class="op"><input type="radio" name="pl" checked><span>Płatność online: BLIK, przelew, karta</span></label>

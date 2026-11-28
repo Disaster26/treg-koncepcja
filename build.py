@@ -65,7 +65,7 @@ def karta(k, n, wd, wm, nazwa, opis, cena, stara, dost, alt, kier):
     return (f'<article class="prod">\n  <div class="gal" data-grupa><div class="gt">{"".join(zd)}</div>{strz}<div class="kr" aria-hidden="true">{kropki}</div></div>\n'
             f'  <div class="pin"><h3><span class="kw {kier}"></span>{nz}</h3><p class="po">{H.escape(opis)}</p>\n'
             f'  <p class="dost {dost[0]}"><span class="b" aria-hidden="true"></span>{dost[1]}</p>\n'
-            f'  <p class="cena"><b>{cena} zł</b>{st}</p>{kup}</div>\n</article>')
+            f'  <p class="cena"><b>{cena} zł</b>{st}<span class="gratis">Transport gratis</span></p>{kup}</div>\n</article>')
 
 s = s.replace('{{WANNY}}', '\n'.join(karta(*x, 'aq') for x in WANNY))
 s = s.replace('{{BIEZNIE}}', '\n'.join(karta(*x, 'apv') for x in BIEZNIE))

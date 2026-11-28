@@ -176,7 +176,7 @@ def karta(p, nag='h3'):
     return (f'<article class="kt" {atr}><a class="f" href="../{p["slug"]}/" tabindex="-1" aria-hidden="true">'
             f'<img src="../img/p/{z["m"][0]}" srcset="../img/p/{z["m"][0]} {z["m"][1]}w, ../img/p/{z["d"][0]} {z["d"][1]}w" sizes="(max-width:640px) 92vw, (max-width:1100px) 45vw, 22vw" width="{z["m"][1]}" height="{z["m"][2]}" loading="lazy" decoding="async" alt="{E(p["nazwa"])}"></a>'
             f'<div class="in"><{nag}><span class="kw {k}"></span><a href="../{p["slug"]}/">{E(p["nazwa"])}</a></{nag}><p class="po">{E(opis_krotki(p))}</p>'
-            f'<p class="dost {d[0]}"><span class="b" aria-hidden="true"></span>{d[1]}</p><p class="cena"><b>{zl(p["cena"])}</b>{st}</p>{kup}</div></article>')
+            f'<p class="dost {d[0]}"><span class="b" aria-hidden="true"></span>{d[1]}</p><p class="cena"><b>{zl(p["cena"])}</b>{st}<span class="gratis">Transport gratis</span></p>{kup}</div></article>')
 
 FILMY_W = {'A9009': [('UxqKd6TiJ00', 'Wanna A9009, biała: hydromasaż i podświetlenie LED')], 'A9009C': [('Kwkem9694PE', 'Wanna A9009C, czarna: hydromasaż i podświetlenie LED')],
            'A9008C': [('IQyb91JjEAs', 'Wanna A9008C, czarna: prezentacja')], 'A9014': [('c0Il79_bJFk', 'Wanna A9014: prezentacja')]}
@@ -377,7 +377,7 @@ def strona_produktu(p):
         <span class="marka"><span class="kw {k}"></span>{marka}</span>
         <h1 id="h1">{E(p['nazwa'])}</h1>
         <a class="ocz" href="#opinie">Opinie kupujących z Opinii Zaufanych Ceneo</a>
-        <p class="cena"><b>{zl(p['cena'])}</b>{st}</p>
+        <p class="cena"><b>{zl(p['cena'])}</b>{st}<span class="gratis">Transport gratis</span></p>
         <p class="dost {d[0]}"><span class="b" aria-hidden="true"></span>{d[1]}</p>
         <ul class="kl">{''.join(f'<li>{E(x)}</li>' for x in kl)}</ul>
         {opc}
@@ -495,7 +495,8 @@ kosz = f'''<section class="kosz-s" aria-labelledby="h1">
       <div>
         <ul id="lista" aria-label="Produkty w koszyku"></ul>
         <p class="razem"><span>Razem za produkty</span><b id="suma">0 zł</b></p>
-        <p class="uw">Koszt dostawy doliczamy zgodnie z cennikiem dostaw z dnia zamówienia. Zamawiając wannę lub bieżnię na zamówienie, przed wysyłką potwierdzimy termin realizacji.</p>
+        <p class="razem"><span>Dostawa kurierem</span><b>0 zł, transport gratis</b></p>
+        <p class="uw">Transport gratis na wszystkie produkty, także na wanny i bieżnie wysyłane jako przesyłki nadwymiarowe. Zamawiając wannę lub bieżnię na zamówienie, przed wysyłką potwierdzimy termin realizacji.</p>
       </div>
       <form class="zamf" id="zamowienie" novalidate>
         <h2>Dane do zamówienia</h2>
@@ -504,7 +505,7 @@ kosz = f'''<section class="kosz-s" aria-labelledby="h1">
         <label>Ulica i numer<input type="text" name="u" autocomplete="street-address" required></label>
         <div class="r2"><label>Kod pocztowy<input type="text" name="k" autocomplete="postal-code" required></label><label>Miejscowość<input type="text" name="m" autocomplete="address-level2" required></label></div>
         <fieldset><legend>Dostawa</legend>
-          <label class="op"><input type="radio" name="dost" checked><span>Kurier<small>Także przesyłki nadwymiarowe i bardzo ciężkie, ubezpieczone.</small></span></label>
+          <label class="op"><input type="radio" name="dost" checked><span>Kurier: 0 zł, transport gratis<small>Także przesyłki nadwymiarowe i bardzo ciężkie, ubezpieczone.</small></span></label>
         </fieldset>
         <fieldset><legend>Płatność</legend>
           <label class="op"><input type="radio" name="pl" checked><span>Płatność online: BLIK, przelew, karta</span></label>
@@ -546,7 +547,7 @@ tekst('polityka-prywatnosci', 'Polityka prywatności', 'Polityka prywatności | 
 
 dost_html = f'''<p>Sklep treg.pl prowadzi TREG Łukasz Pawluczuk z Bielska Podlaskiego. Wanny i bieżnie wysyłamy kurierem w całej Polsce, każdą przesyłkę solidnie pakujemy i ubezpieczamy.</p>
 <h2>Dostawa</h2>
-<ul><li>Kurierem: przedmioty o standardowych wymiarach, paczka do 25 kg.</li><li>Kurierem: przedmioty nadwymiarowe i bardzo ciężkie, czyli wanny i bieżnie.</li><li>Koszty wysyłki pokrywa kupujący, doliczamy je do zamówienia zgodnie z cennikiem dostaw obowiązującym w dniu zamówienia.</li>
+<ul><li>Kurierem: przedmioty o standardowych wymiarach, paczka do 25 kg.</li><li>Kurierem: przedmioty nadwymiarowe i bardzo ciężkie, czyli wanny i bieżnie.</li><li><b>Transport gratis na wszystkie produkty</b>: koszt wysyłki pokrywamy my, nie doliczamy go do zamówienia.</li>
 <li>Produkty oznaczone „na zamówienie” mają czas realizacji 30 dni. Przed wysyłką potwierdzimy termin.</li></ul>
 <p><b>Sprawdź przesyłkę przy kurierze.</b> Reklamacje uszkodzeń mechanicznych powstałych w transporcie rozpatrujemy na podstawie protokołu reklamacyjnego spisanego w obecności doręczyciela.</p>
 <h2>Płatności</h2>
