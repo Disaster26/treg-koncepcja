@@ -352,6 +352,25 @@ def obraz_yt(yid):
     raise SystemExit('brak okladki ' + yid)
 
 CSS = '''
+.fk{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.fk li{background:var(--g);padding:10px 12px;border-left:3px solid var(--aq);display:flex;flex-direction:column;gap:2px;min-width:0}
+.bz .fk li{border-left-color:var(--apv)}
+.fk span{font-size:.8rem;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.fk b{font-size:1rem;line-height:1.3;overflow-wrap:anywhere}
+.war{margin-top:16px}.war-t{display:block;font-weight:700;font-size:.95rem}
+.war-l{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.war-l a{display:flex;gap:10px;align-items:center;padding:6px;border:2px solid var(--line);color:var(--ink);text-decoration:none;background:#fff}
+.war-l a[aria-current]{border-color:var(--ink)}.war-l a:hover{border-color:var(--mut)}
+.war-l img{width:56px;height:56px;object-fit:contain;flex:none}
+.war-l span{font-size:.92rem;line-height:1.3}.war-l small{display:block;color:var(--mut)}
+.zakl2{position:sticky;top:var(--hh);z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.zakl2 .wrap{display:flex;gap:clamp(16px,2.4vw,40px);overflow-x:auto;scrollbar-width:none}
+.zakl2 a{flex:none;padding:15px 0 12px;font-weight:700;color:var(--mut);text-decoration:none;border-bottom:3px solid transparent}
+.zakl2 a:hover,.zakl2 a.on{color:var(--ink);border-bottom-color:var(--aq)}
+.bz~.zakl2 a.on,.zakl2 a.on{border-bottom-color:var(--ink)}
+#opis,.opis h3[id],#korzysci,#info-d{scroll-margin-top:calc(var(--hh) + 64px)}
+@media (max-width:900px){.zakl2{top:calc(var(--hh) + 63px)}#opis,.opis h3[id],#korzysci,#info-d{scroll-margin-top:calc(var(--hh) + 130px)}}
+@media (max-width:560px){.fk{grid-template-columns:1fr 1fr}.war-l{grid-template-columns:1fr}}
 .kp .podt{display:block;margin-top:6px;font-size:clamp(17px,1.1vw,19px);color:var(--mut);line-height:1.4}
 .gl2{min-width:0}
 .gl2 .duze-w{position:relative;background:#fff;border:1px solid var(--line)}

@@ -225,10 +225,12 @@ function pokaz(i){if(!mb.length)return;cur=(i+mb.length)%mb.length;var b=mb[cur]
 mb.forEach(function(x){x.setAttribute('aria-current',x===b)});if(nr)nr.textContent=cur+1;var s=b.parentNode;s.scrollTo({left:b.offsetLeft-s.offsetLeft-s.clientWidth/2+b.clientWidth/2,behavior:'smooth'})}
 mb.forEach(function(b,i){b.addEventListener('click',function(){pokaz(i)})});
 var gp=d.querySelector('.gl2 .gp'),gn=d.querySelector('.gl2 .gn');if(gp){gp.addEventListener('click',function(){pokaz(cur-1)});gn.addEventListener('click',function(){pokaz(cur+1)})}
+var lz=[].slice.call(d.querySelectorAll('.gl2 .lbz'));bd.addEventListener('click',function(){if(lz[cur])lz[cur].click()});
 var tx=0;bd.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});bd.addEventListener('touchend',function(e){var dd=e.changedTouches[0].clientX-tx;if(Math.abs(dd)>45){pokaz(cur+(dd<0?1:-1))}});
 var il=d.getElementById('il');if(il)d.querySelectorAll('[data-il]').forEach(function(b){b.addEventListener('click',function(){il.value=Math.max(1,(+il.value||1)+(+b.dataset.il))})});
 var p=d.getElementById('pasek'),z=d.getElementById('zakup');
 if('IntersectionObserver' in window)new IntersectionObserver(function(e){var on=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;p.classList.toggle('on',on);p.setAttribute('aria-hidden',!on)}).observe(z);
+var za=[].slice.call(d.querySelectorAll('.zakl2 a'));if(za.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)za.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-30% 0px -60% 0px'});za.forEach(function(a){var x=d.getElementById(a.getAttribute('href').slice(1));if(x)io.observe(x)})}
 /* podobne produkty: karuzela przesuwa sie sama od prawej do lewej, stop po najechaniu / dotyku */
 var t=d.getElementById('ptor');if(t&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var st=false,wid=true;
 ['pointerenter','focusin','touchstart'].forEach(function(e){t.addEventListener(e,function(){st=true},{passive:true})});t.addEventListener('pointerleave',function(){st=false});
@@ -237,6 +239,68 @@ setInterval(function(){if(st||!wid||d.hidden||t.scrollWidth<=t.clientWidth+4)ret
 if(t.scrollLeft+t.clientWidth>=t.scrollWidth-4)t.scrollTo({left:0,behavior:'smooth'});else t.scrollBy({left:k,behavior:'smooth'})},3000)}
 })();
 </script>'''
+
+
+# --- elementy ukladu oparte wylacznie na danych z oferty klienta
+from bs4 import BeautifulSoup as _BS
+def _tekst_oferty(o):
+    b = _BS(o['opis_html'], 'html.parser')
+    for x in b.find_all(['br', 'p', 'div', 'li']): x.insert_after('\n')
+    return oferty.tekst_popraw(b.get_text('')).replace('\xa0', ' ')
+
+def fakty(p, o):
+    """najwazniejsze parametry jako kafelki - tylko wartosci z opisu klienta"""
+    t = _tekst_oferty(o); wy = []
+    def szukaj(*wz):
+        for w in wz:
+            m = re.search(w, t, re.I | re.M)
+            if m: return re.sub(r'\s+', ' ', m.group(1)).strip(' ,;').rstrip('.') + ('.' if m.group(1).strip().endswith('szt.') else '')
+    if p['typ'] == 'wanna':
+        m = re.search(r'(\d{3}) x (\d{2,3}) x (\d{2}) cm', p['nazwa'])
+        if m: wy.append(('Wymiary', f'{m.group(1)} x {m.group(2)} x {m.group(3)} cm'))
+        v = szukaj(r'pojemno\w*\s*:?\s*(\d{2,4})\s*l?\b')
+        if v: wy.append(('Pojemność', v + ' l'))
+        v = szukaj(r'dysz\w* powietrznych\s*[–-]\s*(\d+ szt\.)', r'\((\d+) nowoczesnych[^)]*dysz LED RGB do masażu powietrznego')
+        if v: wy.append(('Dysze powietrzne', v if 'szt' in v else v + ' szt.'))
+        v = szukaj(r'ilość dysz wodnych\s*[–-]\s*(\d+ szt\.)', r'masaż wodny \((\d+) dużych')
+        if v: wy.append(('Dysze wodne', v if 'szt' in v else v + ' szt.'))
+        v = szukaj(r'pompy wodnej\s*[–-]\s*(\d+ W)', r'pompa wodna o mocy (\d+ W)', r'pompa wodna[^,\n]*?o mocy ([\d.,]+ ?HP)')
+        if v: wy.append(('Pompa wodna', v))
+        v = szukaj(r'podgrzewacza wody\s*[–-]\s*(\d+ W)', r'podgrzewacz wody o dużej mocy (\d+ W)', r'podgrzewacz wody (\d+ W)')
+        if v: wy.append(('Podgrzewacz wody', v))
+    elif p['typ'] == 'bieznia':
+        for et, w in (('Moc silnika', r'^Moc silnika:\s*(.+)$'), ('Prędkość', r'^Prędkość:\s*(.+)$'),
+                      ('Maks. obciążenie', r'^Maksymalne obciążenie ćwiczącego:\s*(.+)$'), ('Pas biegowy', r'^Wymiary pasa biegowego:\s*(.+)$')):
+            v = szukaj(w)
+            if v: wy.append((et, v))
+        v = szukaj(r'(ekran TFT[^,\n]*?(?:cala|cali|″))', r'(Dotykowy ekran TFT [\d.,]+″?)', r'(ekran LCD)')
+        if v: wy.append(('Ekran', v[:1].upper() + v[1:]))
+        v = szukaj(r'^(?:Ogólne )?[Ww]ymiary urządzenia:\s*(.+)$')
+        if v: wy.append(('Wymiary bieżni', v))
+    return wy[:6]
+
+def warianty(p):
+    """ta sama wanna w drugim kolorze (bialy / czarny) - pary z oferty klienta"""
+    if p['typ'] != 'wanna': return []
+    kod = p['kod'].rstrip('C')
+    para = [x for x in P if x['typ'] == 'wanna' and x['kod'].rstrip('C') == kod and x.get('wym') == p.get('wym') and x.get('ksztalt') == p.get('ksztalt')]
+    if len(para) < 2: return []
+    return sorted(para, key=lambda x: x['kod'].endswith('C'))
+
+NAV_KLUCZE = [('Parametry', r'opis techniczny|wymiary|parametry elektryczne|kod produktu'), ('Opis funkcji', r'opis funkcji'),
+              ('Rysunki techniczne', r'rysunki techniczne'), ('Filmy', r'^film'), ('Galeria zdjęć', r'galeria'), ('Pakowanie', r'pakowanie')]
+def kotwice(html):
+    """id dla naglowkow opisu + lista kotwic do nawigacji sekcji"""
+    nav, uzyte = [], set()
+    def podmien(m):
+        tekst = re.sub(r'<[^>]+>', '', m.group(2)).strip()
+        for et, wz in NAV_KLUCZE:
+            if et not in uzyte and re.search(wz, tekst, re.I):
+                uzyte.add(et); idx = 'o-' + str(len(nav) + 1); nav.append((idx, et))
+                return f'<h3{m.group(1)} id="{idx}">{m.group(2)}</h3>'
+        return m.group(0)
+    html = re.sub(r'<h3([^>]*)>(.*?)</h3>', podmien, html)
+    return html, nav
 
 def strona_produktu(p):
     o = oferty.O[p['id']]
@@ -251,7 +315,7 @@ def strona_produktu(p):
     g0 = G[0]
     def ss(g, m): return f'../img/o/{m[0]} {m[1]}w, ../img/o/{g[0]} {g[1]}w' if m[1] < g[1] else ''
     SZ = '(max-width:900px) calc(100vw - 34px), 50vw'
-    gal = (f'<div class="gl2" id="gal"><div class="duze-w"><button class="duze" type="button" data-lb="../img/o/{g0[0]}" aria-label="Powiększ zdjęcie">'
+    gal = (f'<div class="gl2" id="gal" data-grupa><div class="duze-w"><button class="duze" type="button" aria-label="Powiększ zdjęcie">'
            f'<img id="duze" src="../img/o/{g0[0]}"{f' srcset="{ss(g0, M[0])}" sizes="{SZ}"' if ss(g0, M[0]) else ''} width="{g0[1]}" height="{g0[2]}" style="max-width:min(100%,{g0[1]}px)" fetchpriority="high" alt="{E(alt)}, zdjęcie 1"></button>')
     if len(G) > 1:
         gal += (f'<button class="gp" type="button" aria-label="Poprzednie zdjęcie">&#8249;</button><button class="gn" type="button" aria-label="Następne zdjęcie">&#8250;</button>'
@@ -259,8 +323,8 @@ def strona_produktu(p):
                 f'<button type="button" data-duze="../img/o/{g[0]}" data-ss="{ss(g, m)}" data-w="{g[1]}" data-h="{g[2]}"' + (' aria-current="true"' if i == 0 else '') + f' aria-label="Zdjęcie {i + 1} z {len(G)}">'
                 f'<img src="../img/o/{t[0]}" width="{t[1]}" height="{t[2]}" loading="lazy" decoding="async" alt=""></button>' for i, (g, t, m) in enumerate(zip(G, T, M))) + '</div>')
     else:
-        gal += '</div>'
-    gal += '</div>'
+        gal += '</div></div>'
+    gal = gal[:-6] + ''.join(f'<span class="lbz" hidden data-lb="../img/o/{g[0]}"><img alt="{E(alt)}, zdjęcie {i + 1}"></span>' for i, g in enumerate(G)) + '</div></div>'
     st = f'<s>{zl(p["stara"])}</s>' if p['stara'] else ''
     dost = {'zam': '<p class="dost zam"><span class="b" aria-hidden="true"></span>Czas realizacji: 14 dni</p>',
             'brak': '<p class="dost brak"><span class="b" aria-hidden="true"></span>Brak w magazynie</p>', 'jest': ''}[p['dost']]
@@ -283,6 +347,16 @@ def strona_produktu(p):
     sek_pod = (f'<section class="pods" aria-labelledby="h-pod"><div class="wrap"><div class="sg"><h2 id="h-pod">Podobne produkty</h2>{nav}</div>'
                f'<div class="ptor" id="ptor" data-tor>{"".join(mini_karta(x) for x in pod)}</div></div></section>') if pod else ''
     opis = oferty.opis_html(o, SL, alt)
+    opis = opis.replace('<ul class="ikony"', '<ul id="korzysci" class="ikony"', 1)
+    opis, nav_o = kotwice(opis)
+    FK = fakty(p, o)
+    kafle = ('<ul class="fk" aria-label="Najważniejsze parametry">' + ''.join(f'<li><span>{E(a)}</span><b>{E(b)}</b></li>' for a, b in FK) + '</ul>') if FK else ''
+    WR = warianty(p)
+    war = ('<div class="war"><span class="war-t">Dostępne kolory</span><div class="war-l">' + ''.join(
+        (f'<a href="../{x["slug"]}/"' + (' aria-current="page"' if x['id'] == p['id'] else '') + f'><img src="../img/p/{x["zdjecia"][0]["m"][0]}" width="{x["zdjecia"][0]["m"][1]}" height="{x["zdjecia"][0]["m"][2]}" loading="lazy" decoding="async" alt="">'
+         f'<span><b>{"czarna" if x["kod"].endswith("C") else "biała"}</b> {E(x["kod"])}<small>{zl(x["cena"])}{" · brak w magazynie" if x["dost"] == "brak" else ""}</small></span></a>') for x in WR) + '</div></div>') if WR else ''
+    nav_l = [('opis', 'Opis')] + ([('korzysci', 'Dostawa i płatności')] if 'id="korzysci"' in opis else []) + nav_o + ([('info-d', 'Informacje dodatkowe')] if o['info'] else [])
+    nawig = '<nav class="zakl2" aria-label="Sekcje oferty"><div class="wrap">' + ''.join(f'<a href="#{a}">{E(b)}</a>' for a, b in nav_l) + '</div></nav>'
     url = BAZA + p['slug'] + '/'
     pelna = p['nazwa'] + (f', {p["podtytul"]}' if p['podtytul'] else '')
     ld = {'@context': 'https://schema.org', '@graph': [
@@ -297,7 +371,7 @@ def strona_produktu(p):
     opis_m = f'{pelna}. Cena {zl(p["cena"])}' + (f' (wcześniej {zl(p["stara"])})' if p['stara'] else '') + '.'
     if len(opis_m) > 160: opis_m = opis_m[:157].rsplit(' ', 1)[0] + '...'
     bz = ' bz' if k == 'apv' else ''
-    info = ('<h3 class="info-h">Informacje dodatkowe</h3><table class="par info-t"><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in o['info']) + '</tbody></table>') if o['info'] else ''
+    info = ('<h3 class="info-h" id="info-d">Informacje dodatkowe</h3><table class="par info-t"><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in o['info']) + '</tbody></table>') if o['info'] else ''
     podt = f'<span class="podt">{E(p["podtytul"])}</span>' if p['podtytul'] else ''
     kr = [(a, b.lstrip("’'")) for a, b in o.get('krotki', []) if b.strip()]     # tabela z krotkiego opisu oferty (EAN / numer katalogowy / producent)
     ean = ('<p class="ean">' + '<br>'.join((f'{E(a)}: ' if a else '') + E(b) for a, b in kr) + '</p>') if kr else ''
@@ -311,6 +385,8 @@ def strona_produktu(p):
         <h1 id="h1">{E(p['nazwa'])}{podt}</h1>
         <p class="cena"><b>{zl(p['cena'])}</b>{st}<small>z VAT</small></p>
         {dost}
+        {kafle}
+        {war}
         {ean}
         {odz}
         {kup}
@@ -320,6 +396,7 @@ def strona_produktu(p):
   </div>
 </section>
 {sek_pod}
+{nawig}
 <section class="opis-s{bz}" id="opis" aria-labelledby="h-opis">
   <div class="wrap">
     <h2 id="h-opis">Opis</h2>
@@ -329,7 +406,7 @@ def strona_produktu(p):
     {info}
   </div>
 </section>
-<div class="pas" id="pasek" aria-hidden="true"><div class="wrap"><span class="n">{E(p['nazwa'])}</span><b>{zl(p['cena'])}</b><a class="dok" href="#zakup" tabindex="-1">{'Kup teraz' if kupuj else 'Zapytaj o termin'}</a></div></div>'''
+<div class="pas" id="pasek" aria-hidden="true"><div class="wrap"><span class="n">{E(p['nazwa'])}</span><b>{zl(p['cena'])}</b>{f'<button type="button" class="dok" data-kosz data-id="{p["id"]}" data-nazwa="{E(p["nazwa"])}" data-cena="{p["cena"]}" data-url="./" data-img="../img/p/{z0["m"][0]}" tabindex="-1">Dodaj do koszyka</button>' if kupuj else f'<a class="dok" href="{WA}" target="_blank" rel="noopener" tabindex="-1">Zapytaj o termin</a>'}</div></div>'''
     zapisz(p['slug'], podstrona(tytul, opis_m, p['slug'] + '/', tresc, ld, SKR_P))
 
 for p in P: strona_produktu(p)
