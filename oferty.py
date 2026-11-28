@@ -432,5 +432,5 @@ CSS = '''
 .ikony li{z-index:0}
 @media (max-width:1400px){.ikony{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:1100px){.ptor{grid-auto-columns:minmax(220px,calc((100% - 2*20px)/3))}}
-@media (max-width:640px){.ptor{grid-auto-columns:84%}.opis .of-z.rz{flex-wrap:wrap}.ikony{grid-template-columns:minmax(0,1fr)}.ikony li{padding:12px 14px}.gl2 .gp,.gl2 .gn{width:44px;height:44px}.gl2 .mini2 button{width:64px;height:64px}.opis .of-z.rz .oi{flex:1 1 100%}}
+@media (max-width:640px){.ptor{grid-auto-columns:84%}.opis .of-z.rz{flex-wrap:wrap}.ikony{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ikony li{flex-direction:column;align-items:flex-start;gap:10px;padding:12px;font-size:.88rem}.ikony .ik{width:42px;height:42px}.ikony .ik svg{width:24px;height:24px}.gl2 .gp,.gl2 .gn{width:44px;height:44px}.gl2 .mini2 button{width:64px;height:64px}.opis .of-z.rz .oi{flex:1 1 100%}}
 '''
