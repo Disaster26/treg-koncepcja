@@ -40,5 +40,18 @@
       lista.appendChild(li)});
     suma.textContent=zl(s);pusty.hidden=!!k.length;d.querySelectorAll('[data-pelny]').forEach(function(e){e.hidden=!k.length})}
   rysuj();
-  if(zam)zam.addEventListener('submit',function(e){e.preventDefault();var m=d.getElementById('komunikat');m.hidden=false;m.focus()});
+  /* zamowienie: w podgladzie tylko zapis w sessionStorage i strona potwierdzenia, nic nie jest wysylane */
+  if(zam)zam.addEventListener('submit',function(e){e.preventDefault();if(!zam.checkValidity()){zam.reportValidity();return}
+    var k=czytaj(),s=0;k.forEach(function(p){s+=p.cena*p.il});
+    var pl=zam.querySelector('input[name=pl]:checked'),f=zam.elements;
+    var o={poz:k,suma:s,pl:pl?pl.parentNode.querySelector('span').textContent:'',adr:[f.n.value,f.u.value,(f.k.value+' '+f.m.value).trim()].join(', ')};
+    try{sessionStorage.setItem('treg-zam',JSON.stringify(o))}catch(x){}
+    zapisz([]);location.href=BAZA+'zamowienie-przyjete/'});
+  var lp=d.getElementById('lista-p');
+  if(lp){var o=null;try{o=JSON.parse(sessionStorage.getItem('treg-zam')||'null')}catch(x){}
+    if(o&&o.poz&&o.poz.length){o.poz.forEach(function(p){var li=d.createElement('li');li.className='poz';li.style.gridTemplateColumns='84px minmax(0,1fr) auto';
+        li.innerHTML='<img alt="" width="84" height="68" style="width:84px;height:68px"><div class="op"><span class="nz"></span><span class="cj"></span></div><b class="wr"></b>';
+        li.querySelector('img').src=p.img;li.querySelector('.nz').textContent=p.nazwa;li.querySelector('.cj').textContent=p.il+' szt. x '+zl(p.cena);li.querySelector('.wr').textContent=zl(p.cena*p.il);lp.appendChild(li)});
+      d.getElementById('p-suma').textContent=zl(o.suma);d.getElementById('p-pl').textContent=o.pl||'-';d.getElementById('p-adr').textContent=o.adr||'-'}
+    else{var li=d.createElement('li');li.style.padding='14px 0';li.textContent='Tu pojawi się lista zamówionych produktów. Dodaj produkt do koszyka i złóż zamówienie, żeby zobaczyć przykład.';lp.appendChild(li)}}
 })();

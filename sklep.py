@@ -84,6 +84,22 @@ STYL_S = STYL_P.replace('</style>', '''
 .zamf .zg{display:flex;gap:10px;font-weight:400;align-items:flex-start}.zamf .zg input{width:20px;height:20px;flex:none;margin-top:2px}
 .zamf .btn{margin-top:18px;width:100%;justify-content:center}
 .komunikat{margin-top:14px;padding:14px;background:#fff;border-left:4px solid var(--aq)}
+.kroki{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;counter-reset:k}
+.kroki li{counter-increment:k;display:flex;align-items:center;gap:10px;min-height:54px;padding:8px 14px;background:var(--g);font-weight:700;color:var(--mut);line-height:1.2}
+.kroki li::before{content:counter(k);flex:none;display:grid;place-items:center;width:32px;height:32px;border:2.5px solid currentColor;font-weight:800}
+.kroki li.ok{color:var(--ink)}.kroki li.ok::before{background:var(--ink);border-color:var(--ink);color:#fff}
+.kroki li[aria-current]{background:var(--ink);color:#fff}.kroki li[aria-current]::before{border-color:#fff;background:transparent;color:#fff}
+.potw{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,4vw,70px);align-items:start;margin-top:26px}
+.potw .ok-h{font-size:clamp(24px,1.8vw,34px);display:flex;gap:14px;align-items:center}
+.potw .ok-h::before{content:"";flex:none;width:30px;height:30px;background:var(--ink);box-shadow:-8px -8px 0 -2px #fff,-8px -8px 0 0 var(--aq)}
+.potw dl{margin:18px 0 0;display:grid;grid-template-columns:minmax(0,12em) minmax(0,1fr);border-top:1px solid var(--line)}
+.potw dt,.potw dd{margin:0;padding:12px 0;border-bottom:1px solid var(--line)}.potw dt{color:var(--mut);font-weight:600}.potw dd{font-weight:700}
+.potw ol{margin:14px 0 0;padding-left:22px}.potw ol li{margin-top:10px;line-height:1.5}
+.potw .bok{background:var(--g);padding:clamp(20px,2.4vw,34px)}
+.potw .bok h2{font-size:1.4rem}
+.potw .akc{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+@media (max-width:1000px){.potw{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:700px){.kroki{grid-template-columns:1fr 1fr}.kroki li{font-size:.95rem;min-height:50px;padding:8px 10px}.potw dl{grid-template-columns:1fr}.potw dt{padding-bottom:0;border-bottom:0}.potw dd{padding-top:2px}}
 @media (max-width:1000px){.kg{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:700px){.lst{columns:1}.filtry label{margin-left:0;width:100%}.filtry select{flex:1}
 .poz{grid-template-columns:84px minmax(0,1fr) auto;grid-template-areas:"f o o" "f i w" ". u u";gap:8px 12px}.poz .fz{grid-area:f}.poz img{width:84px;height:68px}.poz .op{grid-area:o}.poz .ilosc{grid-area:i;justify-self:start}.poz .wr{grid-area:w;justify-self:end}.poz .us{grid-area:u;justify-self:start;min-height:36px}
@@ -98,7 +114,7 @@ def podstrona(tytul, opis, sciezka, tresc, ld=None, skrypty=''):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="noindex,nofollow" data-podglad>
 <title>{E(tytul)}</title>
 <meta name="description" content="{E(opis)}">
 <link rel="canonical" href="{url}">
@@ -486,10 +502,16 @@ kategoria('bieznie-elektryczne', 'Bieżnie elektryczne', 'Bieżnie elektryczne A
           B, [('', 'Wszystkie'), ('model:apv8000', 'APV8000'), ('model:inne', 'Pozostałe modele'), ('dost:zam', 'Dostępne do zamówienia')], akc)
 
 # --- koszyk
+def kroki(n):
+    t = ['Koszyk', 'Dane i dostawa', 'Płatność', 'Potwierdzenie']
+    li = ''.join(f'<li class="ok">{x}</li>' if i + 1 < n else (f'<li aria-current="step">{x}</li>' if i + 1 == n else f'<li>{x}</li>') for i, x in enumerate(t))
+    return f'<ol class="kroki" aria-label="Etapy zamówienia">{li}</ol>'
+
 kosz = f'''<section class="kosz-s" aria-labelledby="h1">
   <div class="wrap">
     <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / Koszyk</nav>
     <h1 id="h1">Koszyk</h1>
+    {kroki(1)}
     <div class="pusty" id="pusty" hidden><p>Koszyk jest pusty.</p><div class="akc"><a class="btn aq" href="../wanny-z-hydromasazem/">Wanny z hydromasażem</a><a class="btn apv" href="../bieznie-elektryczne/">Bieżnie elektryczne</a></div></div>
     <div class="kg" data-pelny hidden>
       <div>
@@ -498,7 +520,7 @@ kosz = f'''<section class="kosz-s" aria-labelledby="h1">
         <p class="razem"><span>Dostawa kurierem</span><b>0 zł, transport gratis</b></p>
         <p class="uw">Transport gratis na wszystkie produkty, także na wanny i bieżnie wysyłane jako przesyłki nadwymiarowe. Zamawiając wannę lub bieżnię na zamówienie, przed wysyłką potwierdzimy termin realizacji.</p>
       </div>
-      <form class="zamf" id="zamowienie" novalidate>
+      <form class="zamf" id="zamowienie">
         <h2>Dane do zamówienia</h2>
         <div class="r2"><label>Imię i nazwisko<input type="text" name="n" autocomplete="name" required></label><label>Telefon<input type="tel" name="t" autocomplete="tel" required></label></div>
         <label>E-mail<input type="email" name="e" autocomplete="email" required></label>
@@ -516,12 +538,46 @@ kosz = f'''<section class="kosz-s" aria-labelledby="h1">
         </fieldset>
         <label class="zg"><input type="checkbox" required><span>Akceptuję <a href="../regulamin/">regulamin sklepu</a> i zapoznałem się z <a href="../polityka-prywatnosci/">polityką prywatności</a>.</span></label>
         <button class="btn ciem" type="submit">Zamawiam i płacę</button>
-        <p class="komunikat" id="komunikat" tabindex="-1" hidden>To podgląd sklepu. Zamówienia i płatności zaczną działać po uruchomieniu sklepu na WooCommerce.</p>
+        <p class="komunikat">To podgląd sklepu: po kliknięciu zobaczysz stronę potwierdzenia, ale zamówienie nigdzie nie zostanie wysłane.</p>
       </form>
     </div>
   </div>
 </section>'''
 zapisz('koszyk', podstrona('Koszyk | TREG', 'Koszyk sklepu TREG: wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport.', 'koszyk/', kosz))
+
+# --- potwierdzenie zamowienia (podglad: dane z koszyka w sessionStorage, nic nie jest wysylane)
+potw = f'''<section class="kosz-s" aria-labelledby="h1">
+  <div class="wrap">
+    <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / <a href="../koszyk/">Koszyk</a> / Potwierdzenie</nav>
+    <h1 id="h1">Dziękujemy, zamówienie przyjęte</h1>
+    {kroki(4)}
+    <div class="potw">
+      <div>
+        <h2 class="ok-h">Podsumowanie zamówienia</h2>
+        <ul id="lista-p" aria-label="Zamówione produkty" style="list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--line)"></ul>
+        <dl>
+          <dt>Razem za produkty</dt><dd id="p-suma">-</dd>
+          <dt>Dostawa</dt><dd>Kurier: 0 zł, transport gratis</dd>
+          <dt>Płatność</dt><dd id="p-pl">-</dd>
+          <dt>Adres dostawy</dt><dd id="p-adr">-</dd>
+        </dl>
+        <p class="komunikat">To podgląd sklepu: zamówienie nie zostało nigdzie wysłane. W uruchomionym sklepie w tym miejscu klient zobaczy numer zamówienia.</p>
+      </div>
+      <aside class="bok" aria-labelledby="h-co">
+        <h2 id="h-co">Co dalej?</h2>
+        <ol>
+          <li>Na podany adres e-mail przyjdzie potwierdzenie zamówienia z listą produktów.</li>
+          <li>Przy płatności online od razu przechodzisz do bezpiecznej płatności (BLIK, przelew, karta). Raty 0% i PayPo wybierasz w tym samym miejscu.</li>
+          <li>Przy wannie albo bieżni na zamówienie przed wysyłką potwierdzimy termin realizacji.</li>
+          <li>Kurier dostarcza paczkę pod wskazany adres. Transport gratis, także przesyłki nadwymiarowe.</li>
+        </ol>
+        <p style="margin-top:16px">Pytanie do zamówienia? Zadzwoń: <a href="tel:+48503538038"><b>503 538 038</b></a> albo napisz na WhatsAppie.</p>
+        <div class="akc"><a class="btn aq" href="../wanny-z-hydromasazem/">Wanny z hydromasażem</a><a class="btn apv" href="../bieznie-elektryczne/">Bieżnie elektryczne</a></div>
+      </aside>
+    </div>
+  </div>
+</section>'''
+zapisz('zamowienie-przyjete', podstrona('Zamówienie przyjęte | TREG', 'Potwierdzenie zamówienia w sklepie TREG.', 'zamowienie-przyjete/', potw))
 
 # --- strony tresci z treg.pl
 def czysty_html(h):
@@ -576,7 +632,7 @@ zapisz('o-firmie', podstrona('O firmie TREG z Bielska Podlaskiego: Aquaholm i AP
 
 # --- mapa strony
 sm = open('sitemap.xml', encoding='utf-8').read()
-for s in STRONY:
+for s in [x for x in STRONY if x not in ("zamowienie-przyjete/", "koszyk/")]:
     if BAZA + s not in sm: sm = sm.replace('</urlset>', f'<url><loc>{BAZA}{s}</loc></url>\n</urlset>')
 open('sitemap.xml', 'w', encoding='utf-8').write(sm)
 print('sklep ok', len(STRONY))

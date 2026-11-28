@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="noindex,nofollow" data-podglad>
 <title>Wanny z hydromasażem i bieżnie elektryczne | TREG Bielsk Podlaski</title>
 <meta name="description" content="TREG z Bielska Podlaskiego: wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport. Raty 0%, PayPo, BLIK, serwis i części. Tel. 503 538 038.">
 <meta name="theme-color" content="#ffffff">
@@ -353,6 +353,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .sieci li{font-size:clamp(19px,1.7vw,30px);font-weight:800;letter-spacing:-.02em;color:#8a939b}
 /* 24.11 propozycja klienta (WA 19:07): sekcja Nasze marki pod pasem sieci */
 .marki2{padding:clamp(40px,4.5vw,72px) 0}
+.kupno{padding:clamp(48px,5.5vw,96px) 0;background:var(--g)}
+.kupno .gl{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px 40px}
+.kupno h2{font-size:clamp(30px,2.6vw,50px);font-stretch:92%}
+.kupno .lead{max-width:56ch;margin-top:12px;font-size:clamp(18px,1.15vw,21px);color:var(--mut)}
+.kupno ol{list-style:none;margin:clamp(24px,2.6vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.4vw,24px);counter-reset:kk}
+.kupno li{counter-increment:kk;position:relative;background:#fff;padding:clamp(20px,1.8vw,30px);display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--ink)}
+.kupno li::before{content:counter(kk);display:grid;place-items:center;width:54px;height:54px;font-size:1.7rem;font-weight:800;color:var(--ink);border:3px solid var(--ink);box-shadow:9px 9px 0 0 var(--apv);margin-bottom:10px}
+.kupno li:nth-child(odd)::before{box-shadow:9px 9px 0 0 var(--aq)}
+.kupno h3{font-size:clamp(19px,1.25vw,24px)}
+.kupno li p{color:var(--mut);line-height:1.5}
+.kupno li a{margin-top:auto;padding-top:6px;font-weight:700;color:var(--ink);text-underline-offset:4px;min-height:44px;display:inline-flex;align-items:center}
+.kupno .pom{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:1100px){.kupno ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.kupno ol{grid-template-columns:minmax(0,1fr)}.kupno li{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:18px;row-gap:4px;align-items:start}.kupno li::before{grid-row:1/3;margin:0;width:46px;height:46px;font-size:1.4rem;box-shadow:7px 7px 0 0 var(--apv)}.kupno li:nth-child(odd)::before{box-shadow:7px 7px 0 0 var(--aq)}.kupno li>div,.kupno li>a{grid-column:2}.kupno .pom .btn{width:100%;justify-content:center}}
 .marki2 h2{text-align:center;font-size:clamp(26px,2.2vw,40px);margin-bottom:clamp(20px,2.4vw,36px)}
 .marki2 .g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.6vw,28px)}
 .marki2 a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:16px;padding:clamp(18px,2vw,32px);border:1px solid var(--line);border-radius:8px;background:#fff;text-decoration:none;color:var(--ink);box-shadow:0 10px 30px rgba(20,24,28,.06);transition:box-shadow .2s,transform .2s}
@@ -395,7 +409,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
     <p class="hasla" aria-hidden="true"><span>Przewaga dzięki technologii</span><span>Raty 0% na cały asortyment</span><span>Zapłać za 30 dni z PayPo albo BLIK-iem</span><span>Własny serwis i magazyn części</span><span>Transport gratis na wszystkie produkty</span><span>Polska firma z Bielska Podlaskiego</span></p>
   </div>
   <a class="pol aq" href="#wanny">
-    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/wanny-hero-v4.webp" width="1536" height="864" aria-label="Wanny z hydromasażem Aquaholm w działaniu"><source src="film/wanny-hero-v4.mp4" type="video/mp4"></video></span>
+    <span class="ekran"><video autoplay muted loop playsinline preload="auto" poster="film/wanny-hero-v5.webp" width="1536" height="864" aria-label="Wanny z hydromasażem Aquaholm w działaniu"><source src="film/wanny-hero-v5.mp4" type="video/mp4"></video></span>
     <span class="in">
       <span class="marka"><span class="kw aq"></span>Aquaholm</span>
       <span class="tyt">Wanny z hydromasażem</span>
@@ -432,6 +446,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </section>
 
 
+
+<section class="kupno" id="jak-kupic" aria-labelledby="h-kup">
+  <div class="wrap">
+    <div class="gl">
+      <div><h2 id="h-kup">Jak kupić w treg.pl</h2><p class="lead">Cztery kroki od wyboru do dostawy. Jeśli wolisz porozmawiać, zadzwoń albo napisz na WhatsAppie, doradzimy przy wyborze.</p></div>
+      <div class="pom"><a class="btn ciem" href="tel:+48503538038">Zadzwoń: 503 538 038</a></div>
+    </div>
+    <ol>
+      <li><div><h3>Wybierz wannę albo bieżnię</h3><p>W kategorii zawęzisz wybór, np. do wanien narożnych, czarnych albo dostępnych od ręki, i ułożysz produkty według ceny.</p></div><a href="wanny-z-hydromasazem/">Wanny z hydromasażem</a></li>
+      <li><div><h3>Sprawdź kartę produktu</h3><p>Zdjęcia, cena, dostępność, parametry w tabeli i filmy. Obok ceny jest przycisk „Dodaj do koszyka”, a przy przewijaniu na dole ekranu zostaje pasek z ceną.</p></div><a href="bieznia-apv8000-futura-prestige-6km/">Przykładowa karta bieżni</a></li>
+      <li><div><h3>Podaj adres i wybierz płatność</h3><p>Jeden formularz w koszyku: dane, dostawa kurierem za 0 zł i płatność: BLIK, przelew, karta, raty 0%, PayPo albo przy odbiorze.</p></div><a href="koszyk/">Koszyk</a></li>
+      <li><div><h3>Odbierz przesyłkę</h3><p>Po zamówieniu dostajesz potwierdzenie na e-mail. Transport gratis, także wanny i bieżnie wysyłane jako przesyłki nadwymiarowe.</p></div><a href="dostawa-i-platnosci/">Dostawa i płatności</a></li>
+    </ol>
+  </div>
+</section>
 
 <section class="sek" id="wanny" data-k="aq" aria-labelledby="h-wanny">
   <div class="wrap">
@@ -576,7 +605,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
       <div><a class="logo" href="#start" aria-label="TREG">{{LOGO_JASNE}}</a><p style="margin-top:14px">Wanny z hydromasażem Aquaholm i bieżnie elektryczne APVsport. Bielsk Podlaski.</p></div>
       <div><h4>Kategorie</h4><ul><li><a href="wanny-z-hydromasazem/">Wanny z hydromasażem</a></li><li><a href="bieznie-elektryczne/">Bieżnie elektryczne i akcesoria</a></li><li><a href="#sauny">Sauny parowe (wkrótce)</a></li></ul></div>
       <div><h4>Zakupy</h4><ul><li><a href="dostawa-i-platnosci/">Dostawa i płatności</a></li><li><a href="regulamin/">Regulamin</a></li><li><a href="polityka-prywatnosci/">Polityka prywatności</a></li><li><a href="koszyk/">Koszyk</a></li></ul></div>
-      <div><h4>Kontakt</h4><ul><li><a href="tel:+48503538038">503 538 038</a></li><li><a href="mailto:sklep@treg.pl">sklep@treg.pl</a></li><li>ul. 30 Lipca 2, Bielsk Podlaski</li><li><a href="kontakt/">Formularz kontaktowy</a></li><li><a href="o-firmie/">O firmie</a></li></ul></div>
+      <div><h4>Kontakt</h4><ul><li><a href="tel:+48503538038">503 538 038</a></li><li><a href="mailto:sklep@treg.pl">sklep@treg.pl</a></li><li>ul. 30 Lipca 2, Bielsk Podlaski</li><li><a href="kontakt/">Formularz kontaktowy</a></li><li><a href="o-firmie/">O firmie</a></li></ul><h4 style="margin-top:22px">Obserwuj nas</h4><ul><li><a href="https://www.youtube.com/@TREGpl/videos" target="_blank" rel="noopener">YouTube: TREG</a></li><li><a href="https://www.facebook.com/AQUAHOLM/" target="_blank" rel="noopener">Facebook: Aquaholm</a></li><li><a href="https://www.facebook.com/apvsportpl/" target="_blank" rel="noopener">Facebook: APVsport</a></li><li><a href="https://x.com/AQUAHOLM" target="_blank" rel="noopener">X: Aquaholm</a></li></ul></div>
     </div>
     <div class="dol"><span>© <span id="rok">2026</span> TREG Łukasz Pawluczuk</span>{{BADGE_LINK}}</div>
   </div>

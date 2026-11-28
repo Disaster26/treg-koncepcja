@@ -161,7 +161,7 @@ strona = f'''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="noindex,nofollow" data-podglad>
 <title>Bieżnia APV8000 Futura Prestige 6 KM, ekran 15,6" | TREG</title>
 <meta name="description" content="Bieżnia elektryczna APV8000 Futura Prestige: silnik 6 KM, pas 145 x 58 cm, ekran dotykowy Android 15,6 cala, do 180 kg. 4 990 zł, raty 0%, PayPo, BLIK.">
 <link rel="canonical" href="{URL}">

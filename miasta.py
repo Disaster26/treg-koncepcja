@@ -95,7 +95,7 @@ for i, (m, w, dop, woj, wst, krot) in enumerate(M):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="noindex,nofollow" data-podglad>
 <title>{E(tytul)}</title>
 <meta name="description" content="{E(opis)}">
 <link rel="canonical" href="{url}">
