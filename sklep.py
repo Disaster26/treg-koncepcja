@@ -296,7 +296,8 @@ def strona_produktu(p):
     bz = ' bz' if k == 'apv' else ''
     info = ('<h3 class="info-h">Informacje dodatkowe</h3><table class="par info-t"><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in o['info']) + '</tbody></table>') if o['info'] else ''
     podt = f'<span class="podt">{E(p["podtytul"])}</span>' if p['podtytul'] else ''
-    ean = f'<p class="ean">EAN: {E(o["ean"])}</p>' if o.get('ean') else ''
+    kr = [(a, b.lstrip("’'")) for a, b in o.get('krotki', []) if b.strip()]     # tabela z krotkiego opisu oferty (EAN / numer katalogowy / producent)
+    ean = ('<p class="ean">' + '<br>'.join((f'{E(a)}: ' if a else '') + E(b) for a, b in kr) + '</p>') if kr else ''
     tresc = f'''<section class="kp{bz}" aria-labelledby="h1">
   <div class="wrap">
     <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / <a href="../{kat[0]}/">{kat[1]}</a> / {E(p['nazwa'])}</nav>
