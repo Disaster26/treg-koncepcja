@@ -231,6 +231,7 @@ var il=d.getElementById('il');if(il)d.querySelectorAll('[data-il]').forEach(func
 var p=d.getElementById('pasek'),z=d.getElementById('zakup');
 if('IntersectionObserver' in window)new IntersectionObserver(function(e){var on=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;p.classList.toggle('on',on);p.setAttribute('aria-hidden',!on)}).observe(z);
 var za=[].slice.call(d.querySelectorAll('.zakl2 a'));if(za.length&&'IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)za.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-30% 0px -60% 0px'});za.forEach(function(a){var x=d.getElementById(a.getAttribute('href').slice(1));if(x)io.observe(x)})}
+d.querySelectorAll('[data-wiecej]').forEach(function(b){var g=b.previousElementSibling,n=b.querySelector('span').outerHTML;b.addEventListener('click',function(){var z=g.classList.toggle('zw');b.setAttribute('aria-expanded',!z);b.innerHTML=z?b.dataset.wiecej+' '+n:'Zwiń';if(z){var r=g.getBoundingClientRect().top;if(r<0)scrollBy({top:r-140,behavior:'instant'})}})});
 /* podobne produkty: karuzela przesuwa sie sama od prawej do lewej, stop po najechaniu / dotyku */
 var t=d.getElementById('ptor');if(t&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var st=false,wid=true;
 ['pointerenter','focusin','touchstart'].forEach(function(e){t.addEventListener(e,function(){st=true},{passive:true})});t.addEventListener('pointerleave',function(){st=false});

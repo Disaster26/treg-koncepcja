@@ -330,6 +330,13 @@ def opis_html(o, sl_url, alt):
                         kom.append(f'<figure class="mk"><button type="button" class="oi" data-lb="../img/o/{n}" aria-label="Powiększ zdjęcie">'
                                    f'<img src="../img/o/{n}" width="{sw}" height="{sh}" style="max-width:min(100%,{sw}px);max-height:min(100%,{sh}px)" loading="lazy" decoding="async" alt="{E(alt)}"></button></figure>')
                 i += 1
+            if len(kom) > 2:
+                # pierwszy rzad widoczny, reszta po kliknieciu (bez "tasiemca")
+                filmy = all('class="mk mf"' in x for x in kom[2:])
+                kom = kom[:2] + [x.replace('<figure class="mk', '<figure class="ukr mk', 1) for x in kom[2:]]
+                tekst = 'Zobacz więcej filmów' if filmy else 'Chcesz zobaczyć więcej zdjęć?'
+                html.append('<div class="siatka zw">' + ''.join(kom) + '</div>'
+                            f'<button type="button" class="wiecej" data-wiecej="{tekst}" aria-expanded="false">{tekst} <span>(+{len(kom) - 2})</span></button>'); continue
             html.append(f'<div class="siatka{" jeden" if len(kom) == 1 else ""}">' + ''.join(kom) + '</div>'); continue
         i += 1
     return '\n'.join(html)
@@ -352,6 +359,13 @@ def obraz_yt(yid):
     raise SystemExit('brak okladki ' + yid)
 
 CSS = '''
+.siatka.zw .ukr{display:none}
+.wiecej{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;margin-top:14px;border:2px solid var(--ink);background:#fff;color:var(--ink);font:700 1.02rem Archivo,Arial,sans-serif;cursor:pointer}
+.wiecej:hover{background:var(--ink);color:#fff}.wiecej span{font-weight:600;opacity:.75}
+.opis,.opis p,.opis li,.opis .par th,.opis .par td,.info-t th,.info-t td,.opis .wyr{font-size:1.05rem}
+.opis strong{font-size:inherit}
+.opis h3,.opis-s .info-h{font-size:clamp(20px,1.35vw,24px)!important;font-weight:800;font-stretch:100%;letter-spacing:0;line-height:1.25}
+.opis .par th{font-weight:600}
 .fk{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .fk li{background:var(--g);padding:10px 12px;border-left:3px solid var(--aq);display:flex;flex-direction:column;gap:2px;min-width:0}
 .bz .fk li{border-left-color:var(--apv)}
