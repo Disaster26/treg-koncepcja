@@ -202,14 +202,15 @@ def kv(t):
     return (m.group(1).strip(), m.group(2).strip()) if m and not re.search(r'https?$', m.group(1)) else None
 
 def pasek_ikon():
-    ik = [('<path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/>', 'Promocja!'),
-          ('<circle cx="12" cy="9" r="6"/><path d="m8.5 13.8-1.5 7.2 5-3 5 3-1.5-7.2"/>', 'Gwarancja najniższej ceny lub zwrot różnicy'),
-          ('<text x="12" y="16" text-anchor="middle" font-size="10" font-weight="800" fill="currentColor" stroke="none" font-family="Archivo,Arial,sans-serif">0%</text><rect x="2.5" y="4" width="19" height="16" rx="3"/>', 'Zakupy na raty 0%, RRSO 0%'),
-          ('<rect x="1.5" y="6" width="13" height="10" rx="1"/><path d="M14.5 9h4l3 3.5V16h-7"/><circle cx="6" cy="17.5" r="2"/><circle cx="17.5" cy="17.5" r="2"/>', 'Darmowa dostawa'),
-          ('<path d="M3 14h4l4 2h4a2 2 0 0 0 0-4h-3"/><path d="M7 14V21H3v-7"/><path d="m15 12 5-2a2 2 0 0 1 2 3l-7 5-4-1"/><rect x="11" y="3" width="7" height="6" rx="1"/>', 'Wygodna dostawa'),
-          ('<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/><text x="12" y="18.5" text-anchor="middle" font-size="7.5" font-weight="800" fill="currentColor" stroke="none" font-family="Archivo,Arial,sans-serif">30</text>', 'Kup teraz, zapłać za 30 dni (PayPo)')]
+    # korzysci zakupu (tresc klienta), wlasne ikony w stylu treg: kwadrat z logo, grafit + niebieski/czerwony
+    ik = [('<path d="M8 16 16 8"/><rect x="6" y="6.5" width="3.5" height="3.5"/><rect x="14.5" y="14" width="3.5" height="3.5"/>', 'Promocja'),
+          ('<path d="M12 3.5 5 6v5.5c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/>', 'Gwarancja najniższej ceny lub zwrot różnicy'),
+          ('<rect x="3.5" y="5.5" width="17" height="13"/><path d="M3.5 9.5h17"/><path d="M7 15h4"/><text x="16.4" y="16.4" text-anchor="middle" font-size="5.6" font-weight="800" fill="currentColor" stroke="none" font-family="Archivo,Arial,sans-serif">0%</text>', 'Zakupy na raty 0%, RRSO 0%'),
+          ('<path d="M2.5 7h11v9h-11z"/><path d="M13.5 10h4l3 3v3h-7"/><rect x="4.5" y="15.5" width="3" height="3"/><rect x="15.5" y="15.5" width="3" height="3"/>', 'Darmowa dostawa'),
+          ('<path d="M4 9.5 12 5l8 4.5v9L12 23l-8-4.5z" transform="translate(0 -2)"/><path d="M4 7.5 12 12l8-4.5M12 12v9"/>', 'Wygodna dostawa'),
+          ('<rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><text x="12" y="18.3" text-anchor="middle" font-size="6.6" font-weight="800" fill="currentColor" stroke="none" font-family="Archivo,Arial,sans-serif">30</text>', 'Kup teraz, zapłać za 30 dni z PayPo')]
     return '<ul class="ikony" aria-label="Korzyści zakupu">' + ''.join(
-        f'<li><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{s}</svg><span>{E(t)}</span></li>' for s, t in ik) + '</ul>'
+        f'<li><span class="ik"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="miter" aria-hidden="true">{sv}</svg></span><span>{E(t)}</span></li>' for sv, t in ik) + '</ul>'
 
 def opis_html(o, sl_url, alt):
     soup = BeautifulSoup(o['opis_html'], 'html.parser')
@@ -374,13 +375,13 @@ CSS = '''
 .pods{padding:clamp(26px,3vw,48px) 0;background:var(--g)}
 .pods h2{font-size:clamp(24px,1.8vw,32px)}
 .pods .sg{display:flex;justify-content:space-between;align-items:end;gap:16px}
-.ptor{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,calc((100% - 5*16px)/6));gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:18px;padding-bottom:8px;scrollbar-width:thin}
+.ptor{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,calc((100% - 3*20px)/4));gap:20px;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:18px;padding-bottom:8px;scrollbar-width:thin}
 .pk{scroll-snap-align:start;background:#fff;border:1px solid #dfe4e9;display:flex;flex-direction:column}
 .pk .f{display:block;aspect-ratio:1;background:#fff}.pk .f img{width:100%;height:100%;object-fit:contain}
 .pk .in{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1;gap:6px}
-.pk h3{font-size:.98rem;line-height:1.35;font-weight:700;font-stretch:100%;letter-spacing:0}.pk h3 a{color:var(--ink);text-decoration:none}.pk h3 a:hover{text-decoration:underline}
+.pk h3{font-size:1.08rem;line-height:1.35;font-weight:700;font-stretch:100%;letter-spacing:0}.pk h3 a{color:var(--ink);text-decoration:none}.pk h3 a:hover{text-decoration:underline}
 .pk .cz{margin-top:auto;font-size:.88rem;color:var(--mut)}
-.pk .c{font-weight:800;font-size:1.15rem}.pk .c s{font-weight:500;color:var(--mut);font-size:.9rem;margin-left:6px}
+.pk .c{font-weight:800;font-size:1.3rem}.pk .c s{font-weight:500;color:var(--mut);font-size:.9rem;margin-left:6px}
 .pods .nav button{width:48px;height:48px}
 .opis-s{padding:clamp(30px,4vw,64px) 0 clamp(50px,6vw,90px)}
 .opis-s h2{font-size:clamp(26px,2vw,36px)}
@@ -422,10 +423,14 @@ CSS = '''
 .opis .film.of{width:100%;margin:18px 0 0}
 .opis .film.of figcaption{color:var(--mut);font-size:.93rem;margin-top:8px}
 .opis .promo{display:inline-block;margin-top:16px;padding:6px 16px;background:#d7140f;color:#fff;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.ikony{list-style:none;margin:6px 0 0;padding:clamp(16px,1.6vw,22px) 10px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;background:var(--g)}
-.ikony li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;font-weight:700;font-size:.86rem;line-height:1.3}
-.ikony svg{color:#fff;background:#1e7e48;border-radius:50%;padding:12px;width:64px;height:64px}
-.ikony li:nth-child(even) svg{background:#027fd1}
-@media (max-width:1100px){.ptor{grid-auto-columns:minmax(200px,calc((100% - 3*16px)/4))}.ikony{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:640px){.ptor{grid-auto-columns:72%}.opis .of-z.rz{flex-wrap:wrap}.ikony{grid-template-columns:repeat(2,minmax(0,1fr))}.gl2 .gp,.gl2 .gn{width:44px;height:44px}.gl2 .mini2 button{width:64px;height:64px}.opis .of-z.rz .oi{flex:1 1 100%}}
+.ikony{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.ikony li{position:relative;display:flex;align-items:center;gap:14px;padding:16px 16px 16px 14px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--aq);font-weight:700;font-size:.95rem;line-height:1.3;text-align:left;color:var(--ink)}
+.ikony li:nth-child(even){border-top-color:var(--apv)}
+.ikony .ik{flex:none;position:relative;display:grid;place-items:center;width:52px;height:52px;background:var(--ink);color:#fff}
+.ikony .ik::before{content:"";position:absolute;left:-6px;top:-6px;width:20px;height:20px;border:2.5px solid var(--aq);background:#fff;z-index:-1}
+.ikony li:nth-child(even) .ik{background:var(--apv)}.ikony li:nth-child(even) .ik::before{border-color:var(--ink)}
+.ikony li{z-index:0}
+@media (max-width:1400px){.ikony{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1100px){.ptor{grid-auto-columns:minmax(220px,calc((100% - 2*20px)/3))}}
+@media (max-width:640px){.ptor{grid-auto-columns:84%}.opis .of-z.rz{flex-wrap:wrap}.ikony{grid-template-columns:minmax(0,1fr)}.ikony li{padding:12px 14px}.gl2 .gp,.gl2 .gn{width:44px;height:44px}.gl2 .mini2 button{width:64px;height:64px}.opis .of-z.rz .oi{flex:1 1 100%}}
 '''

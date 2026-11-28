@@ -586,13 +586,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .pods{padding:clamp(26px,3vw,48px) 0;background:var(--g)}
 .pods h2{font-size:clamp(24px,1.8vw,32px)}
 .pods .sg{display:flex;justify-content:space-between;align-items:end;gap:16px}
-.ptor{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,calc((100% - 5*16px)/6));gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:18px;padding-bottom:8px;scrollbar-width:thin}
+.ptor{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(240px,calc((100% - 3*20px)/4));gap:20px;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:18px;padding-bottom:8px;scrollbar-width:thin}
 .pk{scroll-snap-align:start;background:#fff;border:1px solid #dfe4e9;display:flex;flex-direction:column}
 .pk .f{display:block;aspect-ratio:1;background:#fff}.pk .f img{width:100%;height:100%;object-fit:contain}
 .pk .in{padding:12px 14px 14px;display:flex;flex-direction:column;flex:1;gap:6px}
-.pk h3{font-size:.98rem;line-height:1.35;font-weight:700;font-stretch:100%;letter-spacing:0}.pk h3 a{color:var(--ink);text-decoration:none}.pk h3 a:hover{text-decoration:underline}
+.pk h3{font-size:1.08rem;line-height:1.35;font-weight:700;font-stretch:100%;letter-spacing:0}.pk h3 a{color:var(--ink);text-decoration:none}.pk h3 a:hover{text-decoration:underline}
 .pk .cz{margin-top:auto;font-size:.88rem;color:var(--mut)}
-.pk .c{font-weight:800;font-size:1.15rem}.pk .c s{font-weight:500;color:var(--mut);font-size:.9rem;margin-left:6px}
+.pk .c{font-weight:800;font-size:1.3rem}.pk .c s{font-weight:500;color:var(--mut);font-size:.9rem;margin-left:6px}
 .pods .nav button{width:48px;height:48px}
 .opis-s{padding:clamp(30px,4vw,64px) 0 clamp(50px,6vw,90px)}
 .opis-s h2{font-size:clamp(26px,2vw,36px)}
@@ -634,12 +634,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .opis .film.of{width:100%;margin:18px 0 0}
 .opis .film.of figcaption{color:var(--mut);font-size:.93rem;margin-top:8px}
 .opis .promo{display:inline-block;margin-top:16px;padding:6px 16px;background:#d7140f;color:#fff;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
-.ikony{list-style:none;margin:6px 0 0;padding:clamp(16px,1.6vw,22px) 10px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;background:var(--g)}
-.ikony li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;font-weight:700;font-size:.86rem;line-height:1.3}
-.ikony svg{color:#fff;background:#1e7e48;border-radius:50%;padding:12px;width:64px;height:64px}
-.ikony li:nth-child(even) svg{background:#027fd1}
-@media (max-width:1100px){.ptor{grid-auto-columns:minmax(200px,calc((100% - 3*16px)/4))}.ikony{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:640px){.ptor{grid-auto-columns:72%}.opis .of-z.rz{flex-wrap:wrap}.ikony{grid-template-columns:repeat(2,minmax(0,1fr))}.gl2 .gp,.gl2 .gn{width:44px;height:44px}.gl2 .mini2 button{width:64px;height:64px}.opis .of-z.rz .oi{flex:1 1 100%}}
+.ikony{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.ikony li{position:relative;display:flex;align-items:center;gap:14px;padding:16px 16px 16px 14px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--aq);font-weight:700;font-size:.95rem;line-height:1.3;text-align:left;color:var(--ink)}
+.ikony li:nth-child(even){border-top-color:var(--apv)}
+.ikony .ik{flex:none;position:relative;display:grid;place-items:center;width:52px;height:52px;background:var(--ink);color:#fff}
+.ikony .ik::before{content:"";position:absolute;left:-6px;top:-6px;width:20px;height:20px;border:2.5px solid var(--aq);background:#fff;z-index:-1}
+.ikony li:nth-child(even) .ik{background:var(--apv)}.ikony li:nth-child(even) .ik::before{border-color:var(--ink)}
+.ikony li{z-index:0}
+@media (max-width:1400px){.ikony{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:1100px){.ptor{grid-auto-columns:minmax(220px,calc((100% - 2*20px)/3))}}
+@media (max-width:640px){.ptor{grid-auto-columns:84%}.opis .of-z.rz{flex-wrap:wrap}.ikony{grid-template-columns:minmax(0,1fr)}.ikony li{padding:12px 14px}.gl2 .gp,.gl2 .gn{width:44px;height:44px}.gl2 .mini2 button{width:64px;height:64px}.opis .of-z.rz .oi{flex:1 1 100%}}
 @media (max-width:900px){#tresc{padding-top:63px}}</style>
 
 </head>

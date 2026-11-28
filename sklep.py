@@ -233,7 +233,7 @@ if('IntersectionObserver' in window)new IntersectionObserver(function(e){var on=
 var t=d.getElementById('ptor');if(t&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var st=false,wid=true;
 ['pointerenter','focusin','touchstart'].forEach(function(e){t.addEventListener(e,function(){st=true},{passive:true})});t.addEventListener('pointerleave',function(){st=false});
 if('IntersectionObserver' in window)new IntersectionObserver(function(e){wid=e[0].isIntersecting}).observe(t);
-setInterval(function(){if(st||!wid||d.hidden||t.scrollWidth<=t.clientWidth+4)return;var k=t.children[0].getBoundingClientRect().width+16;
+setInterval(function(){if(st||!wid||d.hidden||t.scrollWidth<=t.clientWidth+4)return;var k=t.children[0].getBoundingClientRect().width+20;
 if(t.scrollLeft+t.clientWidth>=t.scrollWidth-4)t.scrollTo({left:0,behavior:'smooth'});else t.scrollBy({left:k,behavior:'smooth'})},3000)}
 })();
 </script>'''
@@ -274,7 +274,10 @@ def strona_produktu(p):
     else:
         kup = f'<div class="kup"><a class="dok pyt" href="{WA}" target="_blank" rel="noopener">Zapytaj o termin na WhatsAppie</a></div>'
     meta = (f'SKU: {E(o["sku"])}<br>' if o['sku'] else '') + f'Kategoria: <a href="../{kat[0]}/">{kat[1]}</a>'
-    pod = [PID[i] for i in o['podobne'] if isinstance(i, int) and i in PID]
+    # podobne produkty: automatycznie z tej samej kategorii (wanny -> wanny, bieznie i akcesoria -> bieznie), tylko dostepne, kolejnosc jak w sklepie klienta
+    typ_pod = 'wanna' if p['typ'] == 'wanna' else 'bieznia'
+    kol_pod = oferty.KOL_WANNY if typ_pod == 'wanna' else oferty.KOL_BIEZNIE
+    pod = [PID[i] for i in kol_pod if i != p['id'] and PID[i]['typ'] == typ_pod and PID[i]['dost'] != 'brak']
     nav = ('<div class="nav" data-nav="ptor"><button type="button" data-k="-1" aria-label="Poprzednie produkty"></button>'
            '<button type="button" data-k="1" aria-label="Następne produkty"></button></div>') if len(pod) > 2 else ''
     sek_pod = (f'<section class="pods" aria-labelledby="h-pod"><div class="wrap"><div class="sg"><h2 id="h-pod">Podobne produkty</h2>{nav}</div>'
