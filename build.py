@@ -16,8 +16,8 @@ import json
 PROD = {p['id']: p for p in json.load(open('produkty.json', encoding='utf-8'))}
 KARTY = {'w9014': 19555, 'w9011': 17916, 'w8008': 17905, 'w8008c': 19099, 'w9001': 17827,
          'futura': 20185, 'premium': 20175, 'top': 20183, 'apv6000': 20272, 'apv5000': 20270, 'apv900': 20233}
-ZAM = ('zam', 'Na zamówienie, realizacja 30 dni')
-JEST = ('jest', 'Dostępna')
+ZAM = ('zam', 'Czas realizacji: 14 dni')
+JEST = ('jest', 'Dostępny')
 BRAK = ('brak', 'Brak w magazynie')
 
 # (plik, ile zdjec, szer. duza, szer. mala, nazwa, opis, cena, stara, dostepnosc, alt)
@@ -30,7 +30,6 @@ WANNY = [
 ]
 BIEZNIE = [
     ('futura', 1, 640, 360, 'Bieżnia APV8000 Futura Prestige 6 KM', 'ekran dotykowy Android 15,6", silnik 6 KM (10 KM szczytowo), pas 145 x 58 cm, do 180 kg', '4 990', '7 290', ZAM, 'Bieżnia elektryczna APVsport APV8000 Futura Prestige z ekranem 15,6 cala'),
-    ('elitek', 1, 640, 360, 'Bieżnia APV8000 Elite Series 5 KM', 'ekran dotykowy Android 10,1", silnik 5 KM (8 KM szczytowo), pas 145 x 58 cm, do 160 kg', '4 790', '6 790', ZAM, 'Bieżnia elektryczna APVsport APV8000 Elite Series'),
     ('premium', 1, 640, 360, 'Bieżnia APV8000 Premium Line 6 KM', 'ekran dotykowy Android 10,1", silnik 6 KM (10 KM szczytowo), pas 145 x 58 cm, do 180 kg', '4 990', '7 290', ZAM, 'Bieżnia elektryczna APVsport APV8000 Premium Line'),
     ('top', 1, 640, 360, 'Bieżnia APV8000 Top Quality 5 KM', 'ekran dotykowy Android 10,1", silnik 5 KM (8 KM szczytowo), pas 145 x 58 cm', '4 790', '6 790', ZAM, 'Bieżnia elektryczna APVsport APV8000 Top Quality'),
     ('apv6000', 1, 640, 360, 'Bieżnia APV6000 z zestawem dodatków', 'ekran Android 10,1", pas 135 x 48 cm, w zestawie masażer, hantle, przyrząd do brzuszków, mata', '6 490', None, BRAK, 'Bieżnia elektryczna APVsport APV6000'),
@@ -53,6 +52,7 @@ def karta(k, n, wd, wm, nazwa, opis, cena, stara, dost, alt, kier):
         dost = {'zam': ZAM, 'jest': JEST, 'brak': BRAK}[pr['dost']]
         cena = f'{pr["cena"]:,}'.replace(',', ' ')
         stara = f'{pr["stara"]:,}'.replace(',', ' ') if pr['stara'] else None
+        nazwa, opis = pr['nazwa'], pr.get('podtytul', '')   # nazwa i opis wg oferty klienta na aquaholm.pl
     st = f'<s>{stara} zł</s>' if stara else ''
     nz = f'<a class="pl" href="{pr["slug"]}/">{H.escape(nazwa)}</a>' if pr else H.escape(nazwa)
     if pr and dost[0] != 'brak':

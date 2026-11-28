@@ -26,7 +26,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "akcesorium",
-  "nazwa": "Mata wygłuszająca APVsport pod bieżnię 175 x 75 cm",
+  "nazwa": "Mata wygłuszająca APVsport pod bieżnię",
   "krotka": "Mata wygłuszająca pod bieżnię",
   "slug": "mata-wygluszajaca-apvsport-pod-bieznie-175-x-75-cm",
   "opis": [
@@ -42,7 +42,8 @@
    "Antypoślizgowa powierzchnia",
    "Doskonała przyczepność do podłoża",
    "Grubość 7 mm"
-  ]
+  ],
+  "podtytul": "model APV8000 oraz inny sprzęt sportowy"
  },
  {
   "id": 20530,
@@ -85,7 +86,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "akcesorium",
-  "nazwa": "Pas piersiowy do pomiaru tętna",
+  "nazwa": "Pas piersiowy telemetryczny do pomiaru tętna",
   "krotka": "Pas piersiowy do pomiaru tętna",
   "slug": "pas-piersiowy-do-pomiaru-tetna",
   "opis": [
@@ -94,7 +95,8 @@
    "Precyzyjny pomiar tętna bez konieczności odrywania rąk od sensorów. Pełna swoboda ruchu i komfort podczas ćwiczeń. Ekonomiczne i sprawdzone rozwiązanie, polecane zarówno dla początkujących, jak i zaawansowanych sportowców.",
    "Uwaga! Prezentowany pas kompatybilny jest tylko z urządzeniami pracującymi na tej samej częstotliwości."
   ],
-  "wyroznienia": []
+  "wyroznienia": [],
+  "podtytul": ""
  },
  {
   "id": 20522,
@@ -194,7 +196,8 @@
    "Wygłuszająca duża mata pod bieżnię chroniąca podłogę",
    "4 buteleczki oleju silikonowego",
    "Certyfikaty: CE, RoHS"
-  ]
+  ],
+  "podtytul": "masażer, twister, 2 hantle, rama do robienia brzuszków z gąbkami, mata pod bieżnię, olej silikonowy"
  },
  {
   "id": 20279,
@@ -321,7 +324,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV6000 S",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV6000 S",
   "krotka": "Bieżnia APV6000 S",
   "model": "APV6000",
   "seria": null,
@@ -446,7 +449,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran TFT Android 10,1 cala, pas biegowy 135 x 48 cm"
  },
  {
   "id": 20272,
@@ -573,7 +577,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV6000 z zestawem dodatków",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV6000",
   "krotka": "Bieżnia APV6000 z zestawem dodatków",
   "model": "APV6000",
   "seria": null,
@@ -698,7 +702,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran TFT Android 10,1 cala, dodatkowe wyposażenie: masażer, hantle, brzuszki, mata, pas biegowy 135 x 48 cm"
  },
  {
   "id": 20270,
@@ -825,7 +830,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV5000 z zestawem dodatków",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV5000",
   "krotka": "Bieżnia APV5000 z zestawem dodatków",
   "model": "APV5000",
   "seria": null,
@@ -954,7 +959,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran TFT Android 7 cali, dodatkowe wyposażenie: masażer, hantle, brzuszki, mata, pas biegowy 130 x 40 cm"
  },
  {
   "id": 20248,
@@ -1081,7 +1087,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV5000 S",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV5000 S",
   "krotka": "Bieżnia APV5000 S",
   "model": "APV5000",
   "seria": null,
@@ -1206,7 +1212,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran TFT Android 7 cali, pas biegowy 130 x 40 cm"
  },
  {
   "id": 20241,
@@ -1333,7 +1340,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV900 S",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV900 S",
   "krotka": "Bieżnia APV900 S",
   "model": "APV900",
   "seria": null,
@@ -1449,7 +1456,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran LCD, pas biegowy 130 x 38 cm"
  },
  {
   "id": 20233,
@@ -1576,7 +1584,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV900 z zestawem dodatków",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV900",
   "krotka": "Bieżnia APV900 z zestawem dodatków",
   "model": "APV900",
   "seria": null,
@@ -1692,7 +1700,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran LCD, dodatkowe wyposażenie: masażer, hantle, brzuszki, mata, pas biegowy 130 x 38 cm"
  },
  {
   "id": 20227,
@@ -1819,7 +1828,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV600 S",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV600 S",
   "krotka": "Bieżnia APV600 S",
   "model": "APV600",
   "seria": null,
@@ -1935,7 +1944,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran LCD, pas biegowy 125 x 38 cm"
  },
  {
   "id": 20221,
@@ -2062,7 +2072,7 @@
   "ean": null,
   "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV600 z zestawem dodatków",
+  "nazwa": "Bieżnia elektryczna do biegania i chodzenia APVsport APV600",
   "krotka": "Bieżnia APV600 z zestawem dodatków",
   "model": "APV600",
   "seria": null,
@@ -2178,7 +2188,8 @@
   "gratisy": false,
   "pas_opcja": false,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "ekran LCD, dodatkowe wyposażenie: masażer, hantle, brzuszki, mata, pas biegowy 125 x 38 cm"
  },
  {
   "id": 20189,
@@ -2303,9 +2314,9 @@
    }
   ],
   "ean": "9331582499991",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Premium Line 6 KM, wersja komercyjna",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Premium Line 6 KM, wersja komercyjna",
   "krotka": "Bieżnia APV8000 Premium Line 6 KM komercyjna",
   "model": "APV8000",
   "seria": "Premium Line",
@@ -2423,7 +2434,8 @@
   "gratisy": true,
   "pas_opcja": true,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20187,
@@ -2548,9 +2560,9 @@
    }
   ],
   "ean": "9331582499953",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Top Quality 6 KM, wersja komercyjna",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Top Quality 6 KM, wersja komercyjna",
   "krotka": "Bieżnia APV8000 Top Quality 6 KM komercyjna",
   "model": "APV8000",
   "seria": "Top Quality",
@@ -2668,7 +2680,8 @@
   "gratisy": true,
   "pas_opcja": true,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20185,
@@ -2793,9 +2806,9 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Futura Prestige 6 KM",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Futura Prestige 6 KM",
   "krotka": "Bieżnia APV8000 Futura Prestige 6 KM",
   "model": "APV8000",
   "seria": "Futura Prestige",
@@ -2909,7 +2922,8 @@
    "Kinomap",
    "Zwift",
    "FitShow"
-  ]
+  ],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20183,
@@ -3034,9 +3048,9 @@
    }
   ],
   "ean": "9331582499113",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Top Quality 5 KM",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Top Quality 5 KM",
   "krotka": "Bieżnia APV8000 Top Quality 5 KM",
   "model": "APV8000",
   "seria": "Top Quality",
@@ -3146,7 +3160,8 @@
   "gratisy": true,
   "pas_opcja": true,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20181,
@@ -3271,9 +3286,9 @@
    }
   ],
   "ean": "9331582499977",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Premium Line 5 KM",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Premium Line 5 KM",
   "krotka": "Bieżnia APV8000 Premium Line 5 KM",
   "model": "APV8000",
   "seria": "Premium Line",
@@ -3383,7 +3398,8 @@
   "gratisy": true,
   "pas_opcja": true,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20179,
@@ -3508,9 +3524,9 @@
    }
   ],
   "ean": "9331582499984",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Futura Prestige 5 KM",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Futura Prestige 5 KM",
   "krotka": "Bieżnia APV8000 Futura Prestige 5 KM",
   "model": "APV8000",
   "seria": "Futura Prestige",
@@ -3624,7 +3640,8 @@
    "Kinomap",
    "Zwift",
    "FitShow"
-  ]
+  ],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20177,
@@ -3749,9 +3766,9 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Top Quality 6 KM",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Top Quality 6 KM",
   "krotka": "Bieżnia APV8000 Top Quality 6 KM",
   "model": "APV8000",
   "seria": "Top Quality",
@@ -3861,7 +3878,8 @@
   "gratisy": true,
   "pas_opcja": true,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20175,
@@ -3986,9 +4004,9 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Premium Line 6 KM",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Premium Line 6 KM",
   "krotka": "Bieżnia APV8000 Premium Line 6 KM",
   "model": "APV8000",
   "seria": "Premium Line",
@@ -4098,7 +4116,8 @@
   "gratisy": true,
   "pas_opcja": true,
   "amortyzacja": true,
-  "aplikacje": []
+  "aplikacje": [],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 20145,
@@ -4223,9 +4242,9 @@
    }
   ],
   "ean": "9331582499939",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "bieznia",
-  "nazwa": "Bieżnia elektryczna APV8000 Futura Prestige 6 KM, wersja komercyjna",
+  "nazwa": "Elektryczna bieżnia do biegania i chodzenia APV8000 Futura Prestige 6 KM, wersja komercyjna",
   "krotka": "Bieżnia APV8000 Futura Prestige 6 KM komercyjna",
   "model": "APV8000",
   "seria": "Futura Prestige",
@@ -4339,7 +4358,8 @@
    "Kinomap",
    "Zwift",
    "FitShow"
-  ]
+  ],
+  "podtytul": "pas biegowy 145 x 58 cm"
  },
  {
   "id": 19555,
@@ -4474,7 +4494,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9014 170 x 80 x 58 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9014 170 x 80 x 58 cm",
   "krotka": "Wanna A9014 Premium Line",
   "slug": "wanna-z-hydromasazem-a9014-170x80",
   "cechy_n": {
@@ -4567,7 +4587,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19552,
@@ -4702,7 +4723,7 @@
   ],
   "ksztalt": "podwojna",
   "kolor": "czarna",
-  "nazwa": "Podwójna czarna wanna z hydromasażem A9002C 180 x 120 x 68 cm",
+  "nazwa": "Podwójna czarna wanna z hydromasażem Aquaholm Premium Line A9002C 180 x 120 x 68 cm",
   "krotka": "Podwójna czarna wanna A9002C Premium Line",
   "slug": "podwojna-czarna-wanna-z-hydromasazem-a9002c-180x120",
   "cechy_n": {
@@ -4797,7 +4818,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19550,
@@ -4932,7 +4954,7 @@
   ],
   "ksztalt": "podwojna",
   "kolor": "biala",
-  "nazwa": "Podwójna wanna z hydromasażem A9002 180 x 120 x 68 cm",
+  "nazwa": "Podwójna wanna z hydromasażem Aquaholm Premium Line A9002 180 x 120 x 68 cm",
   "krotka": "Podwójna wanna A9002 Premium Line",
   "slug": "podwojna-wanna-z-hydromasazem-a9002-180x120",
   "cechy_n": {
@@ -5027,7 +5049,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19105,
@@ -5162,7 +5185,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna narożna z hydromasażem A9012C 150 x 150 x 58 cm",
+  "nazwa": "Czarna wanna narożna z hydromasażem Aquaholm Premium Line A9012C 150 x 150 x 58 cm",
   "krotka": "Czarna wanna narożna A9012C Premium Line",
   "slug": "czarna-wanna-narozna-z-hydromasazem-a9012c-150x150",
   "cechy_n": {
@@ -5255,7 +5278,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 19103,
@@ -5390,7 +5414,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna narożna z hydromasażem A9011C 150 x 150 x 58 cm",
+  "nazwa": "Czarna wanna narożna z hydromasażem Aquaholm Premium Line A9011C 150 x 150 x 58 cm",
   "krotka": "Czarna wanna narożna A9011C Premium Line",
   "slug": "czarna-wanna-narozna-z-hydromasazem-a9011c-150x150",
   "cechy_n": {
@@ -5481,7 +5505,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 19101,
@@ -5606,7 +5631,7 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9009C",
   "wym": [
@@ -5616,7 +5641,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna narożna z hydromasażem A9009C 140 x 140 x 64 cm",
+  "nazwa": "Czarna wanna narożna z hydromasażem Aquaholm Premium Line A9009C 140 x 140 x 64 cm",
   "krotka": "Czarna wanna narożna A9009C Premium Line",
   "slug": "czarna-wanna-narozna-z-hydromasazem-a9009c-140x140",
   "cechy_n": {
@@ -5709,7 +5734,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 19099,
@@ -5834,7 +5860,7 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9008C",
   "wym": [
@@ -5844,7 +5870,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna z hydromasażem A9008C 180 x 120 x 59 cm",
+  "nazwa": "Czarna wanna z hydromasażem Aquaholm Premium Line A9008C 180 x 120 x 59 cm",
   "krotka": "Czarna wanna A9008C Premium Line",
   "slug": "czarna-wanna-z-hydromasazem-a9008c-180x120",
   "cechy_n": {
@@ -5939,7 +5965,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19097,
@@ -6064,7 +6091,7 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9007C",
   "wym": [
@@ -6074,7 +6101,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna z hydromasażem A9007C 170 x 120 x 59 cm",
+  "nazwa": "Czarna wanna z hydromasażem Aquaholm Premium Line A9007C 170 x 120 x 59 cm",
   "krotka": "Czarna wanna A9007C Premium Line",
   "slug": "czarna-wanna-z-hydromasazem-a9007c-170x120",
   "cechy_n": {
@@ -6169,7 +6196,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19095,
@@ -6304,7 +6332,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna z hydromasażem A9005C 180 x 120 x 64 cm",
+  "nazwa": "Czarna wanna z hydromasażem Aquaholm Premium Line A9005C 180 x 120 x 64 cm",
   "krotka": "Czarna wanna A9005C Premium Line",
   "slug": "czarna-wanna-z-hydromasazem-a9005c-180x120",
   "cechy_n": {
@@ -6399,7 +6427,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19093,
@@ -6524,7 +6553,7 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9004C",
   "wym": [
@@ -6534,7 +6563,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna z hydromasażem A9004C 170 x 80 x 58 cm",
+  "nazwa": "Czarna wanna z hydromasażem Aquaholm Premium Line A9004C 170 x 80 x 58 cm",
   "krotka": "Czarna wanna A9004C Premium Line",
   "slug": "czarna-wanna-z-hydromasazem-a9004c-170x80",
   "cechy_n": {
@@ -6629,7 +6658,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19091,
@@ -6764,7 +6794,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna z hydromasażem A9003C 170 x 90 x 58 cm",
+  "nazwa": "Czarna wanna z hydromasażem Aquaholm Premium Line A9003C 170 x 90 x 58 cm",
   "krotka": "Czarna wanna A9003C Premium Line",
   "slug": "czarna-wanna-z-hydromasazem-a9003c-170x90",
   "cechy_n": {
@@ -6859,7 +6889,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 19089,
@@ -6984,7 +7015,7 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9001C",
   "wym": [
@@ -6994,7 +7025,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "czarna",
-  "nazwa": "Czarna wanna z hydromasażem A9001C 170 x 78 x 60 cm",
+  "nazwa": "Czarna wanna z hydromasażem Aquaholm Premium Line A9001C 170 x 78 x 60 cm",
   "krotka": "Czarna wanna A9001C Premium Line",
   "slug": "czarna-wanna-z-hydromasazem-a9001c-170x78",
   "cechy_n": {
@@ -7089,7 +7120,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 18306,
@@ -7224,7 +7256,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9003 170 x 90 x 58 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9003 170 x 90 x 58 cm",
   "krotka": "Wanna A9003 Premium Line",
   "slug": "wanna-z-hydromasazem-a9003-170x90",
   "cechy_n": {
@@ -7319,7 +7351,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 17918,
@@ -7454,7 +7487,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "biala",
-  "nazwa": "Wanna narożna z hydromasażem A9012 150 x 150 x 58 cm",
+  "nazwa": "Wanna narożna z hydromasażem Aquaholm Premium Line A9012 150 x 150 x 58 cm",
   "krotka": "Wanna narożna A9012 Premium Line",
   "slug": "wanna-narozna-z-hydromasazem-a9012-150x150",
   "cechy_n": {
@@ -7547,7 +7580,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 17916,
@@ -7682,7 +7716,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "biala",
-  "nazwa": "Wanna narożna z hydromasażem A9011 150 x 150 x 58 cm",
+  "nazwa": "Wanna narożna z hydromasażem Aquaholm Premium Line A9011 150 x 150 x 58 cm",
   "krotka": "Wanna narożna A9011 Premium Line",
   "slug": "wanna-narozna-z-hydromasazem-a9011-150x150",
   "cechy_n": {
@@ -7773,7 +7807,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 17913,
@@ -7908,7 +7943,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "biala",
-  "nazwa": "Wanna narożna z hydromasażem A9010 150 x 150 x 64 cm",
+  "nazwa": "Wanna narożna z hydromasażem Aquaholm Premium Line A9010 150 x 150 x 64 cm",
   "krotka": "Wanna narożna A9010 Premium Line",
   "slug": "wanna-narozna-z-hydromasazem-a9010-150x150",
   "cechy_n": {
@@ -8001,7 +8036,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 17908,
@@ -8126,7 +8162,7 @@
    }
   ],
   "ean": "9331582499946",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9009",
   "wym": [
@@ -8136,7 +8172,7 @@
   ],
   "ksztalt": "narozna",
   "kolor": "biala",
-  "nazwa": "Wanna narożna z hydromasażem A9009 140 x 140 x 64 cm",
+  "nazwa": "Wanna narożna z hydromasażem Aquaholm Premium Line A9009 140 x 140 x 64 cm",
   "krotka": "Wanna narożna A9009 Premium Line",
   "slug": "wanna-narozna-z-hydromasazem-a9009-140x140",
   "cechy_n": {
@@ -8229,7 +8265,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, USB, pilot"
  },
  {
   "id": 17905,
@@ -8354,7 +8391,7 @@
    }
   ],
   "ean": "9331582500024",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9008",
   "wym": [
@@ -8364,7 +8401,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9008 180 x 120 x 59 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9008 180 x 120 x 59 cm",
   "krotka": "Wanna A9008 Premium Line",
   "slug": "wanna-z-hydromasazem-a9008-180x120",
   "cechy_n": {
@@ -8459,7 +8496,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 17899,
@@ -8584,7 +8622,7 @@
    }
   ],
   "ean": "9331582499984",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9006",
   "wym": [
@@ -8594,7 +8632,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9006 170 x 120 x 58 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9006 170 x 120 x 58 cm",
   "krotka": "Wanna A9006 Premium Line",
   "slug": "wanna-z-hydromasazem-a9006-170x120",
   "cechy_n": {
@@ -8689,7 +8727,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 17880,
@@ -8824,7 +8863,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9005 180 x 120 x 64 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9005 180 x 120 x 64 cm",
   "krotka": "Wanna A9005 Premium Line",
   "slug": "wanna-z-hydromasazem-a9005-180x120",
   "cechy_n": {
@@ -8919,7 +8958,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 17871,
@@ -9054,7 +9094,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9002 185 x 90 x 70 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9002 185 x 90 x 70 cm",
   "krotka": "Wanna A9002 Premium Line",
   "slug": "wanna-z-hydromasazem-a9002-185x90",
   "cechy_n": {
@@ -9149,7 +9189,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 17827,
@@ -9274,7 +9315,7 @@
    }
   ],
   "ean": "9331582500055",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9001",
   "wym": [
@@ -9284,7 +9325,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9001 170 x 78 x 60 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9001 170 x 78 x 60 cm",
   "krotka": "Wanna A9001 Premium Line",
   "slug": "wanna-z-hydromasazem-a9001-170x78",
   "cechy_n": {
@@ -9379,7 +9420,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 17695,
@@ -9504,7 +9546,7 @@
    }
   ],
   "ean": null,
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "9004S",
   "wym": [
@@ -9514,7 +9556,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem 9004S 170 x 80 x 58 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line 9004S 170 x 80 x 58 cm",
   "krotka": "Wanna 9004S Premium Line",
   "slug": "wanna-z-hydromasazem-9004s-170x80",
   "cechy_n": {
@@ -9582,7 +9624,8 @@
    "Zagłówki 2 sztuki (po 1 na każdą stronę)"
   ],
   "material": "Akryl sanitarny czterowarstwowy, biały, wykonany na wysoki połysk o grubości od 3mm-4.5mm, wzmocniony od spodu włóknem szklanym i żywicą o grubości 10mm-15mm. Akryl jest odporny przed uszkodzeniami i zarysowaniem. Armatura wykonana z stali chromowanej.",
-  "elektryka": []
+  "elektryka": [],
+  "podtytul": "Bluetooth, podgrzewacz wody, wodospad"
  },
  {
   "id": 15845,
@@ -9707,7 +9750,7 @@
    }
   ],
   "ean": "9331582499915",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9007",
   "wym": [
@@ -9717,7 +9760,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9007 170 x 120 x 59 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9007 170 x 120 x 59 cm",
   "krotka": "Wanna A9007 Premium Line",
   "slug": "wanna-z-hydromasazem-a9007-170x120",
   "cechy_n": {
@@ -9812,7 +9855,8 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  },
  {
   "id": 13835,
@@ -9937,7 +9981,7 @@
    }
   ],
   "ean": "9331582499939",
-  "realizacja30": true,
+  "realizacja30": false,
   "typ": "wanna",
   "kod": "A9004",
   "wym": [
@@ -9947,7 +9991,7 @@
   ],
   "ksztalt": "prostokatna",
   "kolor": "biala",
-  "nazwa": "Wanna z hydromasażem A9004 170 x 80 x 58 cm",
+  "nazwa": "Wanna z hydromasażem Aquaholm Premium Line A9004 170 x 80 x 58 cm",
   "krotka": "Wanna A9004 Premium Line",
   "slug": "wanna-z-hydromasazem-a9004-170x80",
   "cechy_n": {
@@ -10042,6 +10086,7 @@
     "Klasa ochrony porażeniowej",
     "I"
    ]
-  ]
+  ],
+  "podtytul": "dysze obrotowe, Bluetooth, podgrzewacz wody, wodospad, USB, pilot"
  }
 ]

@@ -191,13 +191,13 @@ def karta(p, nag='h3'):
     if p['typ'] == 'bieznia': atr += f' data-model="{"apv8000" if p["model"] == "APV8000" else "inne"}"'
     return (f'<article class="kt" {atr}><a class="f" href="../{p["slug"]}/" tabindex="-1" aria-hidden="true">'
             f'<img src="../img/p/{z["m"][0]}" srcset="../img/p/{z["m"][0]} {z["m"][1]}w, ../img/p/{z["d"][0]} {z["d"][1]}w" sizes="(max-width:640px) 92vw, (max-width:1100px) 45vw, 22vw" width="{z["m"][1]}" height="{z["m"][2]}" loading="lazy" decoding="async" alt="{E(p["nazwa"])}"></a>'
-            f'<div class="in"><{nag}><span class="kw {k}"></span><a href="../{p["slug"]}/">{E(p["nazwa"])}</a></{nag}><p class="po">{E(opis_krotki(p))}</p>'
+            f'<div class="in"><{nag}><span class="kw {k}"></span><a href="../{p["slug"]}/">{E(p["nazwa"])}</a></{nag}>{f'<p class="po">{E(p["podtytul"])}</p>' if p.get('podtytul') else ''}'
             f'<p class="dost {d[0]}"><span class="b" aria-hidden="true"></span>{d[1]}</p><p class="cena"><b>{zl(p["cena"])}</b>{st}<span class="gratis">Transport gratis</span></p>{kup}</div></article>')
 
 
 # --- karty produktow: uporzadkowane kopie ofert z aquaholm.pl (oferty.py), kolejnosc elementow jak u klienta
 import oferty
-SL = {p['id']: (p['slug'], oferty.nazwa_oferty(oferty.O[p['id']])[0]) for p in P}
+SL = {p['id']: (p['slug'], ', '.join(x for x in oferty.nazwa_oferty(oferty.O[p['id']]) if x)) for p in P}
 for p in P:                                   # nazwy, ceny i dostepnosc wg aktualnych ofert klienta (28.11.2026)
     o = oferty.O[p['id']]
     p['nazwa'], p['podtytul'] = oferty.nazwa_oferty(o)
@@ -229,6 +229,12 @@ var tx=0;bd.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{
 var il=d.getElementById('il');if(il)d.querySelectorAll('[data-il]').forEach(function(b){b.addEventListener('click',function(){il.value=Math.max(1,(+il.value||1)+(+b.dataset.il))})});
 var p=d.getElementById('pasek'),z=d.getElementById('zakup');
 if('IntersectionObserver' in window)new IntersectionObserver(function(e){var on=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;p.classList.toggle('on',on);p.setAttribute('aria-hidden',!on)}).observe(z);
+/* podobne produkty: karuzela przesuwa sie sama od prawej do lewej, stop po najechaniu / dotyku */
+var t=d.getElementById('ptor');if(t&&!matchMedia('(prefers-reduced-motion: reduce)').matches){var st=false,wid=true;
+['pointerenter','focusin','touchstart'].forEach(function(e){t.addEventListener(e,function(){st=true},{passive:true})});t.addEventListener('pointerleave',function(){st=false});
+if('IntersectionObserver' in window)new IntersectionObserver(function(e){wid=e[0].isIntersecting}).observe(t);
+setInterval(function(){if(st||!wid||d.hidden||t.scrollWidth<=t.clientWidth+4)return;var k=t.children[0].getBoundingClientRect().width+16;
+if(t.scrollLeft+t.clientWidth>=t.scrollWidth-4)t.scrollTo({left:0,behavior:'smooth'});else t.scrollBy({left:k,behavior:'smooth'})},3000)}
 })();
 </script>'''
 
@@ -329,7 +335,6 @@ def kategoria(sciezka, h1, tytul, opis, lead, prod, filtry, dodatkowe=''):
   <div class="wrap">
     <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / {E(h1)}</nav>
     <h1 id="h1">{E(h1)}</h1>
-    <p class="lead">{E(lead)}</p>
     <div class="filtry" role="group" aria-label="Filtruj produkty">{fb}<label>Sortuj<select id="sort"><option value="">polecane</option><option value="r">cena: od najniższej</option><option value="m">cena: od najwyższej</option></select></label></div>
     <p class="ile" id="ile" aria-live="polite"></p>
   </div>
