@@ -370,7 +370,7 @@ CSS = '''
 .bz~.zakl2 a.on,.zakl2 a.on{border-bottom-color:var(--ink)}
 #opis,.opis h3[id],#korzysci,#info-d{scroll-margin-top:calc(var(--hh) + 64px)}
 @media (max-width:900px){.zakl2{top:calc(var(--hh) + 63px)}#opis,.opis h3[id],#korzysci,#info-d{scroll-margin-top:calc(var(--hh) + 130px)}}
-@media (max-width:560px){.fk{grid-template-columns:1fr 1fr}.war-l{grid-template-columns:1fr}}
+@media (max-width:560px){.fk{grid-template-columns:1fr 1fr}.war-l img{width:44px;height:44px}.odz{grid-template-columns:1fr}}
 .kp .podt{display:block;margin-top:6px;font-size:clamp(17px,1.1vw,19px);color:var(--mut);line-height:1.4}
 .gl2{min-width:0}
 .gl2 .duze-w{position:relative;background:#fff;border:1px solid var(--line)}
@@ -386,8 +386,8 @@ CSS = '''
 .gl2 .mini2 button[aria-current="true"]{border-color:var(--ink)}
 .zak .cena small{font-size:.9rem;color:var(--mut);font-weight:600;margin-left:6px}
 .zak .ean{margin-top:12px;color:var(--mut);font-size:.95rem}
-.odz{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
-.odz li{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#f4fbf7;border:1px solid #c2ebd5;color:#1a6e3f;font-weight:700;font-size:.98rem}
+.odz{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.odz li{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f4fbf7;border:1px solid #c2ebd5;color:#1a6e3f;font-weight:700;font-size:.98rem}
 .odz svg{flex:none}
 .zak .meta{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:.93rem;color:var(--mut);line-height:1.6}
 .zak .meta a{color:var(--mut)}
