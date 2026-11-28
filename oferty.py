@@ -323,7 +323,7 @@ def opis_html(o, sl_url, alt):
             fig = ''
             for src, w in x[1]:
                 n, sw, sh = obraz(src)
-                pok = min(sw, int(w)) if (w and str(w).isdigit() and int(w) > 40) else sw
+                pok = sw   # natywna szerokosc, w kolumnie opisu 800 px wszystkie rowne
                 fig += (f'<button type="button" class="oi" data-lb="../img/o/{n}" aria-label="Powiększ zdjęcie" style="max-width:{pok}px">'
                         f'<img src="../img/o/{n}" width="{sw}" height="{sh}" loading="lazy" decoding="async" alt="{E(alt)}"></button>')
             html.append(f'<div class="of-z{" rz" if len(x[1]) > 1 else ""}">{fig}</div>'); i += 1; continue
