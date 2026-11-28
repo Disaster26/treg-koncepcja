@@ -221,7 +221,7 @@ def mini_karta(x):
 
 SKR_P = '''<script>
 (function(){var d=document,du=d.getElementById('duze'),bd=du.parentNode,mb=[].slice.call(d.querySelectorAll('.mini2 button')),nr=d.getElementById('nrz'),cur=0;
-function pokaz(i){if(!mb.length)return;cur=(i+mb.length)%mb.length;var b=mb[cur];du.src=b.dataset.duze;du.width=b.dataset.w;du.height=b.dataset.h;du.style.maxWidth='min(100%,'+b.dataset.w+'px)';du.alt=du.alt.replace(/zdjęcie \\d+$/,'zdjęcie '+(cur+1));bd.dataset.lb=b.dataset.duze;
+function pokaz(i){if(!mb.length)return;cur=(i+mb.length)%mb.length;var b=mb[cur];if(b.dataset.ss){du.srcset=b.dataset.ss;du.sizes='(max-width:900px) calc(100vw - 34px), 50vw'}else du.removeAttribute('srcset');du.src=b.dataset.duze;du.width=b.dataset.w;du.height=b.dataset.h;du.style.maxWidth='min(100%,'+b.dataset.w+'px)';du.alt=du.alt.replace(/zdjęcie \\d+$/,'zdjęcie '+(cur+1));bd.dataset.lb=b.dataset.duze;
 mb.forEach(function(x){x.setAttribute('aria-current',x===b)});if(nr)nr.textContent=cur+1;var s=b.parentNode;s.scrollTo({left:b.offsetLeft-s.offsetLeft-s.clientWidth/2+b.clientWidth/2,behavior:'smooth'})}
 mb.forEach(function(b,i){b.addEventListener('click',function(){pokaz(i)})});
 var gp=d.querySelector('.gl2 .gp'),gn=d.querySelector('.gl2 .gn');if(gp){gp.addEventListener('click',function(){pokaz(cur-1)});gn.addEventListener('click',function(){pokaz(cur+1)})}
@@ -247,14 +247,17 @@ def strona_produktu(p):
     # galeria: wszystkie zdjecia z oferty klienta, kolejnosc jak u niego, natywny rozmiar
     G = [oferty.obraz(u) for u, w, h in o['galeria']]
     T = [oferty.obraz(u, True) for u, w, h in o['galeria']]
+    M = [oferty.obraz(u, 'm') for u, w, h in o['galeria']]
     g0 = G[0]
+    def ss(g, m): return f'../img/o/{m[0]} {m[1]}w, ../img/o/{g[0]} {g[1]}w' if m[1] < g[1] else ''
+    SZ = '(max-width:900px) calc(100vw - 34px), 50vw'
     gal = (f'<div class="gl2" id="gal"><div class="duze-w"><button class="duze" type="button" data-lb="../img/o/{g0[0]}" aria-label="Powiększ zdjęcie">'
-           f'<img id="duze" src="../img/o/{g0[0]}" width="{g0[1]}" height="{g0[2]}" style="max-width:min(100%,{g0[1]}px)" fetchpriority="high" alt="{E(alt)}, zdjęcie 1"></button>')
+           f'<img id="duze" src="../img/o/{g0[0]}"{f' srcset="{ss(g0, M[0])}" sizes="{SZ}"' if ss(g0, M[0]) else ''} width="{g0[1]}" height="{g0[2]}" style="max-width:min(100%,{g0[1]}px)" fetchpriority="high" alt="{E(alt)}, zdjęcie 1"></button>')
     if len(G) > 1:
         gal += (f'<button class="gp" type="button" aria-label="Poprzednie zdjęcie">&#8249;</button><button class="gn" type="button" aria-label="Następne zdjęcie">&#8250;</button>'
                 f'<span class="licz"><span id="nrz">1</span> / {len(G)}</span></div><div class="mini2">' + ''.join(
-                f'<button type="button" data-duze="../img/o/{g[0]}" data-w="{g[1]}" data-h="{g[2]}"' + (' aria-current="true"' if i == 0 else '') + f' aria-label="Zdjęcie {i + 1} z {len(G)}">'
-                f'<img src="../img/o/{t[0]}" width="{t[1]}" height="{t[2]}" loading="lazy" decoding="async" alt=""></button>' for i, (g, t) in enumerate(zip(G, T))) + '</div>')
+                f'<button type="button" data-duze="../img/o/{g[0]}" data-ss="{ss(g, m)}" data-w="{g[1]}" data-h="{g[2]}"' + (' aria-current="true"' if i == 0 else '') + f' aria-label="Zdjęcie {i + 1} z {len(G)}">'
+                f'<img src="../img/o/{t[0]}" width="{t[1]}" height="{t[2]}" loading="lazy" decoding="async" alt=""></button>' for i, (g, t, m) in enumerate(zip(G, T, M))) + '</div>')
     else:
         gal += '</div>'
     gal += '</div>'
@@ -291,7 +294,7 @@ def strona_produktu(p):
     opis_m = f'{pelna}. Cena {zl(p["cena"])}' + (f' (wcześniej {zl(p["stara"])})' if p['stara'] else '') + '.'
     if len(opis_m) > 160: opis_m = opis_m[:157].rsplit(' ', 1)[0] + '...'
     bz = ' bz' if k == 'apv' else ''
-    info = ('<h2 class="info-h">Informacje dodatkowe</h2><table class="par info-t"><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in o['info']) + '</tbody></table>') if o['info'] else ''
+    info = ('<h3 class="info-h">Informacje dodatkowe</h3><table class="par info-t"><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in o['info']) + '</tbody></table>') if o['info'] else ''
     podt = f'<span class="podt">{E(p["podtytul"])}</span>' if p['podtytul'] else ''
     ean = f'<p class="ean">EAN: {E(o["ean"])}</p>' if o.get('ean') else ''
     tresc = f'''<section class="kp{bz}" aria-labelledby="h1">

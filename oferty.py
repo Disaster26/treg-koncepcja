@@ -19,7 +19,7 @@ OBR = json.load(open('img/o/obrazy.json', encoding='utf-8')) if os.path.exists('
 
 # --- obrazy: WebP w natywnym rozmiarze (maks. 1600 px), miniatury galerii 160 px
 def obraz(url, miniatura=False):
-    k = url + ('#t' if miniatura else '')
+    k = url + ({True: '#t', False: '', 'm': '#m'}[miniatura])
     if k in OBR: return OBR[k]
     from PIL import Image
     src = RAW + MAPA[url]
@@ -28,11 +28,11 @@ def obraz(url, miniatura=False):
     im = im.convert('RGBA') if im.mode in ('RGBA', 'LA', 'P') else im.convert('RGB')
     if im.mode == 'RGBA' and im.getextrema()[3][0] == 255: im = im.convert('RGB')
     w, h = im.size
-    cel = 160 if miniatura else min(w, 1600)
+    cel = {True: 160, False: min(w, 1600), 'm': min(w, 560)}[miniatura]
     if cel < w: im = im.resize((cel, round(h * cel / w)), Image.LANCZOS)
-    n = os.path.splitext(MAPA[url])[0] + ('-t' if miniatura else '') + '.webp'
+    n = os.path.splitext(MAPA[url])[0] + {True: '-t', False: '', 'm': '-m'}[miniatura] + '.webp'
     os.makedirs('img/o', exist_ok=True)
-    im.save('img/o/' + n, 'WEBP', quality=80 if miniatura else 84, method=6)
+    im.save('img/o/' + n, 'WEBP', quality=84 if miniatura is False else 80, method=6)
     OBR[k] = (n, im.size[0], im.size[1])
     return OBR[k]
 
@@ -381,7 +381,7 @@ CSS = '''
 .pods .nav button{width:48px;height:48px}
 .opis-s{padding:clamp(30px,4vw,64px) 0 clamp(50px,6vw,90px)}
 .opis-s h2{font-size:clamp(26px,2vw,36px)}
-.opis-s .info-h{margin-top:clamp(40px,4vw,64px)}.info-t{margin-top:14px;max-width:900px}
+.opis-s .info-h{margin-top:clamp(40px,4vw,64px);font-size:clamp(26px,2vw,36px)}.info-t{margin-top:14px;max-width:900px}
 .opis{max-width:800px;margin:10px auto 0}
 .opis-s>.wrap>h2,.opis-s .info-h,.opis-s .info-t{max-width:800px;margin-left:auto;margin-right:auto}
 .opis p,.opis li{line-height:1.6}
