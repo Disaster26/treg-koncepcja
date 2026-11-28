@@ -147,7 +147,7 @@ def zapisz(sciezka, s):
     STRONY.append(sciezka + '/')
 STRONY = []
 
-DOST = {'jest': ('jest', 'Dostępna od ręki'), 'zam': ('zam', 'Na zamówienie, realizacja 30 dni'), 'brak': ('brak', 'Chwilowo brak, zapytaj o termin')}
+DOST = {'jest': ('jest', 'Dostępny'), 'zam': ('zam', 'Czas realizacji: 14 dni'), 'brak': ('brak', 'Brak w magazynie')}
 SCH = {'jest': 'InStock', 'zam': 'BackOrder', 'brak': 'OutOfStock'}
 def kier(p): return 'aq' if p['typ'] == 'wanna' else 'apv'
 def img(p, i, w): z = p['zdjecia'][i]; return '../img/p/' + (z['d'][0] if w == 'd' else z['m'][0])
@@ -194,260 +194,133 @@ def karta(p, nag='h3'):
             f'<div class="in"><{nag}><span class="kw {k}"></span><a href="../{p["slug"]}/">{E(p["nazwa"])}</a></{nag}><p class="po">{E(opis_krotki(p))}</p>'
             f'<p class="dost {d[0]}"><span class="b" aria-hidden="true"></span>{d[1]}</p><p class="cena"><b>{zl(p["cena"])}</b>{st}<span class="gratis">Transport gratis</span></p>{kup}</div></article>')
 
-FILMY_W = {'A9009': [('UxqKd6TiJ00', 'Wanna A9009, biała: hydromasaż i podświetlenie LED')], 'A9009C': [('Kwkem9694PE', 'Wanna A9009C, czarna: hydromasaż i podświetlenie LED')],
-           'A9008C': [('IQyb91JjEAs', 'Wanna A9008C, czarna: prezentacja')], 'A9014': [('c0Il79_bJFk', 'Wanna A9014: prezentacja')]}
-FILMY_F = [('r46a4RoqEwY', 'Prezentacja serii Futura Prestige'), ('Z4sfFoUTpzg', 'Funkcje ekranu dotykowego 15,6 cala, wersja polska'),
-           ('ZPg6jSN-DGE', 'Wirtualne trasy na ekranie bieżni'), ('3zskB507N9g', 'Jak połączyć bieżnię z aplikacją Kinomap'), ('J7oqwrpF1ac', 'Jak połączyć bieżnię z aplikacją Zwift')]
-# filmy od klienta (WhatsApp 24.11), pelne, z dzwiekiem, natywna rozdzielczosc: klienci/Treg/montaz2.py
-FILMY_N = {'A9001C': (960, 544), 'A9009': (960, 544), 'A9001': (960, 544), 'A9006': (1024, 576), 'A9007C': (1024, 576), 'A9004C': (1024, 576), 'A9014': (1024, 576)}
-def film_nat(p):
-    if p['typ'] == 'bieznia' and p.get('seria') == 'Futura Prestige' and p.get('ekran') == '15.6':
-        # oryginal od klienta (TransferNow 24.11, 1920x1080), bez ujec z hali: klienci/Treg/montaz_bieznia.py
-        w, h, n = 1920, 1080, 'bieznia-apv8000-futura-prestige'
-        return (f'<figure class="film nat" style="grid-column:1/-1;max-width:1280px;margin:0"><video controls playsinline preload="none" poster="../film/{n}.webp" width="{w}" height="{h}" '
-                f'style="display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:6px;background:#0b0e11" aria-label="Film: bieżnia APV8000 Futura Prestige z ekranem 15,6 cala">'
-                f'<source src="../film/{n}.mp4" type="video/mp4"></video><figcaption>Bieżnia APV8000 Futura Prestige: ekran dotykowy 15,6 cala, pokrętło sterujące, pas biegowy 145 x 58 cm (film z dźwiękiem)</figcaption></figure>')
-    if p['typ'] != 'wanna': return ''
-    if p['kod'] == 'A9002' and 'podwojna' in p['slug']: w, h, n = 1280, 720, 'wanna-a9002-podwojna'  # TransferNow 24.11, oryginal 4K
-    elif p['kod'] in FILMY_N: w, h = FILMY_N[p['kod']]; n = 'wanna-' + p['kod'].lower()
-    else: return ''
-    return (f'<figure class="film nat" style="grid-column:1/-1;max-width:{w}px;margin:0"><video controls playsinline preload="none" poster="../film/{n}.webp" width="{w}" height="{h}" '
-            f'style="display:block;width:100%;height:auto;aspect-ratio:{w}/{h};border-radius:6px;background:#0b0e11" aria-label="Film: wanna {E(p["kod"])} w działaniu">'
-            f'<source src="../film/{n}.mp4" type="video/mp4"></video><figcaption>Wanna {E(p["kod"])} w działaniu: hydromasaż, podświetlenie LED i panel sterowania (film z dźwiękiem)</figcaption></figure>')
-def filmy_dla(p):
-    if p['typ'] == 'wanna': return FILMY_W.get(p['kod'], [])
-    if p['typ'] == 'bieznia' and p.get('seria') == 'Futura Prestige':
-        return [f for f in FILMY_F if p['ekran'] == '15.6' or f[0] in ('r46a4RoqEwY', '3zskB507N9g', 'J7oqwrpF1ac')]
-    return []
 
-def blok(p, i, mala, tytul, tekst):
-    i = min(i, len(p['zdjecia']) - 1); z = p['zdjecia'][i]
-    return (f'<div class="cech"><figure class="cf"><img src="../img/p/{z["m"][0]}" srcset="../img/p/{z["m"][0]} {z["m"][1]}w, ../img/p/{z["d"][0]} {z["d"][1]}w" sizes="(max-width:900px) 92vw, 46vw" '
-            f'width="{z["d"][1]}" height="{z["d"][2]}" style="max-width:{z["d"][1]}px" loading="lazy" decoding="async" alt="{E(p["krotka"])}, zdjęcie {i + 1}"></figure>'
-            f'<div><small>{E(mala)}</small><h3>{E(tytul)}</h3><p>{E(tekst)}</p></div></div>')
+# --- karty produktow: uporzadkowane kopie ofert z aquaholm.pl (oferty.py), kolejnosc elementow jak u klienta
+import oferty
+SL = {p['id']: (p['slug'], oferty.nazwa_oferty(oferty.O[p['id']])[0]) for p in P}
+for p in P:                                   # nazwy, ceny i dostepnosc wg aktualnych ofert klienta (28.11.2026)
+    o = oferty.O[p['id']]
+    p['nazwa'], p['podtytul'] = oferty.nazwa_oferty(o)
+    c = [int(round(x)) for x in o['ceny']]
+    p['cena'], p['stara'] = (c[1], c[0]) if len(c) > 1 else (c[0], None)
+    p['dost'] = 'brak' if 'Brak w magazynie' in o['stock'] else ('zam' if 'Czas realizacji' in o['nazwa'] else 'jest')
+STYL_S = STYL_S.replace('</style>', oferty.CSS + '</style>')
+IK_ODZ = {'Darmowa wysyłka': '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+          'Dostępne Raty 0%': '<polyline points="20 6 9 17 4 12"/>',
+          'Zapłać za 30 dni PayPo': '<rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/>',
+          'Dostępne Płatności Blik': '<circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>'}
+ODZ_TXT = {'Dostępne Płatności Blik': 'Dostępne płatności BLIK'}
 
-def tresc_wanny(p):
-    c = p['cechy_n']; f = ' '.join(p['funkcje'] + p['akcesoria']).lower()
-    L, W, Hh = p['wym']
-    ks = {'narozna': 'Narożny kształt dobrze wykorzystuje miejsce w rogu łazienki.',
-          'podwojna': 'To szeroka, podwójna wanna, wygodna do wspólnej kąpieli.',
-          'prostokatna': 'Prostokątną wannę łatwo ustawić przy ścianie, w rogu albo na środku ściany.'}[p['ksztalt']]
-    kol = ('Czarny akryl z kolorowym podświetleniem wygląda efektownie zwłaszcza wieczorem.' if p['kolor'] == 'czarna'
-           else 'Biały akryl na wysoki połysk pasuje do jasnych i ciemnych łazienek.')
-    lead = f'Wanna {p["kod"]} z serii Premium Line ma wymiary {L} x {W} x {Hh} cm' + (f' i mieści ok. {p["pojemnosc"]} l wody' if p['pojemnosc'] else '') + f'. {ks} {kol}'
-    bl = []
-    if p['dysze_pow'] and p['dysze_wod']:
-        t = 'Masaż powietrzny w dnie wanny' + (f' napędza pompa {p["pompa_pow"]} W' if p['pompa_pow'] else '') + ', a hydromasaż wodny w ścianach' + (f' pompa {p["pompa_wod"]} W.' if p['pompa_wod'] else ' mocna pompa wodna.')
-        if p['dysze_plecy']: t += f' Plecy masuje po {p["dysze_plecy"]} obrotowych dysz na każde stanowisko.'
-        if 'regulator siły' in f: t += ' Siłę masażu wodnego ustawisz regulatorem.'
-        bl.append(('Hydromasaż', f'{p["dysze_pow"]} dysz powietrznych i {p["dysze_wod"]} dysz wodnych', t))
-    if p['grzalka']:
-        t = 'Podgrzewacz utrzymuje temperaturę wody, więc długa kąpiel z hydromasażem nie stygnie.'
-        if 'czujniki' in f: t += ' Czujniki chronią pompy, gdy w wannie jest za mało wody.'
-        bl.append(('Ciepła woda', f'Podgrzewacz wody {p["grzalka"]} W', t))
-    if c.get('led rgb'):
-        t = 'Kolorowe podświetlenie wanny i dysz dopasujesz do nastroju.'
-        if 'słuchawka' in f: t += ' Słuchawka prysznicowa LED zmienia kolor zależnie od temperatury wody i nie potrzebuje baterii.'
-        bl.append(('Światło', 'Oświetlenie LED RGB' + (' w siedmiu kolorach' if 'siedem kolorów' in f else ''), t))
-    funk = [n for k, n in (('radio', 'radio FM'), ('bluetooth', 'muzykę przez Bluetooth')) if c.get(k)]
-    t = 'Z podświetlanego panelu włączysz masaż, oświetlenie' + (', ' + ' i '.join(funk) if funk else '') + '.'
-    if c.get('usb'): t += ' Wanna ma też port USB.'
-    if c.get('ozon') and c.get('samoosusz'): t += ' Dezynfekcja ozonowa i samoosuszanie dysz pomagają utrzymać wannę w czystości.'
-    bl.append(('Sterowanie', 'Panel dotykowy' + (' i pilot w zestawie' if c.get('pilot') else ''), t))
-    bloki = ''.join(blok(p, i + 1, *b) for i, b in enumerate(bl))
-    lst = ''
-    if p['funkcje']: lst += '<h3 class="lst-h">Wyposażenie i funkcje</h3><ul class="lst">' + ''.join(f'<li>{E(x)}</li>' for x in p['funkcje']) + '</ul>'
-    if p['akcesoria']: lst += '<h3 class="lst-h">W zestawie</h3><ul class="lst">' + ''.join(f'<li>{E(x)}</li>' for x in p['akcesoria']) + '</ul>'
-    if p['material']: lst += f'<h3 class="lst-h">Materiał</h3><p class="mat">{E(p["material"])}</p>'
-    par = [('Kod produktu', p['kod']), ('Producent / seria', 'Aquaholm / Premium Line'),
-           ('Kształt', {'narozna': 'narożna', 'podwojna': 'prostokątna, podwójna', 'prostokatna': 'prostokątna'}[p['ksztalt']]),
-           ('Kolor', 'czarny' if p['kolor'] == 'czarna' else 'biały'), ('Wymiary (dł. x szer. x wys.)', f'{L} x {W} x {Hh} cm')]
-    if p['pojemnosc']: par.append(('Pojemność', f'ok. {p["pojemnosc"]} l'))
-    if p['dysze_pow']: par.append(('Dysze powietrzne', p['dysze_pow'] + ' szt.'))
-    if p['dysze_wod']: par.append(('Dysze wodne', p['dysze_wod'] + ' szt.'))
-    if p['dysze_plecy']: par.append(('Dysze do masażu pleców', f'po {p["dysze_plecy"]} szt. na stanowisko'))
-    if p['pompa_pow']: par.append(('Pompa powietrzna', p['pompa_pow'] + ' W'))
-    if p['pompa_wod']: par.append(('Pompa wodna', p['pompa_wod'] + ' W'))
-    if p['grzalka']: par.append(('Podgrzewacz wody', p['grzalka'] + ' W'))
-    for k, n in (('led rgb', 'Oświetlenie LED RGB'), ('bluetooth', 'Bluetooth'), ('usb', 'Port USB'), ('radio', 'Radio FM'), ('wodospad', 'Wodospad'), ('pilot', 'Pilot zdalnego sterowania'), ('ozon', 'Dezynfekcja ozonowa')):
-        if c.get(k): par.append((n, 'tak'))
-    par += [(a, ladnie(b)) for a, b in p['elektryka']]
-    if p['ean']: par.append(('EAN', p['ean']))
-    if p['realizacja30']: par.append(('Czas realizacji', '30 dni'))
-    kl = [f'{L} x {W} x {Hh} cm' + (f', ok. {p["pojemnosc"]} l' if p['pojemnosc'] else '')]
-    if p['dysze_pow'] and p['dysze_wod']: kl.append(f'{p["dysze_pow"]} dysz powietrznych i {p["dysze_wod"]} wodnych')
-    if p['dysze_plecy']: kl.append(f'Dysze obrotowe do masażu pleców')
-    if p['grzalka']: kl.append(f'Podgrzewacz wody {p["grzalka"]} W')
-    if c.get('led rgb'): kl.append('Oświetlenie LED RGB')
-    kl.append(', '.join([n for k, n in (('bluetooth', 'Bluetooth'), ('usb', 'USB'), ('radio', 'radio FM'), ('pilot', 'pilot')) if c.get(k)]) or 'Panel dotykowy')
-    if c.get('wodospad'): kl.append('Bateria z wodospadem')
-    return lead, bloki, lst, par, kl[:6], 'Wanna z hydromasażem do domu'
+def mini_karta(x):
+    z = x['zdjecia'][0]
+    st = f'<s>{zl(x["stara"])}</s>' if x['stara'] else ''
+    cz = {'zam': 'Czas realizacji: 14 dni', 'brak': 'Brak w magazynie', 'jest': ''}[x['dost']]
+    czh = f'<span class="cz">{cz}</span>' if cz else ''
+    return (f'<article class="pk"><a class="f" href="../{x["slug"]}/" tabindex="-1" aria-hidden="true"><img src="../img/p/{z["m"][0]}" width="{z["m"][1]}" height="{z["m"][2]}" loading="lazy" decoding="async" alt=""></a>'
+            f'<div class="in"><h3><a href="../{x["slug"]}/">{E(x["nazwa"])}</a></h3>{czh}<span class="c">{zl(x["cena"])}{st}</span></div></article>')
 
-def tresc_biezni(p):
-    w = ' '.join(p['wyroznienia']); moc = tech(p, 'Moc silnika') or ''; obc = tech(p, 'Maksymalne obciążenie') or ''; pr = tech(p, 'Prędkość') or ''
-    mk = ladnie(moc.split('(')[0]).replace(' AC', '').strip()
-    szczyt = re.search(r'(\d+)\s*KM \(moc szczytowa\)', moc)
-    ekr = f'dotykowym ekranem Android {p["ekran"].replace(".", ",")} cala' if p['ekran'] else 'wyświetlaczem LCD'
-    lead = f'{p["model"]}{" " + p["seria"] if p.get("seria") else ""} to bieżnia elektryczna z silnikiem {mk}' + (f' ({szczyt.group(1)} KM mocy szczytowej)' if szczyt else '') + \
-           (f', pasem {p["pas"].replace("x", " x ")} cm' if p['pas'] else '') + f' i {ekr}.' + (f' Unosi użytkownika do {ladnie(obc)}.' if obc else '')
-    if p.get('komercyjna'): lead += ' To wersja komercyjna tej bieżni.'
-    if p.get('zestaw'): lead += ' W zestawie dodatki: masażer, hantle, przyrząd do brzuszków i mata.'
-    bl = []
-    t = (f'Silnik rozpędza pas w zakresie {ladnie(pr)}' if pr else 'Mocny silnik zapewnia płynną pracę pasa') + ('; dzięki technologii Silent Motion pracuje cicho.' if 'Silent Motion' in w else '.')
-    if obc: t += f' Stabilna rama przenosi obciążenie do {ladnie(obc)}.'
-    bl.append(('Silnik i rama', f'Silnik {mk}' + (f', obciążenie do {ladnie(obc)}' if obc else ''), t))
-    if p['ekran']:
-        t = 'Kolorowy ekran dotykowy z menu po polsku obsługuje się jak tablet.'
-        if 'internetu' in w: t += ' Po połączeniu z internetem otworzysz stronę albo film.'
-        if p['aplikacje']: t += ' Bieżnia współpracuje z aplikacjami ' + ', '.join(p['aplikacje'][:-1]) + ' i ' + p['aplikacje'][-1] + '.'
-        if 'Bluetooth' in w: t += ' Ma też Bluetooth do połączenia z telefonem lub tabletem.'
-        bl.append(('Ekran', f'Dotykowy ekran Android {p["ekran"].replace(".", ",")} cala', t))
-    else:
-        bl.append(('Ekran', 'Czytelny wyświetlacz LCD', 'Na wyświetlaczu widać czas, prędkość, tętno, kalorie i dystans. Prędkość zmienisz przyciskami w rączkach albo na panelu.'))
-    if p['pas']:
-        t = ('System amortyzacji zmniejsza obciążenie kości i stawów podczas biegu.' if p['amortyzacja'] else 'Pas biegowy pracuje równo i stabilnie.')
-        if tech(p, 'System kompensacji') == 'tak': t += ' System kompensacji nierówności stabilizuje bieżnię na podłodze.'
-        kat = tech(p, 'Maksymalny kąt')
-        if kat: t += f' Nachylenie pasa ustawisz elektronicznie, maksymalnie {ladnie(kat).replace(" °", "°")}.'
-        bl.append(('Pas biegowy', f'Pas {p["pas"].replace("x", " x ")} cm' + (' z amortyzacją' if p['amortyzacja'] else ''), t))
-    if 'siłownik' in w:
-        bl.append(('Składanie', 'Składa się z pomocą siłownika gazowego', 'Pas podnosi się bez wysiłku, a złożoną bieżnię przesuniesz na kółkach transportowych pod ścianę albo do innego pokoju.'))
-    bloki = ''.join(blok(p, i + 1, *b) for i, b in enumerate(bl))
-    lst = '<h3 class="lst-h">Najważniejsze cechy</h3><ul class="lst">' + ''.join(f'<li>{E(ladnie(x).replace(" cala (Android)", " cala, Android"))}</li>' for x in p['wyroznienia']) + '</ul>' if p['wyroznienia'] else ''
-    if p['gratisy'] and p['model'] == 'APV8000':
-        lst += '<h3 class="lst-h">W cenie</h3><p class="mat">Zestaw dodatków o wartości katalogowej 800 zł: masażer, twister, 2 hantle, rama do brzuszków z gąbkami, wygłuszająca mata pod bieżnię i olej silikonowy do pasa.</p>'
-    par = [('Model', p['model'] + (f' / {p["seria"]}' if p.get('seria') else ''))] + [(k, ladnie(v)) for k, v in p['tech']]
-    if p['ekran']: par.insert(1, ('Ekran', f'dotykowy TFT {p["ekran"].replace(".", ",")} cala, Android, menu po polsku'))
-    elif p['ekran_lcd']: par.insert(1, ('Ekran', 'LCD'))
-    if p['realizacja30']: par.append(('Czas realizacji', '30 dni'))
-    kl = [x for x in [f'Silnik {mk}' + (f', {szczyt.group(1)} KM mocy szczytowej' if szczyt else ''), f'Pas biegowy {p["pas"].replace("x", " x ")} cm' if p['pas'] else None,
-                      (f'Dotykowy ekran Android {p["ekran"].replace(".", ",")} cala' if p['ekran'] else 'Wyświetlacz LCD'),
-                      f'Prędkość {ladnie(pr)}' + (f', obciążenie do {ladnie(obc)}' if obc else '') if pr else None,
-                      'Składanie z siłownikiem gazowym' if 'siłownik' in w else None,
-                      ('Aplikacje ' + ', '.join(p['aplikacje'])) if p['aplikacje'] else ('Bluetooth' if 'Bluetooth' in w else None)] if x]
-    return lead, bloki, lst, par, kl[:6], 'Bieżnia elektryczna do domu'
-
-def tresc_akc(p):
-    lead = ' '.join(p['opis'][:2]) if p.get('opis') else ''
-    lead = lead.replace('Prezentujemy Państwu', 'Proponujemy').replace('Prezentujemy', 'Proponujemy').replace('Prezentowana mata', 'Mata')
-    if p['id'] == 20522:
-        lead = 'Zestaw dodatków do bieżni APV8000: profesjonalny masażer, twister, 2 hantle, rama do robienia brzuszków z gąbkami, wygłuszająca mata pod bieżnię i olej silikonowy do konserwacji pasa.'
-    lst = '<h3 class="lst-h">Cechy</h3><ul class="lst">' + ''.join(f'<li>{E(x)}</li>' for x in p['wyroznienia']) + '</ul>' if p['wyroznienia'] else ''
-    return lead, '', lst, [], p['wyroznienia'][:6], 'Akcesorium do bieżni'
+SKR_P = '''<script>
+(function(){var d=document,du=d.getElementById('duze'),bd=du.parentNode,mb=[].slice.call(d.querySelectorAll('.mini2 button')),nr=d.getElementById('nrz'),cur=0;
+function pokaz(i){if(!mb.length)return;cur=(i+mb.length)%mb.length;var b=mb[cur];du.src=b.dataset.duze;du.width=b.dataset.w;du.height=b.dataset.h;du.style.maxWidth='min(100%,'+b.dataset.w+'px)';du.alt=du.alt.replace(/zdjęcie \\d+$/,'zdjęcie '+(cur+1));bd.dataset.lb=b.dataset.duze;
+mb.forEach(function(x){x.setAttribute('aria-current',x===b)});if(nr)nr.textContent=cur+1;var s=b.parentNode;s.scrollTo({left:b.offsetLeft-s.offsetLeft-s.clientWidth/2+b.clientWidth/2,behavior:'smooth'})}
+mb.forEach(function(b,i){b.addEventListener('click',function(){pokaz(i)})});
+var gp=d.querySelector('.gl2 .gp'),gn=d.querySelector('.gl2 .gn');if(gp){gp.addEventListener('click',function(){pokaz(cur-1)});gn.addEventListener('click',function(){pokaz(cur+1)})}
+var tx=0;bd.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});bd.addEventListener('touchend',function(e){var dd=e.changedTouches[0].clientX-tx;if(Math.abs(dd)>45){pokaz(cur+(dd<0?1:-1))}});
+var il=d.getElementById('il');if(il)d.querySelectorAll('[data-il]').forEach(function(b){b.addEventListener('click',function(){il.value=Math.max(1,(+il.value||1)+(+b.dataset.il))})});
+var p=d.getElementById('pasek'),z=d.getElementById('zakup');
+if('IntersectionObserver' in window)new IntersectionObserver(function(e){var on=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;p.classList.toggle('on',on);p.setAttribute('aria-hidden',!on)}).observe(z);
+})();
+</script>'''
 
 def strona_produktu(p):
-    k = kier(p); d = DOST[p['dost']]
-    lead, bloki, lst, par, kl, h2 = {'wanna': tresc_wanny, 'bieznia': tresc_biezni, 'akcesorium': tresc_akc}[p['typ']](p)
+    o = oferty.O[p['id']]
+    k = kier(p)
     kat = ('wanny-z-hydromasazem', 'Wanny z hydromasażem') if p['typ'] == 'wanna' else ('bieznie-elektryczne', 'Bieżnie elektryczne')
     marka = 'Aquaholm' if p['typ'] == 'wanna' else 'APVsport'
-    Z = p['zdjecia']; z0 = Z[0]
-    gal = (f'<div class="gl"><button class="duze" type="button" data-lb="../img/p/{z0["d"][0]}" aria-label="Powiększ zdjęcie">'
-           f'<img id="duze" src="../img/p/{z0["d"][0]}" srcset="../img/p/{z0["m"][0]} {z0["m"][1]}w, ../img/p/{z0["d"][0]} {z0["d"][1]}w" sizes="(max-width:900px) 92vw, 52vw" width="{z0["d"][1]}" height="{z0["d"][2]}" fetchpriority="high" alt="{E(p["nazwa"])}"></button>')
-    if len(Z) > 1:
-        gal += '<div class="mini">' + ''.join(
-            f'<button type="button" data-duze="../img/p/{z["d"][0]}" data-alt="{E(p["krotka"])}, zdjęcie {i + 1}"{" aria-current=\"true\"" if i == 0 else ""} aria-label="Zdjęcie {i + 1} z {len(Z)}">'
-            f'<img src="../img/p/{z["m"][0]}" width="120" height="120" loading="lazy" decoding="async" alt=""></button>' for i, z in enumerate(Z)) + '</div>'
+    alt = p['nazwa']
+    # galeria: wszystkie zdjecia z oferty klienta, kolejnosc jak u niego, natywny rozmiar
+    G = [oferty.obraz(u) for u, w, h in o['galeria']]
+    T = [oferty.obraz(u, True) for u, w, h in o['galeria']]
+    g0 = G[0]
+    gal = (f'<div class="gl2" id="gal"><div class="duze-w"><button class="duze" type="button" data-lb="../img/o/{g0[0]}" aria-label="Powiększ zdjęcie">'
+           f'<img id="duze" src="../img/o/{g0[0]}" width="{g0[1]}" height="{g0[2]}" style="max-width:min(100%,{g0[1]}px)" fetchpriority="high" alt="{E(alt)}, zdjęcie 1"></button>')
+    if len(G) > 1:
+        gal += (f'<button class="gp" type="button" aria-label="Poprzednie zdjęcie">&#8249;</button><button class="gn" type="button" aria-label="Następne zdjęcie">&#8250;</button>'
+                f'<span class="licz"><span id="nrz">1</span> / {len(G)}</span></div><div class="mini2">' + ''.join(
+                f'<button type="button" data-duze="../img/o/{g[0]}" data-w="{g[1]}" data-h="{g[2]}"' + (' aria-current="true"' if i == 0 else '') + f' aria-label="Zdjęcie {i + 1} z {len(G)}">'
+                f'<img src="../img/o/{t[0]}" width="{t[1]}" height="{t[2]}" loading="lazy" decoding="async" alt=""></button>' for i, (g, t) in enumerate(zip(G, T))) + '</div>')
+    else:
+        gal += '</div>'
     gal += '</div>'
-    st = (f'<s>{zl(p["stara"])}</s><span class="oszcz">taniej o {zl(p["stara"] - p["cena"])}</span>' if p['stara'] else '')
-    if p['dost'] != 'brak':
+    st = f'<s>{zl(p["stara"])}</s>' if p['stara'] else ''
+    dost = {'zam': '<p class="dost zam"><span class="b" aria-hidden="true"></span>Czas realizacji: 14 dni</p>',
+            'brak': '<p class="dost brak"><span class="b" aria-hidden="true"></span>Brak w magazynie</p>', 'jest': ''}[p['dost']]
+    odz = ''.join(f'<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{IK_ODZ.get(x, "")}</svg>{E(ODZ_TXT.get(x, x))}</li>' for x in o['odznaki'])
+    odz = f'<ul class="odz">{odz}</ul>' if odz else ''
+    z0 = p['zdjecia'][0]
+    kupuj = o['koszyk'] and p['dost'] != 'brak'
+    if kupuj:
         kup = (f'<div class="kup"><div class="ilosc"><button type="button" data-il="-1" aria-label="Mniej">-</button><input id="il" type="number" min="1" value="1" aria-label="Ilość"><button type="button" data-il="1" aria-label="Więcej">+</button></div>'
                f'<button type="button" class="dok" data-kosz data-id="{p["id"]}" data-nazwa="{E(p["nazwa"])}" data-cena="{p["cena"]}" data-url="./" data-img="../img/p/{z0["m"][0]}">Dodaj do koszyka</button></div>')
     else:
-        kup = (f'<div class="kup"><a class="dok pyt" href="{WA}" target="_blank" rel="noopener">Zapytaj o termin na WhatsAppie</a></div>'
-               f'<p class="zest">Albo zadzwoń: <a href="tel:+48503538038">503 538 038</a>, pon.-pt. 9:00-18:00.</p>')
-    opc = ('<label class="opc"><input type="checkbox" id="pas"><span><b>Dodaj pas piersiowy do pomiaru tętna: 125 zł</b> <s>139 zł</s><small>Tętno wyświetla się na ekranie bieżni.</small></span></label>'
-           if p.get('pas_opcja') and p['dost'] != 'brak' else '')
-    zest = ('<p class="zest">W cenie zestaw dodatków o wartości 800 zł: masażer, twister, 2 hantle, rama do brzuszków, mata i olej silikonowy.</p>'
-            if p.get('gratisy') and p.get('model') == 'APV8000' else '')
-    if p['typ'] == 'wanna' and p['dost'] == 'zam':
-        zest = '<p class="zest"><b>Czekasz, zyskujesz:</b> wanna z terminem realizacji 30 dni kosztuje mniej niż ta sama wanna od ręki.</p>'
-    fl = filmy_dla(p)
-    fn = film_nat(p)
-    filmy = fn + ''.join(f'<figure class="film"><button class="fa" type="button" data-yt="{i}" aria-label="Odtwórz film: {E(t)}"><img src="../img/yt-{i}.webp" width="480" height="270" loading="lazy" decoding="async" alt=""><span class="od" aria-hidden="true"></span></button><figcaption>{E(t)}</figcaption></figure>' for i, t in fl)
-    tabela = ('<table class="par"><caption>Parametry techniczne</caption><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in par) + '</tbody></table>') if par else ''
-    pod = sorted([x for x in P if x['typ'] == p['typ'] and x['id'] != p['id']] if p['typ'] != 'akcesorium' else [x for x in P if x['id'] != p['id'] and (x['typ'] == 'akcesorium' or x['id'] in (20185, 20175, 20177))],
-                 key=lambda x: (x['dost'] == 'brak', abs(x['cena'] - p['cena'])))[:8]
-    zakl = [('opis', 'Opis')] + ([('parametry', 'Parametry')] if tabela else []) + ([('filmy', 'Filmy')] if (fl or fn) else []) + [('dostawa', 'Dostawa i płatności'), ('opinie', 'Opinie'), ('podobne', 'Podobne')]
-    sek_par = f'<section class="sek szary" id="parametry" aria-labelledby="h-par"><div class="wrap"><div class="sg"><div><h2 id="h-par">Parametry</h2></div></div>{tabela}</div></section>' if tabela else ''
-    sek_fil = f'<section class="sek" id="filmy" aria-labelledby="h-fil"><div class="wrap"><div class="sg"><div><h2 id="h-fil">Filmy</h2><p class="lead">{"Film odtwarza się po kliknięciu. " if fn else ""}{"Odtwarzacz YouTube włącza się dopiero po kliknięciu." if fl else ""}</p></div></div><div class="fl2">{filmy}</div></div></section>' if (fl or fn) else ''
-    dostawa = wytnij('<div class="info4">', '</section>', produkt.strona)
+        kup = f'<div class="kup"><a class="dok pyt" href="{WA}" target="_blank" rel="noopener">Zapytaj o termin na WhatsAppie</a></div>'
+    meta = (f'SKU: {E(o["sku"])}<br>' if o['sku'] else '') + f'Kategoria: <a href="../{kat[0]}/">{kat[1]}</a>'
+    pod = [PID[i] for i in o['podobne'] if isinstance(i, int) and i in PID]
+    nav = ('<div class="nav" data-nav="ptor"><button type="button" data-k="-1" aria-label="Poprzednie produkty"></button>'
+           '<button type="button" data-k="1" aria-label="Następne produkty"></button></div>') if len(pod) > 2 else ''
+    sek_pod = (f'<section class="pods" aria-labelledby="h-pod"><div class="wrap"><div class="sg"><h2 id="h-pod">Podobne produkty</h2>{nav}</div>'
+               f'<div class="ptor" id="ptor" data-tor>{"".join(mini_karta(x) for x in pod)}</div></div></section>') if pod else ''
+    opis = oferty.opis_html(o, SL, alt)
     url = BAZA + p['slug'] + '/'
+    pelna = p['nazwa'] + (f', {p["podtytul"]}' if p['podtytul'] else '')
     ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': 1, 'name': 'TREG', 'item': BAZA},
                                                         {'@type': 'ListItem', 'position': 2, 'name': kat[1], 'item': BAZA + kat[0] + '/'},
                                                         {'@type': 'ListItem', 'position': 3, 'name': p['nazwa'], 'item': url}]},
-        {'@type': 'Product', 'name': p['nazwa'], 'sku': p['sku'] or str(p['id']), **({'gtin13': p['ean']} if p.get('ean') else {}),
-         'brand': {'@type': 'Brand', 'name': marka}, 'image': [BAZA + 'img/p/' + z['d'][0] for z in Z[:3]], 'description': opis_krotki(p),
+        {'@type': 'Product', 'name': pelna, 'sku': o['sku'] or str(p['id']), **({'gtin13': o['ean']} if o.get('ean') else {}),
+         'brand': {'@type': 'Brand', 'name': marka}, 'image': [BAZA + 'img/o/' + g[0] for g in G[:3]],
          'offers': {'@type': 'Offer', 'url': url, 'priceCurrency': 'PLN', 'price': f'{p["cena"]}.00', 'availability': 'https://schema.org/' + SCH[p['dost']],
                     'itemCondition': 'https://schema.org/NewCondition', 'seller': {'@type': 'Organization', 'name': 'TREG Łukasz Pawluczuk'}}}]}
     tytul = f'{p["nazwa"]} | TREG'
-    opis = f'{p["nazwa"]}: {opis_krotki(p)}. {zl(p["cena"])}, raty 0%, PayPo, BLIK.'
-    if len(opis) > 160: opis = f'{p["krotka"]}: {opis_krotki(p)}. {zl(p["cena"])}, raty 0%, PayPo.'
-    if len(opis) > 160: opis = opis[:157].rsplit(' ', 1)[0] + '...'
-    tresc = f'''<section class="kp{' bz' if k == 'apv' else ''}" aria-labelledby="h1">
+    opis_m = f'{pelna}. Cena {zl(p["cena"])}' + (f' (wcześniej {zl(p["stara"])})' if p['stara'] else '') + '.'
+    if len(opis_m) > 160: opis_m = opis_m[:157].rsplit(' ', 1)[0] + '...'
+    bz = ' bz' if k == 'apv' else ''
+    info = ('<h2 class="info-h">Informacje dodatkowe</h2><table class="par info-t"><tbody>' + ''.join(f'<tr><th scope="row">{E(a)}</th><td>{E(b)}</td></tr>' for a, b in o['info']) + '</tbody></table>') if o['info'] else ''
+    podt = f'<span class="podt">{E(p["podtytul"])}</span>' if p['podtytul'] else ''
+    ean = f'<p class="ean">EAN: {E(o["ean"])}</p>' if o.get('ean') else ''
+    tresc = f'''<section class="kp{bz}" aria-labelledby="h1">
   <div class="wrap">
-    <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / <a href="../{kat[0]}/">{kat[1]}</a> / {E(p['krotka'])}</nav>
+    <nav class="okr" aria-label="Okruszki"><a href="../">TREG</a> / <a href="../{kat[0]}/">{kat[1]}</a> / {E(p['nazwa'])}</nav>
     <div class="kp-g">
       {gal}
       <div class="zak" id="zakup">
         <span class="marka"><span class="kw {k}"></span>{marka}</span>
-        <h1 id="h1">{E(p['nazwa'])}</h1>
-        <a class="ocz" href="#opinie">Opinie kupujących z Opinii Zaufanych Ceneo</a>
-        <p class="cena"><b>{zl(p['cena'])}</b>{st}<span class="gratis">Transport gratis</span></p>
-        <p class="dost {d[0]}"><span class="b" aria-hidden="true"></span>{d[1]}</p>
-        <ul class="kl">{''.join(f'<li>{E(x)}</li>' for x in kl)}</ul>
-        {opc}
+        <h1 id="h1">{E(p['nazwa'])}{podt}</h1>
+        <p class="cena"><b>{zl(p['cena'])}</b>{st}<small>z VAT</small></p>
+        {dost}
+        {ean}
+        {odz}
         {kup}
-        <div class="zauf">
-          <span><span class="kw apv"></span>Raty 0%</span><span><span class="kw aq"></span>PayPo: zapłać za 30 dni</span>
-          <span><span class="kw apv"></span>BLIK i przelew</span><span><span class="kw aq"></span>Gwarancja najniższej ceny</span>
-          <span><span class="kw apv"></span>Serwis w całym kraju</span><span><span class="kw aq"></span>Wysyłka ubezpieczona</span>
-        </div>
-        {zest}
+        <p class="meta">{meta}</p>
       </div>
     </div>
   </div>
 </section>
-<nav class="zakl" aria-label="Sekcje produktu"><div class="wrap">{''.join(f'<a href="#{a}">{b}</a>' for a, b in zakl)}</div></nav>
-<section class="sek{' bz' if k == 'apv' else ''}" id="opis" aria-labelledby="h-opis">
+{sek_pod}
+<section class="opis-s{bz}" id="opis" aria-labelledby="h-opis">
   <div class="wrap">
-    <div class="sg"><div><h2 id="h-opis"><span class="kw {k}"></span>{h2}</h2><p class="lead">{E(lead)}</p></div></div>
-    {bloki}
-    {lst}
-  </div>
-</section>
-{sek_par}
-{sek_fil}
-<section class="sek szary" id="dostawa" aria-labelledby="h-dostawa">
-  <div class="wrap">
-    <div class="sg"><div><h2 id="h-dostawa">Dostawa, płatności i zwroty</h2><p class="lead">Szczegóły na stronie <a href="../dostawa-i-platnosci/">Dostawa i płatności</a> i w <a href="../regulamin/">regulaminie</a>.</p></div></div>
-    {dostawa}</section>
-<section class="sek opinie" id="opinie" aria-labelledby="h-opinie">
-  <div class="wrap">
-    <div>
-      <h2 id="h-opinie">Opinie kupujących</h2>
-      <p>Opinie zbieramy w programie Opinie Zaufane Ceneo: po każdym zamówieniu kupujący dostaje krótką ankietę. Po uruchomieniu sklepu opinie pokażą się w tym miejscu.</p>
-      <a class="btn wa" href="{WA}" target="_blank" rel="noopener">Zapytaj na WhatsAppie</a>
+    <h2 id="h-opis">Opis</h2>
+    <div class="opis" data-grupa>
+{opis}
     </div>
-    <div class="miejsce"><b>Opinie Zaufane Ceneo</b><span>Miejsce na opinie i ocenę sklepu treg.pl.</span></div>
+    {info}
   </div>
 </section>
-<section class="sek szary" id="podobne" aria-labelledby="h-pod">
-  <div class="wrap">
-    <div class="sg"><div><h2 id="h-pod"><span class="kw {k}"></span>{'Podobne wanny' if p['typ'] == 'wanna' else ('Podobne bieżnie' if p['typ'] == 'bieznia' else 'Do bieżni')}</h2></div></div>
-    <div class="siat">{''.join(karta(x) for x in pod)}</div>
-  </div>
-</section>
-<div class="pas" id="pasek" aria-hidden="true"><div class="wrap"><span class="n">{E(p['nazwa'])}</span><b>{zl(p['cena'])}</b><a class="dok" href="#zakup" tabindex="-1">{'Kup teraz' if p['dost'] != 'brak' else 'Zapytaj o termin'}</a></div></div>'''
-    skr = re.search(r'<script>\n\(function\(\)\{var d=document,du=.*?</script>', produkt.strona, re.S).group(0)
-    skr = skr.replace("['opis','parametry','filmy','dostawa','opinie','podobne']", json.dumps([a for a, b in zakl]).replace('"', "'"))
-    skr = skr.replace("d.querySelectorAll('.mini button').forEach(function(b){b.addEventListener('click',function(){du.removeAttribute('srcset');",
-                      "d.querySelectorAll('.mini button').forEach(function(b){b.addEventListener('click',function(){du.removeAttribute('srcset');du.removeAttribute('width');du.removeAttribute('height');")
-    zapisz(p['slug'], podstrona(tytul, opis, p['slug'] + '/', tresc, ld, skr))
+<div class="pas" id="pasek" aria-hidden="true"><div class="wrap"><span class="n">{E(p['nazwa'])}</span><b>{zl(p['cena'])}</b><a class="dok" href="#zakup" tabindex="-1">{'Kup teraz' if kupuj else 'Zapytaj o termin'}</a></div></div>'''
+    zapisz(p['slug'], podstrona(tytul, opis_m, p['slug'] + '/', tresc, ld, SKR_P))
 
-# --- karty produktow (APV8000 Futura Prestige 6 KM ma recznie dopracowana karte w produkt.py)
-for p in P:
-    if p['id'] != 20185: strona_produktu(p)
+for p in P: strona_produktu(p)
+oferty.zapisz_obrazy()
 
 # --- kategorie
 def kategoria(sciezka, h1, tytul, opis, lead, prod, filtry, dodatkowe=''):
@@ -482,24 +355,18 @@ bt.forEach(function(b){b.addEventListener('click',function(){f=b.dataset.f;bt.fo
     zapisz(sciezka, podstrona(tytul, opis, sciezka + '/', tresc, ld, skr))
 
 W = [p for p in P if p['typ'] == 'wanna']
-W.sort(key=lambda p: (p['dost'] == 'brak', p['ksztalt'] != 'prostokatna', p['kolor'] == 'czarna', p['cena']))
+W.sort(key=lambda p: oferty.KOL_WANNY.index(p['id']))   # kolejnosc jak na aquaholm.pl/kategoria-produktu/wanny/
 kategoria('wanny-z-hydromasazem', 'Wanny z hydromasażem', 'Wanny z hydromasażem Aquaholm: prostokątne, narożne, podwójne | TREG',
           f'{len(W)} wanien z hydromasażem Aquaholm Premium Line: prostokątne, narożne i podwójne, białe i czarne. Podgrzewacz, LED RGB, Bluetooth. Raty 0%.',
-          f'{len(W)} modeli z serii Premium Line: prostokątne, narożne i podwójne, białe i czarne. Większość z podgrzewaczem wody, oświetleniem LED RGB, Bluetooth i pilotem. Wanna na zamówienie z realizacją 30 dni kosztuje mniej niż ta sama wanna od ręki.',
+          f'{len(W)} modeli z serii Premium Line: prostokątne, narożne i podwójne, białe i czarne. Większość z podgrzewaczem wody, oświetleniem LED RGB, Bluetooth i pilotem.',
           W, [('', 'Wszystkie'), ('ksztalt:prostokatna', 'Prostokątne'), ('ksztalt:narozna', 'Narożne'), ('ksztalt:podwojna', 'Podwójne'), ('kolor:biala', 'Białe'), ('kolor:czarna', 'Czarne'), ('dost:jest', 'Od ręki')])
-B = [p for p in P if p['typ'] == 'bieznia']
-B.sort(key=lambda p: (p['dost'] == 'brak', p['model'] != 'APV8000', p.get('komercyjna', False), -p['cena'] if p['model'] == 'APV8000' else p['cena']))
+B = [p for p in P if p['typ'] in ('bieznia', 'akcesorium')]
+B.sort(key=lambda p: oferty.KOL_BIEZNIE.index(p['id']))  # kolejnosc jak na aquaholm.pl: bieznie i akcesoria razem, jak u klienta
 A = [p for p in P if p['typ'] == 'akcesorium']
-akc = f'''<section class="sek szary" aria-labelledby="h-akc">
-  <div class="wrap">
-    <div class="sg"><div><h2 id="h-akc"><span class="kw apv"></span>Akcesoria do bieżni</h2><p class="lead">Pas do pomiaru tętna, mata pod bieżnię i zestaw dodatków.</p></div></div>
-    <div class="siat">{''.join(karta(x) for x in A)}</div>
-  </div>
-</section>'''
 kategoria('bieznie-elektryczne', 'Bieżnie elektryczne', 'Bieżnie elektryczne APVsport APV8000, APV6000, APV5000 | TREG',
-          f'{len(B)} bieżni elektrycznych APVsport: APV8000 z silnikiem do 6 KM i pasem 145 x 58 cm, APV6000, APV5000, APV900, APV600. Akcesoria. Raty 0%.',
+          f'{len(B) - len(A)} bieżni elektrycznych APVsport: APV8000 z silnikiem do 6 KM i pasem 145 x 58 cm, APV6000, APV5000, APV900, APV600. Akcesoria. Raty 0%.',
           'Bieżnie APVsport do domu i do intensywnego treningu: APV8000 z silnikiem do 6 KM, pasem 145 x 58 cm i ekranem Android, a także APV6000, APV5000, APV900 i APV600. Doradzimy przy wyborze modelu, mamy własny serwis i części.',
-          B, [('', 'Wszystkie'), ('model:apv8000', 'APV8000'), ('model:inne', 'Pozostałe modele'), ('dost:zam', 'Dostępne do zamówienia')], akc)
+          B, [('', 'Wszystkie'), ('model:apv8000', 'APV8000'), ('model:inne', 'Pozostałe modele'), ('typ:akcesorium', 'Akcesoria'), ('dost:zam', 'Dostępne do zamówienia')])
 
 # --- koszyk
 def kroki(n):
