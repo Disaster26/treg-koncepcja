@@ -204,8 +204,7 @@ for p in P:                                   # nazwy, ceny i dostepnosc wg aktu
     c = [int(round(x)) for x in o['ceny']]
     p['cena'], p['stara'] = (c[1], c[0]) if len(c) > 1 else (c[0], None)
     p['dost'] = 'brak' if 'Brak w magazynie' in o['stock'] else ('zam' if 'Czas realizacji' in o['nazwa'] else 'jest')
-STYL_S = STYL_S.replace('</style>', oferty.CSS + '@media (max-width:900px){#tresc{padding-top:63px}}
-</style>')   # podstrony: staly pasek Wanny/Biezne nie zaslania poczatku tresci
+STYL_S = STYL_S.replace('</style>', oferty.CSS + '@media (max-width:900px){#tresc{padding-top:63px}}</style>')   # podstrony: staly pasek Wanny/Bieznie nie zaslania poczatku tresci
 IK_ODZ = {'Darmowa wysyłka': '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
           'Dostępne Raty 0%': '<polyline points="20 6 9 17 4 12"/>',
           'Zapłać za 30 dni PayPo': '<rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/>',
